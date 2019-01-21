@@ -146,6 +146,13 @@ class Model(dict,metaclass=ModelMetaclass):
         affected = await execute(self.__insert__, args)
         if affected != 1:
             logging.warn('failed to insert record : affected rows: %s' % affected)
+    async def update(self,**kws):
+        sql='update `%s` set '%(self.__table__)
+        m,args=self.getSqlMatch(**kws)
+        sql=sql+m+'  where `%s` =? '%self.__primary_key__
+        args.append(self.__getattr__(self.__primary_key__))
+        r=await execute(sql,args)
+        return r
 
     @classmethod
     async def delete(cls,pk):
@@ -179,6 +186,14 @@ class Model(dict,metaclass=ModelMetaclass):
         args=[]
         for k,v in kws.items():
             where.append('%s=?'%k)
+            args.append(v)
+        return  ' '+' and '.join(where),  args
+    @classmethod
+    def getSqlMatch(cls,**kws):
+        where=[]
+        args=[]
+        for k,v in kws.items():
+            where.append('`%s`=?'%k)
             args.append(v)
         return  ' '+' and '.join(where),  args
 

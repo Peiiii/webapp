@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
     <div class=" panel-heading">
         <h1 class="panel-title "> {{title}}</h1>
-        <small>菜鸟</small>
+        <small>{{user_name}}</small>
     </div>
     <div class=" panel-body article-content">
         <br><br>
@@ -35,32 +35,21 @@
                     comment_input.after('<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span><a href="/sign-in">请先登录</a></div>');
                 }
                 else{
-                console.log(user_id);
-                $.get('/api/get_user/'+user_id,function(json){
-                    console.log('jason',json);
-                    if (!json['success']){console.log('wrong!');return };
-                    user=json['user'];
-                    console.log(user);
-                    user_name=user['name'];
-                    console.log(user_name);
+                    console.log(user_id);
                     blog_id=window.location.pathname.split('/').reverse()[0];
                     console.log('blog_id: '+blog_id);
                     j={"user_id":user_id,"blog_id":blog_id,"content":comment};
                     console.log('json_post:'+j['blog_id']);
                     $.post('/comment',JSON.stringify(j),function(jr){
                         console.log('server response comment',jr);
-                        time=jr['created_at'];
-                        if(!time){
-                            var D=new Date();
-                            time=D.toLocaleString();
+                        if(!jr['success']){
+                            comment_form.after(jr['message']);
                         }
-                        text='<div><label>'+user_name+'</label><span style="padding-left:20px;">'+time+'</span><p>'+comment+'</p></div><hr style="border:solid #ccc 1px;">';
-                        comment_form.after(text);
-                        comment_input.val('');
+                        else{
+                            comment_form.after(jr['comment_wrapped']);
+                            comment_input.val('');
+                        }
                     });
-
-
-                });
                 };
             });
         })

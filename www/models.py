@@ -20,12 +20,13 @@ class User(Model):
     name = StringField(ddl='varchar(50)',default=name_default)
     image=StringField(ddl='varchar(50)',default='about:blank')
     created_at = FloatField(default=time.time)
-    def loadBlog(self,file,puretext=False):
+    key=StringField(ddl='varchar(100)',default=None)
+    def loadBlog(self,file,puretext=False,summary_length=100):
         name=os.path.split(file)[-1].split('.')[0]
         content=loadText(file)
         if puretext:
             content=wrapText(content)
-        summary=content[:50] if len(content)>=50 else content
+        summary=content[:summary_length] if len(content)>=summary_length else content
         id=next_id()
         user_id=self.id
         user_name=self.name
@@ -94,6 +95,8 @@ class User(Model):
         passwd = random.randint(1, 10000)
         image = 'about:blank'
         return cls(id=id, email=email, name=name, passwd=passwd, image=image)
+    async def setKey(self,key):
+        return await self.update(key=key)
 
 
 class Blog(Model):
@@ -162,6 +165,8 @@ class Blog(Model):
         return comments
     async def getCommentsWrapped(self):
         comments = await Comment.findAll(blog_id=self.id)
+        if not comments:
+            return '<div class="text-success"> 还没有评论，不如评论一下作者的的文章吧！</div>'
         comments_wrapped=[c.wrap() for c in comments]
         comments_wrapped.reverse()
         return '\n'.join(comments_wrapped)

@@ -141,11 +141,19 @@ class Application(web.Application):
             self.router.add_route('POST',path,wrapper)
             return wrapper
         return decorator
-    def post3(self,path,req=False,json=False,form=True,wrap=False): ##req,json,form同时只能有一个为True
+    def post3(self,path,req=False,json=False,form=True,cookies=False,headers=False,wrap=False): ##req,json,form同时只能有一个为True
         def decorator(func):
-            args=inspect.getargspec(func).args  ##获取原函数参数
-            @functools.wraps(func)
+            args1=inspect.getargspec(func).args  ##获取原函数参数            @functools.wraps(func)
             async def wrapper(request):
+                args=args1.copy()
+                if cookies:
+                    last=args.pop()
+                    if last!='cookies':
+                        raise Exception('函数%s最后一个参数应为cookies,而非%s'%(func.__name__,last))
+                elif headers:
+                    last=args.pop()
+                    if last!='headers':
+                        raise Exception('函数%s最后一个参数应为headers,而非%s'%(func.__name__,last))
                 if req:  ##  直接将request作为参数
                     if len(args)!=1:
                         raise Exception('函数%s参数个数应为一个'%func.__name__)
@@ -156,16 +164,19 @@ class Application(web.Application):
                     if json:  ##参数来源： json
                         data = await request.json()
                         logging.info('json data:%s'%(data))
-                    if args != []:  ##函数所需参数个数不为零
-                        params = []
-                        for i in args:
-                            try:
-                                params.append(data[i])
-                            except:
-                                raise Exception('函数%s参数%s定义不匹配' % (func.__name__, i))
-                        ret = await func(*params)
-                    else:
-                        ret = await func()
+                    params = []
+                    for i in args:
+                        try:
+                            params.append(data[i])
+                        except:
+                            raise Exception('函数%s参数%s定义不匹配' % (func.__name__, i))
+                    if cookies:
+                        co= request.cookies
+                        params.append(co)
+                    elif headers:
+                        co= request.headers
+                        params.append(co)
+                    ret = await func(*params)
                 if wrap: ##函数返回值还需进行包装
                     return self.wrapAsResponse(wrap)
                 return ret
