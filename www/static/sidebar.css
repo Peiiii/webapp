@@ -1,0 +1,74 @@
+
+html{
+    font-size:16px;
+}
+body{
+    background:#1a1a1a;
+}
+body{
+    font-size:16px;
+    font-family: Merriweather, Georgia, serif;
+    line-height:1.75;
+}
+.site{
+    background:#fff;
+    margin:21px;
+}
+.site-header{
+    padding: 3.9375em 7.6923%;
+}
+.site-branding{
+    margin-top: 1.3125em;
+    margin-bottom: 1.3125em;
+    margin: 0.875em auto 0.875em 0;
+}
+.site-title{
+    font-family: Montserrat, "Helvetica Neue", sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.25;
+
+}
+.site-description{
+    color: #686868;
+    font-size: 13px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.0769230769;
+    margin: 0.538461538em 0 0;
+}
+.site-footer{
+    margin-top:100px;
+    padding:5%;
+    text-align:center;
+}
+.session{
+    border-top:rgb(26,26,26) solid 4px;
+}
+.article-box{
+    padding:30px;
+}
+.article{
+    padding:20px;
+}
+.article-entry{
+    padding:20px;
+    border-bottom:#288823 solid ;
+}
+.article-content{
+    text-indent:2em;
+}
+.center-btn{
+    padding-left:20%;
+    padding-right:20%;
+}
+
+.categories, .category{
+
+}
+.cate-title{
+    font-size:1.5rem;
+}
+.panel-title{
+    font-size:1.5rem;
+}

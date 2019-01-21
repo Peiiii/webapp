@@ -1,22 +1,33 @@
 import logging;logging.basicConfig(level=logging.INFO)
-import asyncio
+import asyncio,hashlib
+from aiohttp import web
 from orm import create_pool
-from models import User,Blog,Comment
-from webtools import Application,loadText
+from www.models import User,Blog,Comment,loadText,next_id
+from framework import Application
 from config import config
-from tools import blog_urls
+from  jinja2 import  Template,Environment, PackageLoader
+
+
+env = Environment(loader=PackageLoader('www', 'templates'))
 
 
 loop=asyncio.get_event_loop()
 app=Application(loop=loop)
 
-
+uid='a9aaf78de22542e3b1f61f0d6d1d8acc'
 @app.get('/')
 async def home():
-    a=loadText('templates/a.txt')
+    u=await User.find(uid)
+    temArtl = env.get_template('article-display.html')
+    articles=await u.formBlogShortCut(temArtl,{'title':'name','summary':'summary','url':'blog_url'},max=5)
+    blog_list=await u.formList()
+    
+
     return {
-        '__template__':'home.html',
-        'a':a
+        '__template__':'home2.html',
+        'articles':articles,
+        'dir_name':'分类目录',
+        'blog_list':blog_list
     }
 @app.get('/users')
 async def render_users(request):
@@ -28,27 +39,114 @@ async def render_users(request):
 @app.get('/blog/{blog_id}')
 async def render_blog(blog_id):
     blog=await Blog.find(blog_id)
+    tem=env.get_template('blog_show.html')
+    title=blog.name
+    comments=await blog.getCommentsWrapped()
+    blog_html=tem.render({'title':title,'content':blog.content,'comments':comments})
+
+    u = await User.find(uid)
+    blog_list = await u.formList()
+
     return {
-        '__template__':'home.html',
-        'a':blog.content
+        '__template__':'home2.html',
+        'articles':blog_html,
+        'dir_name': '分类目录',
+        'blog_list': blog_list
     }
 
 @app.get('/blogs')
 async def blog_list():
     blogs=await Blog.findAll()
-    urls=blog_urls(blogs)
+    urls=Blog.blog_urls(blogs)
     return {
         '__template__':'home.html',
         'a':urls
     }
+@app.get('/sign-up')
+async def do_signup_get():
+    return {
+        '__template__':'sign-up-in.html',
+        'sign_up':True
+    }
+@app.post3('/sign-up',form=True,wrap=False)
+async def do_signup_post(username,email,password):
+    uid=next_id()
+    passwd=hashlib.sha1(('%s:%s'%(uid,password)).encode('utf-8')).hexdigest()
+    exist=await User.findAll(email=email)
+    if exist:
+        json={'status':1,'info':'Email already used.'} #0表示失败
+        return web.json_response(json)
+    u = User(id=uid, name=username, email=email, passwd=passwd)
+    await u.save()
+    logging.info('用户注册成功，id: %s  passwd:%s'%(u.id,u.passwd))
+    json={'url':'/sign-in','status':2}
+    return web.json_response(json)
+@app.get('/sign-in')
+async def do_signin_get():
+    return {
+        '__template__':'sign-up-in.html',
+        'sign_in':True
+    }
+@app.post3('/sign-in',form=True,wrap=False)
+async def do_signin_post(email,password):
+
+    u=await User.findAll(email=email)
+    if not u:
+        dic= {
+            '__template__':'sign-up-in.html',
+            'user_not_exist':True,
+            'message':'User not exists.'
+        }
+        return app.wrapAsResponse(dic)
+    u=u[0]
+    passwd = hashlib.sha1(('%s:%s' % (u.id, password)).encode('utf-8')).hexdigest()
+    if u.passwd!=passwd:
+        print(passwd,' ',u.passwd)
+        dic= {
+            '__template__': 'sign-up-in.html',
+            'wrong_password': True,
+            'message': 'Wrong password.'
+        }
+        return app.wrapAsResponse(dic)
+    import time
+    key=str(int(time.time()))+uid+u.passwd
+    key=hashlib.sha1(key.encode('utf-8')).hexdigest()
+    r=web.Response(status=303)
+    r.set_cookie('key',key,max_age=86400)
+    r.set_cookie('user_id',u.id)
+    r.headers['location']='/'
+    return r
+
+
+
+@app.get2('/api/get_user/{user_id}')
+async def do_api_get_user(user_id):
+    print('api get user :%s'%user_id)
+    user=await User.find(user_id)
+    if not user:
+        logging.info('user not found..%s'%user_id)
+        return web.json_response({'success':False,'info':'user not exist.'})
+    return web.json_response({'success':True,'user':user})
+
+@app.post3('/comment',json=True)
+async def do_comment(user_id,blog_id,content):
+    u=await User.find(user_id)
+    if not u:
+        logging.warn('User %s not found'%user_id)
+    comment=Comment(
+        user_id=user_id,user_name=u.name,user_image=u.image,
+        blog_id=blog_id,content=content
+    )
+    await comment.save()
+    return web.json_response(status=200,data={'created_at':comment.dateTime()})
 
 async def init(loop):
-    server = await loop.create_server(app.make_handler(),'127.0.0.1',8000)
-    logging.info('server started at http://127.0.0.1:8000....')
+    server = await loop.create_server(app.make_handler(),'127.0.0.1',80)
+    logging.info('server started at http://127.0.0.1:80....')
     return server
 
 
-app.router.add_static('/prefix', 'templates', show_index=True)
+app.router.add_static('/', 'static', show_index=True)
 
 # loop.run_until_complete(create_pool(user=config['user'],
 #                                     password=config['password'],

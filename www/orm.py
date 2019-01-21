@@ -68,7 +68,7 @@ class ModelMetaclass(type):
             tableName, ', '.join(escaped_fields), primaryKey, create_args_string(len(fields)+1))
         attrs['__update__'] = 'update `%s` set %s where `%s`=?' % (\
             tableName, ', '.join(map(lambda f: '`%s`=?' % (mappings.get(f).name or f), fields)), primaryKey)
-        attrs['__delete__'] = 'delete from `%s` where `%s`=?' % (tableName, primaryKey)
+        attrs['__delete__'] = 'delete from `%s` where '%tableName
         return type.__new__(cls,name,bases,attrs)
 
 #   字符串生成小工具
@@ -116,8 +116,22 @@ class Model(dict,metaclass=ModelMetaclass):
             return None
         return cls(**rs[0])
     @classmethod
-    async def findAll(cls):
-        rs=await select('%s'%(cls.__select__))
+    async def findAll(cls,**kws):
+        '''
+        根据条件查找元素
+        :param kws: 条件关键字， eg: user_id=123 ：可以找到该类别中user_id属性值为123的所有元素
+        :return: 满足查找条件的所有元素，若kws为空则返回该类别的所有元素
+        '''
+        sql='%s'%(cls.__select__)
+        where = []
+        args = []
+        if kws:
+            for k,v in kws.items():
+                where.append('%s=?'%(k))
+                args.append(v)
+            sql=sql+' where '+' and '.join(where)
+        args=None if args==[] else args
+        rs=await select(sql,args)
         if len(rs)==0:
             return None
         all=[]
@@ -139,11 +153,34 @@ class Model(dict,metaclass=ModelMetaclass):
         if not await cls.find(pk):
             logging.info('record not found: primary key :%s'%pk)
             return False
-        affected=await execute(cls.__delete__,pk)
+        affected=await execute(cls.__delete__+'%s=?'%cls.__table__,pk)
         if not affected:
             logging.warn('failed to delete: %s'%pk)
             return False
         return affected
+    @classmethod
+    async def deleteAll(cls,**kws):
+        if not kws:
+            logging.info('deleteAll method needs more arguments. ')
+            return False
+        all = await cls.findAll(**kws)
+        sure = input('%s records found. Are you sure to delete all?( sure ) \n请输入：' % (len(all)))
+        if not sure=='sure':
+            return
+        conditions,args=cls.getSqlWhere(**kws)
+        sql=cls.__delete__+conditions
+        affected=await execute(sql,args)
+        logging.info('%s records was deleted.'%(affected))
+        return affected
+
+    @classmethod
+    def getSqlWhere(cls,**kws):
+        where=[]
+        args=[]
+        for k,v in kws.items():
+            where.append('%s=?'%k)
+            args.append(v)
+        return  ' '+' and '.join(where),  args
 
 
 

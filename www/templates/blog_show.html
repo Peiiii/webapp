@@ -1,0 +1,80 @@
+<div class="panel panel-primary">
+    <div class=" panel-heading">
+        <h1 class="panel-title "> {{title}}</h1>
+        <small>菜鸟</small>
+    </div>
+    <div class=" panel-body article-content">
+        <br><br>
+        <p>
+            {{content}}
+        </p>
+    </div>
+    <script>
+        $(document).ready(function (){
+            comment_form=$('#comment-form');
+            $('#comment-form').submit(function () {
+                function getCookie(){
+                    strcookie=document.cookie;
+                    strcookie=strcookie.split(';');
+                    var cookie= new Array();
+                    for(var i=0;i<strcookie.length;i++){
+                        [name,value]=strcookie[i].trim().split('=');
+                        cookie[name]=value;
+                    };
+                    return cookie;
+                };
+
+                comment_input=$('#comment-input');
+                comment=comment_input.val();
+                comment_area=$('#comment-area');
+                cookie=getCookie();
+                console.log(cookie);
+                user_id=cookie['user_id'];
+                if(!user_id){
+                    console.log(cookie['user_id']);
+                    comment_input.after('<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span><a href="/sign-in">请先登录</a></div>');
+                }
+                else{
+                console.log(user_id);
+                $.get('/api/get_user/'+user_id,function(json){
+                    console.log('jason',json);
+                    if (!json['success']){console.log('wrong!');return };
+                    user=json['user'];
+                    console.log(user);
+                    user_name=user['name'];
+                    console.log(user_name);
+                    blog_id=window.location.pathname.split('/').reverse()[0];
+                    console.log('blog_id: '+blog_id);
+                    j={"user_id":user_id,"blog_id":blog_id,"content":comment};
+                    console.log('json_post:'+j['blog_id']);
+                    $.post('/comment',JSON.stringify(j),function(jr){
+                        console.log('server response comment',jr);
+                        time=jr['created_at'];
+                        if(!time){
+                            var D=new Date();
+                            time=D.toLocaleString();
+                        }
+                        text='<div><label>'+user_name+'</label><span style="padding-left:20px;">'+time+'</span><p>'+comment+'</p></div><hr style="border:solid #ccc 1px;">';
+                        comment_form.after(text);
+                        comment_input.val('');
+                    });
+
+
+                });
+                };
+            });
+        })
+
+    </script>
+    <iframe name="hidden-frame" style="display:none;"></iframe>
+    <div class="panel-footer" id="comment-area">
+        <form id="comment-form" class="form" target="hidden-frame" style="margin-bottom:10px;">
+            <div class="form-group">
+                <label >评论文章</label>
+                <textarea id="comment-input" class="form-control" rows="5" placeholder="输入你的评论..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">提交</button>
+        </form>
+        {{comments}}
+    </div>
+</div>
