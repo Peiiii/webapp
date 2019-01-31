@@ -1,69 +1,73 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary mode" id="article" v-bind:blog-id="blog_id">
+    <script>executeMode();</script>
     <div class=" panel-heading">
-        <h1 class="panel-title "> {{title}}</h1>
-        <small>{{user_name}}</small>
+        <h1 class="panel-title "> {{blog.name}}</h1>
+        <small>{{blog.user_name}}</small>
     </div>
     <div class=" panel-body article-content">
-        <br><br>
-        <p>
-            {{content}}
-        </p>
+        <div style="text-align:right;">
+            <button class="btn btn-small btn-default" style=""><a href="edit_blog">编辑</a></button>
+        </div>
+        <div id="blog_content_{{blog.id}}" class="markdown" data="{{blog.content}}">
+            {{blog.content}}
+        </div>
     </div>
-    <script>
-        $(document).ready(function (){
-            comment_form=$('#comment-form');
-            $('#comment-form').submit(function () {
-                function getCookie(){
-                    strcookie=document.cookie;
-                    strcookie=strcookie.split(';');
-                    var cookie= new Array();
-                    for(var i=0;i<strcookie.length;i++){
-                        [name,value]=strcookie[i].trim().split('=');
-                        cookie[name]=value;
-                    };
-                    return cookie;
-                };
 
-                comment_input=$('#comment-input');
-                comment=comment_input.val();
-                comment_area=$('#comment-area');
-                cookie=getCookie();
-                console.log(cookie);
-                user_id=cookie['user_id'];
-                if(!user_id){
-                    console.log(cookie['user_id']);
-                    comment_input.after('<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span><a href="/sign-in">请先登录</a></div>');
-                }
-                else{
-                    console.log(user_id);
-                    blog_id=window.location.pathname.split('/').reverse()[0];
-                    console.log('blog_id: '+blog_id);
-                    j={"user_id":user_id,"blog_id":blog_id,"content":comment};
-                    console.log('json_post:'+j['blog_id']);
-                    $.post('/comment',JSON.stringify(j),function(jr){
-                        console.log('server response comment',jr);
-                        if(!jr['success']){
-                            comment_form.after(jr['message']);
-                        }
-                        else{
-                            comment_form.after(jr['comment_wrapped']);
-                            comment_input.val('');
-                        }
-                    });
-                };
-            });
-        })
-
-    </script>
-    <iframe name="hidden-frame" style="display:none;"></iframe>
-    <div class="panel-footer" id="comment-area">
-        <form id="comment-form" class="form" target="hidden-frame" style="margin-bottom:10px;">
+    <div class="panel-footer mode" id="comment-area">
+        <script>executeMode();</script>
+        <form id="comment-form" class="form" target="hidden-iframe" style="margin-bottom:10px;">
             <div class="form-group">
-                <label >评论文章</label>
-                <textarea id="comment-input" class="form-control" rows="5" placeholder="输入你的评论..."></textarea>
+                <label>评论文章</label>
+                <textarea v-model="comment" id="comment-input" class="form-control mode" rows="3"
+                          placeholder="输入你的评论..."></textarea>
             </div>
-            <button type="submit" class="btn btn-default">提交</button>
+            <button v-on:click="submit_comment" type="submit" class="btn btn-default mode">提交</button>
         </form>
-        {{comments}}
+        {%if blog.comments%}
+        {%for comment in blog.comments%}
+        {%include "comment_show.html"%}
+        {%endfor%}
+        {%endif%}
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        <!--$.get(window.location.href+'api_get_blog',function(jr){-->
+            <!--cont=jr['data']['content'];-->
+            <!--bc=$('#blog_content')[0];-->
+            <!--log('raw:'+cont);-->
+            <!--bc.innerHTML=marked(cont);-->
+            <!--log('marked:'+bc.innerHTML)-->
+            <!--wrapRichText();-->
+        <!--})-->
+
+        <!--wrapTextarea();-->
+
+        var app_comment=new Vue({
+            el:'#comment-area',
+            data:{
+                comment:'',
+            },
+            methods:{
+                submit_comment:function(){
+                    vm=this;
+                    loc=window.location.href;
+                    $.post(loc+'comment',JSON.stringify({content:this.comment}),function(jr){
+                    log('submit_comment:');
+                        form=$('#comment-form');
+                        comment_input=$('#comment-input');
+                        if(jr['success']){
+                            form.after(jr['data']['comment']);
+                            comment_input.val('');
+                        }
+                        else{
+                            form.after(jr['message']);
+                        }
+                    })
+                }
+            }
+        })
+    })
+
+
+</script>

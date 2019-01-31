@@ -1,0 +1,58 @@
+
+下一步:
+快捷方式：回到顶部
+头像问题：用户头像
+用户主页展示信息
+用户主页默认展示页面
+markdown写作
+网站主页
+网站架构梳理！！
+管理员的管理功能
+网站图标favorite.ico
+
+网站目录结构：
+/  :get
+/sign-in  :get,post
+/sign-up  :get,post
+/user/home  :get
+/user/create-blog  :get,post
+/user/blog/{blog_id}  :get,post(comment)
+
+服务器模块：
+orm
+models
+app
+config
+framework
+apis
+static/
+templates/
+
+模板文件：
+site-header:公共主页和用户主页不同，公共：展示网站标题、图标，按钮（登入，注册，夜间模式），背景；
+    用户：网站标题、图标，按钮（创建博客，登录，注册，我的主页，夜间模式），背景，个性签名，个人简介
+site-body
+site-footer:固定
+公共主页内容：待定
+个人主页内容：
+
+
+实现新闻抓取。天气。各种api。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

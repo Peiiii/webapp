@@ -1,0 +1,92 @@
+<div class="row" id="app-blog" >
+
+        <div class="col-xs-6 col-md-9 container session" >
+            <div class="article-box  mode">
+                <script>executeMode();</script>
+                {{site_primary}}
+            </div>
+            <div ></div>
+
+        </div>
+        <script>executeMode();</script>
+            <!--侧边栏-->
+        <div class="col-xs-6 col-md-3 container session" >
+                <br><br>
+                <div class="center-btn category" >
+                    <h1 class="cate-title ">{{dir_name}}</h1>
+                    <ul>
+                        {%for b in blogs%}
+                        <li><a v-on:click="get_blog('{{b.id}}')">{{b.name}}</a></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+
+        </div>
+        <script>executeMode();</script>
+</div>
+<script>
+                $(document).ready(function(){
+                    var app_blog= new Vue({
+                         el:'#app-blog',
+                        data:{
+                            blog_title:'',
+                            blog_user_name:'',
+                            blog_content:'',
+                            blog_id:'',
+                            comments:''
+                        },
+                        methods:{
+                            get_blog:function(bid){
+                                b=apiGetBlog(bid);
+                                log('comments:'+b.comments);
+                                this.blog_title=b.name;
+                                this.blog_user_name=b.user_name;
+                                this.blog_content=b.content;
+                                this.blog_id=b.id;
+                                this.comments=b.comments;
+                            }
+                        },
+                        watch:{
+                            comments:function(newComments,oldComments){
+                                log('comments updated:-->'+newComments);
+                            }
+                        }
+                    })
+
+            comment_form=$('#comment-form');
+            $('#comment-form').submit(function () {
+
+
+                comment_input=$('#comment-input');
+                comment=comment_input.val();
+                comment_area=$('#comment-area');
+                cookie=getCookie();
+                console.log(cookie);
+                user_id=cookie['user_id'];
+                if(!user_id){
+                    console.log(cookie['user_id']);
+                    comment_input.after('<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span><a href="/sign-in">请先登录</a></div>');
+                }
+                else{
+                    console.log(user_id);
+                    blog_id=$('#article').attr('blog-id');
+                    console.log('blog_id: '+blog_id);
+                    j={"user_id":user_id,"blog_id":blog_id,"content":comment};
+                    console.log('json_post:'+j);
+                    $.post('/comment',JSON.stringify(j),function(jr){
+                        console.log('server response comment',jr);
+                        if(!jr['success']){
+                            comment_form.after(jr['message']);
+                            log('failed');
+                        }
+                        else{
+                            app_blog.comments.unshift(jr['data']['comment']);
+                            log('app_blog.comments:'+app_blog.comments);
+                            comment_input.val('');
+                        }
+                    });
+                };
+            });
+
+                 })
+</script>

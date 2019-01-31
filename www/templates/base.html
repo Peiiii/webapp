@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>求生之路</title>
+    <script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <link href="/sidebar.css" rel="stylesheet">
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <script src="/html5shiv.min.js"></script>
+    <script src="/respond.min.js"></script>
+    <script src="/vue.js"></script>
+    <script src="/marked.min.js"></script>
+    <script src="/highlight.js"></script>
+    <script src="/handle.js"></script>
+    <script src="/base.js"></script>
+    <script src="/js1.js"></script>
+    <style>
+        .img-responsive{
+            height:200px;
+            min-width:50%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="site container-fluid mode">
+    <div class="row site-header mode">
+        <!--<img src="/ball.jpg" style="z-index:-10;">-->
+        <script>executeMode();</script>
+        <div class="site-header-main col-md-8">
+            <div class="site-branding">
+                <p class="site-title">
+                    <a href="#">Moonflow Stang</a>
+                </p>
+                <p class="site-description">
+                    you will get there
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
+            <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
+            <button class="btn btn-default mode"><a href="/user/create_blog">Create Blog</a></button>
+            <br><br>
+            <button class="btn btn-default mode"><a href="/user/home">My Home</a></button>
+            <button class="btn btn-default mode"><a href="/user/manage/">Manage</a></button>
+            <button id="mod-switch" class="btn btn-default mode"><a href="#!">切换模式</a></button>
+            <br>
+            <script>executeMode();</script>
+        </div>
+    </div>
+    {%block site_body%}{%endblock%}
+    <!--site-footer,网页尾-->
+    <div class="row site-footer session">
+        <h1 class="btn btn-default mode">谢谢观赏</h1>
+    </div>
+    <iframe name="hidden-iframe" style="display:none;"></iframe>
+</div>
+<script>
+        $(document).ready(function(){
+           init();
+        })
+
+</script>
+</body>
+</html>

@@ -1,12 +1,19 @@
+{%extends "site_body_base.html"%}
+{%block site_primary%}
+{%for blog in blogs%}
 <div class="article-entry">
     <h3 class="article-title">
-        <span class="text-primary"> {{title}}</span>
+        <span class="text-primary"> {{blog.name}}</span>
     </h3>
-    <div class="article-summary">
-        <p>
-            {{summary}}
+    <div class="article-summary" >
+        <div class="markdown" id="article_display_{{blog.id}}" data="{{blog.summary}}">
+
             <span>......</span>
-        </p>
+        </div>
     </div>
-    <div class="more"><button class="btn btn-primary"><a href="{{blog_url}}" style="color:white;">继续阅读</a></button> </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="/user/blog/{{blog.id}}/" style="color:white;">继续阅读</a></button>
+    </div>
 </div>
+{%endfor%}
+{%endblock site_primary%}

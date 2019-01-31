@@ -1,0 +1,9 @@
+{%extends "site_body_base.html"%}
+{%block site_primary%}
+{%if blogs %}
+    {%include "blog_show.html"%}
+{%endif%}
+{%if message%}
+<div class="text-info">{{message}}</div>
+{%endif%}
+{%endblock%}

@@ -10,6 +10,9 @@ body{
     font-family: Merriweather, Georgia, serif;
     line-height:1.75;
 }
+.label{
+    color:black;
+}
 .site{
     background:#fff;
     margin:21px;
@@ -71,4 +74,10 @@ body{
 }
 .panel-title{
     font-size:1.5rem;
+}
+.panel{
+}
+.dark{
+    background-color:black;
+    color:white;
 }

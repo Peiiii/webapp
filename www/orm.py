@@ -1,6 +1,6 @@
 import logging;logging.basicConfig(level=logging.INFO)
 import asyncio,aiomysql
-from config import config
+from www.config import database
 
 
 class Field(object):
@@ -29,7 +29,7 @@ class TextField(Field):
         super().__init__(name,ddl,primary_key,default)
 
 class BooleanField(Field):
-    def __init__(self,name=None,primary_key=False,default=0,ddl='bool'):
+    def __init__(self,name=None,primary_key=False,default=False,ddl='bool'):
         super().__init__(name,ddl,primary_key,default)
 
 class ModelMetaclass(type):
@@ -86,7 +86,7 @@ class Model(dict,metaclass=ModelMetaclass):
         try:
             return self[key]
         except KeyError:
-            raise AttributeError(r"'Model' object has no attribute '%s'"%key)
+            raise AttributeError("'Model' object has no attribute '%s'"%key)
 
     def __setattr__(self, key, value):
         self[key]=value
@@ -160,7 +160,7 @@ class Model(dict,metaclass=ModelMetaclass):
         if not await cls.find(pk):
             logging.info('record not found: primary key :%s'%pk)
             return False
-        affected=await execute(cls.__delete__+'%s=?'%cls.__table__,pk)
+        affected=await execute(cls.__delete__+'%s=?'%cls.__primary_key__,pk)
         if not affected:
             logging.warn('failed to delete: %s'%pk)
             return False
@@ -251,9 +251,9 @@ async def execute(sql,args):
 
 
 loop=asyncio.get_event_loop()
-loop.run_until_complete(create_pool(user=config['user'],
-                                    password=config['password'],
-                                    db=config['db'],
+loop.run_until_complete(create_pool(user=database['user'],
+                                    password=database['password'],
+                                    db=database['db'],
                                     loop=loop))
 
 

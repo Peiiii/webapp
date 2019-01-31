@@ -1,0 +1,30 @@
+{%extends "base.html"%}
+{%block site_body%}
+{%for blog in blogs%}
+<div class="article-entry" id="blog_box_{{blog.id}}">
+    <h3 class="article-title">
+        <span class="text-primary"> {{blog.name}}</span>
+    </h3>
+    <div class="article-summary">
+        <div class="markdown" id="user_manage_article_display_{{blog.id}}" data="{{blog.summary}}" no-full-img="yes">
+            {{blog.summary}}
+        </div>
+        <span>......</span>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="/user/blog/{{blog.id}}/" style="color:white;">显示全部</a></button>
+        <button class="btn btn-primary" onclick="delete_blog('{{blog.id}}','{{blog.id}}')">
+            <span style="color:white;">删除博客</span>
+        </button>
+    </div>
+    <br>
+    <div class="message" id="msg_box_{{blog.id}}" style="display:none; ">
+        <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    <span id="msg_show_{{blog.id}}"></span>
+            <button class="btn btn-default" id="known_btn_{{blog.id}}">确定</button>
+        </div>
+    </div>
+</div>
+{%endfor%}
+{%endblock%}

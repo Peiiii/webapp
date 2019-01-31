@@ -1,0 +1,105 @@
+{%extends "base.html"%}
+{%block site_body%}
+<!--输入参数：-->
+<!--create_模式：-->
+<!--edit_blog模式：edit=True;blog=...;-->
+<form class="form mode" id="create_blog_app" target="hidden-iframe" usage="{{usage}}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="">标题</label>
+                <textarea id="blog_heading" v-model="blog_heading" class="form-control mode" rows="1" type="text">
+            {% if blog%}{{blog.name}}{%endif%}</textarea>
+            </div>
+            <div class="form-group">
+                <label class=" ">摘要</label>
+                <textarea id="blog_summary" v-model="blog_summary" class="form-control mode" rows="2" type="text">{% if blog%}{{blog.summary}}{%endif%}</textarea>
+            </div>
+            <div class="form-group ">
+                <label class="">内容</label>
+                <div style="text-align:right;">
+                    <button id="pull_btn" v-on:click="pull_up_down('#pull_btn','#blog_content')" class="btn btn-primary"
+                            type="submit" status="down" up="显示全部" down="收起">收起
+                    </button>
+                </div>
+                <textarea id="blog_content" v-model="blog_content" class="form-control mode" type="text" rows="10">{% if blog%}{{blog.content}}{%endif%}</textarea>
+            </div>
+            <button id="blog_submit" v-on:click="post_blog" class="btn btn-primary" type="submit">Submit</button>
+            <div id="message-submit-blog">{{message}}</div>
+        </div>
+        <div class="col-md-6">
+            <br>
+            <div class="panel panel-primary mode">
+                <div class=" panel-heading">
+                    <span class="label label-warning">Preview</span>
+                    <h1 class="panel-title " id="blog_heading_view"> {{blog_heading}}</h1>
+                    <small id="blog_summary_view">{{blog_summary}}</small>
+                </div>
+                <div id="blog_preview_view" class="panel-body rich-text">
+
+                </div>
+            </div>
+        </div>
+    </div> <!--end row-->
+
+</form>
+<script>
+    $(document).ready(function(){
+
+        var app = new Vue({
+            el:'#create_blog_app',
+            data:{
+                blog_heading:'',
+                blog_summary:'',
+                blog_content:'',
+                message:'',
+                usage:''
+            },
+            created:function(){
+                this.blog_heading=$('#blog_heading').val();
+                this.blog_summary=$('#blog_summary').val();
+                this.blog_content=$('#blog_content').val();
+                this.usage=$('#create_blog_app')[0].getAttribute('usage');
+            },
+            watch:{
+                blog_heading:function(newBlog_heading,oldBlog_heading){
+                    $('#blog_heading_view')[0].innerText=newBlog_heading;
+                },
+                blog_summary:function(newBlog_summary,oldBlog_summary){
+                    $('#blog_summary_view')[0].innerText=newBlog_summary;
+                },
+                blog_content:function(newBlog_content,oldBlog_content){
+                    newB=newBlog_content;
+                    //log('raw:'+newB);
+                    view=$('#blog_preview_view');
+                    v0=view[0];
+                    mkd=marked(this.blog_content);
+                    //log('mkd:'+mkd);
+                    v0.innerHTML=mkd;
+                    view.addClass('rich-text');
+                    wrapRichText();
+                }
+            },
+            methods:{
+                pull_up_down:pull_up_down,
+                post_blog:function(){
+                    vm=this;
+                    console.log('this.data:'+this.$data);
+                    $.post(window.location.href,JSON.stringify(this.$data),function(jr){
+                        console.log('this.message before:'+vm.message);
+                        //console.log('json response from server:'+jr+jr['message']);
+                        vm.message=jr['message'];
+                        console.log('this.message:'+vm.message);
+                        if(jr['success']){
+                            msg=$('#message-submit-blog');
+                            msg.after('<a href="/user/home">前往主页？</a>');
+                        };
+                    });
+                }
+            }
+        });
+
+    })
+
+</script>
+{%endblock site_body%}
