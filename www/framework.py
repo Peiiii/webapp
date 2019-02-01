@@ -5,7 +5,7 @@ from aiohttp import web as web
 from  jinja2 import  Template,Environment, PackageLoader
 
 templates_dir='templates'
-env = Environment(loader=PackageLoader('www', 'templates'))
+env = Environment(loader=PackageLoader('templates',''))
 
 
 class Application(web.Application):

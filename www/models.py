@@ -1,5 +1,5 @@
 import time,uuid,os,random
-from www.orm import Model,StringField, FloatField,TextField,BooleanField
+from orm import Model,StringField, FloatField,TextField,BooleanField
 from jinja2 import Template
 
 
@@ -26,6 +26,7 @@ class User(Model):
     async def getBlogs(self):
         blogs=await Blog.findAll(user_id=self.id)
         if blogs:
+            #blogs.sort(key=lambda i:i.created_at,reverse=True)
             blogs.reverse()
         else:
             blogs=[]
@@ -134,7 +135,8 @@ class Blog(Model):
         await b.save()
         return b
     def checkBlog(self,len_summary=150):  ### 检查一个Blog的summary若为空，则快速生成一个
-        if len(self.summary)==0:
+        ##if len(self.summary)==0:## 仅当用户未填写summary时才自动生成summary
+        ## 暂时采取这样的策略： 无论用户有没有填写summary最终summary都会有机器自动生成。
             self.summary=shortCut(self.content,length=len_summary)
     async def chownComments(self,bid):
         comments=await self.getComments()

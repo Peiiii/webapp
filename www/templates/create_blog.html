@@ -3,22 +3,25 @@
 <!--输入参数：-->
 <!--create_模式：-->
 <!--edit_blog模式：edit=True;blog=...;-->
-<form class="form mode" id="create_blog_app" target="hidden-iframe" usage="{{usage}}">
-    <div class="row">
-        <div class="col-md-6">
+
+
+<div class="row" id="create_blog_app">
+    <div class="col-md-6" id="blog_edit_box">
+        <form class="form mode" target="hidden-iframe" usage="{{usage}}" >
             <div class="form-group">
                 <label class="">标题</label>
-                <textarea id="blog_heading" v-model="blog_heading" class="form-control mode" rows="1" type="text">
-            {% if blog%}{{blog.name}}{%endif%}</textarea>
+                <textarea id="blog_heading" v-model="blog_heading" class="form-control mode" rows="1" type="text">{% if blog%}{{blog.name}}{%endif%}</textarea>
             </div>
             <div class="form-group">
                 <label class=" ">摘要</label>
                 <textarea id="blog_summary" v-model="blog_summary" class="form-control mode" rows="2" type="text">{% if blog%}{{blog.summary}}{%endif%}</textarea>
             </div>
-            <div class="form-group ">
+            <div class="form-group " style="max-height:800px;overflow:scroll;" id="content_input_box">
                 <label class="">内容</label>
                 <div style="text-align:right;">
-                    <button id="pull_btn" v-on:click="pull_up_down('#pull_btn','#blog_content')" class="btn btn-primary"
+                    <button class="btn btn-default" onclick="fullScreen('#content_input_box')" >全屏</button>
+                    <button class="btn btn-default" onclick="exitFullScreen('#content_input_box')" >取消全屏</button>
+                    <button id="pull_btn" v-on:click="pull_up_down('#pull_btn','#blog_content')" class="btn btn-default"
                             type="submit" status="down" up="显示全部" down="收起">收起
                     </button>
                 </div>
@@ -26,23 +29,28 @@
             </div>
             <button id="blog_submit" v-on:click="post_blog" class="btn btn-primary" type="submit">Submit</button>
             <div id="message-submit-blog">{{message}}</div>
-        </div>
-        <div class="col-md-6">
-            <br>
-            <div class="panel panel-primary mode">
-                <div class=" panel-heading">
-                    <span class="label label-warning">Preview</span>
-                    <h1 class="panel-title " id="blog_heading_view"> {{blog_heading}}</h1>
-                    <small id="blog_summary_view">{{blog_summary}}</small>
-                </div>
-                <div id="blog_preview_view" class="panel-body rich-text">
+        </form>
+    </div> <!--end col-1-->
 
-                </div>
+    <div class="col-md-6" id="blog_preview_box" >
+        <br>
+        <button class="btn btn-default" onclick="fullScreen('#blog_preview_box')" >全屏</button>
+        <button class="btn btn-default" onclick="exitFullScreen('#blog_preview_box')" >取消全屏</button>
+        <br>
+        <div class="panel panel-primary mode" style="max-height:800px;overflow:scroll;">
+            <div class=" panel-heading">
+                <span class="label label-warning">Preview</span>
+                <h1 class="panel-title " id="blog_heading_view"> {{blog_heading}}</h1>
+                <small id="blog_summary_view">{{blog_summary}}</small>
+            </div>
+            <div id="blog_preview_view" class="panel-body rich-text"  >
+
             </div>
         </div>
-    </div> <!--end row-->
+    </div>
+</div> <!--end row-->
 
-</form>
+
 <script>
     $(document).ready(function(){
 
@@ -100,6 +108,7 @@
         });
 
     })
+
 
 </script>
 {%endblock site_body%}

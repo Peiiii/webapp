@@ -76,6 +76,29 @@ function getData(selector){
 }
 // 笔记：js 默认参数；js 类；
 //----------------------页面控件-------------------------------//
+
+//------------全屏控件-------------------//
+function getreqfullscreen(){
+    var root = document.documentElement
+    return root.requestFullscreen || root.webkitRequestFullscreen || root.mozRequestFullScreen || root.msRequestFullscreen
+}
+function getExitfullScreen(){
+    return document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen
+}
+function fullScreen(sel_box){
+    box=$(sel_box)[0];
+    box.style['max-hight']='800px';
+    box.style['overflow']='scroll';
+    getreqfullscreen().call(box);
+}
+function exitFullScreen(sel_box){
+    box=$(sel_box)[0];
+    box.style['max-hight']='';
+    box.style['overflow']='';
+    getExitfullScreen().call(document);
+}
+
+//----------------testarea控件-------------------//
 function pull_up_down(sel_btn,sel_ta){
 // textarea 下拉收起控件；
     btn=$(sel_btn)[0];
@@ -208,6 +231,7 @@ function init(){
         switchMode();
     });
     $('textarea').on('input propertychange',wrapTextarea);
+    //$('textarea').on('input propertychange',corWithContent);
     parseMarkdown('.markdown');
     wrapRichText();
     wrapTextarea();

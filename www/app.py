@@ -1,13 +1,13 @@
 import logging;logging.basicConfig(level=logging.INFO)
 import asyncio, hashlib, os
 from aiohttp import web
-from www.orm import create_pool
-from www.models import User, Blog, Comment, loadText, next_id
-from www.framework import Application, templates_dir
-from www.config import database,files
+from orm import create_pool
+from models import User, Blog, Comment, loadText, next_id
+from framework import Application, templates_dir
+from config import database,files
 from jinja2 import Template, Environment, PackageLoader
-from www.apis import apiError, jsonResponse
-env = Environment(loader=PackageLoader('www', 'templates'))
+from apis import apiError, jsonResponse
+env = Environment(loader=PackageLoader('templates',''))
 loop = asyncio.get_event_loop()
 app = Application(loop=loop)
 
@@ -347,7 +347,13 @@ async def init(loop):
     logging.info('server started at http://127.0.0.1:80....')
     return server
 
-
+print('current dir:',os.getcwd())
 app.router.add_static('/', 'static', show_index=True)
+print('http://127.0.0.1')
 loop.run_until_complete(init(loop))
+import webbrowser
+print('open in a minute:')
+webbrowser.open('http://127.0.0.1:80/user/home')
 loop.run_forever()
+
+

@@ -1,6 +1,6 @@
 import logging;logging.basicConfig(level=logging.INFO)
 import asyncio,aiomysql
-from www.config import database
+from config import database
 
 
 class Field(object):

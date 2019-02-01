@@ -1,4 +1,5 @@
 <div class="panel panel-primary mode" id="article" v-bind:blog-id="blog_id">
+
     <script>executeMode();</script>
     <div class=" panel-heading">
         <h1 class="panel-title "> {{blog.name}}</h1>
@@ -6,7 +7,9 @@
     </div>
     <div class=" panel-body article-content">
         <div style="text-align:right;">
-            <button class="btn btn-small btn-default" style=""><a href="edit_blog">编辑</a></button>
+            <button class="btn btn-small btn-default" style=""><a href="edit_blog" class="a-plain mode" >编辑</a></button>
+            <button class="btn btn-small btn-default" onclick="fullScreen('#article')" id="test-btn">全屏</button>
+            <button class="btn btn-small btn-default" onclick="exitFullScreen('#article')">取消全屏</button>
         </div>
         <div id="blog_content_{{blog.id}}" class="markdown" data="{{blog.content}}">
             {{blog.content}}
@@ -68,6 +71,7 @@
             }
         })
     })
+
 
 
 </script>
