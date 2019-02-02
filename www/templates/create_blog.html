@@ -7,7 +7,7 @@
 
 <div class="row" id="create_blog_app">
     <div class="col-md-6" id="blog_edit_box">
-        <form class="form mode" target="hidden-iframe" usage="{{usage}}" >
+        <form class="form mode" target="hidden-iframe" usage="{{usage}}">
             <div class="form-group">
                 <label class="">标题</label>
                 <textarea id="blog_heading" v-model="blog_heading" class="form-control mode" rows="1" type="text">{% if blog%}{{blog.name}}{%endif%}</textarea>
@@ -16,26 +16,36 @@
                 <label class=" ">摘要</label>
                 <textarea id="blog_summary" v-model="blog_summary" class="form-control mode" rows="2" type="text">{% if blog%}{{blog.summary}}{%endif%}</textarea>
             </div>
-            <div class="form-group " style="max-height:800px;overflow:scroll;" id="content_input_box">
+            <div class="form-group " id="content_input_box">
                 <label class="">内容</label>
                 <div style="text-align:right;">
-                    <button class="btn btn-default" onclick="fullScreen('#content_input_box')" >全屏</button>
-                    <button class="btn btn-default" onclick="exitFullScreen('#content_input_box')" >取消全屏</button>
-                    <button id="pull_btn" v-on:click="pull_up_down('#pull_btn','#blog_content')" class="btn btn-default"
-                            type="submit" status="down" up="显示全部" down="收起">收起
+                    <button class="btn btn-default"
+                            onclick="fullScreenSwitch('#full_screen_switch_edit_box','#content_input_box')"
+                            id="full_screen_switch_edit_box" status="off" on="全屏" off="取消全屏">全屏
+                    </button>
+                    <button id="pull_btn" onclick="pullTextAreaUpSwitch('#pull_btn','#blog_content')"
+                            class="btn btn-default"
+                            type="submit" status="off" on="收起" off="显示全部">收起
                     </button>
                 </div>
-                <textarea id="blog_content" v-model="blog_content" class="form-control mode" type="text" rows="10">{% if blog%}{{blog.content}}{%endif%}</textarea>
+                <textarea id="blog_content" v-model="blog_content" class="form-control mode textarea"
+                          style="max-height:800px;overflow:scroll;" type="text" rows="10">{% if blog%}{{blog.content}}{%endif%}</textarea>
             </div>
             <button id="blog_submit" v-on:click="post_blog" class="btn btn-primary" type="submit">Submit</button>
             <div id="message-submit-blog">{{message}}</div>
         </form>
     </div> <!--end col-1-->
 
-    <div class="col-md-6" id="blog_preview_box" >
+    <div class="col-md-6" id="blog_preview_box">
         <br>
-        <button class="btn btn-default" onclick="fullScreen('#blog_preview_box')" >全屏</button>
-        <button class="btn btn-default" onclick="exitFullScreen('#blog_preview_box')" >取消全屏</button>
+        <button class="btn btn-default"
+                onclick="fullScreenSwitch('#full_screen_switch_preview_box','#blog_preview_box')"
+                id="full_screen_switch_preview_box" status="off" on="全屏" off="取消全屏">全屏
+        </button>
+        <button class="btn btn-small btn-default"
+                onclick="speakInnerTextSwitch('#speak_switch_btn','#blog_preview_view')"
+                status="off" on="朗读全文" off="停止阅读" id="speak_switch_btn">朗读全文
+        </button>
         <br>
         <div class="panel panel-primary mode" style="max-height:800px;overflow:scroll;">
             <div class=" panel-heading">
@@ -43,7 +53,7 @@
                 <h1 class="panel-title " id="blog_heading_view"> {{blog_heading}}</h1>
                 <small id="blog_summary_view">{{blog_summary}}</small>
             </div>
-            <div id="blog_preview_view" class="panel-body rich-text"  >
+            <div id="blog_preview_view" class="panel-body rich-text">
 
             </div>
         </div>
@@ -89,7 +99,6 @@
                 }
             },
             methods:{
-                pull_up_down:pull_up_down,
                 post_blog:function(){
                     vm=this;
                     console.log('this.data:'+this.$data);
@@ -108,6 +117,8 @@
         });
 
     })
+
+
 
 
 </script>

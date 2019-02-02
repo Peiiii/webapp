@@ -8,8 +8,12 @@
     <div class=" panel-body article-content">
         <div style="text-align:right;">
             <button class="btn btn-small btn-default" style=""><a href="edit_blog" class="a-plain mode" >编辑</a></button>
-            <button class="btn btn-small btn-default" onclick="fullScreen('#article')" id="test-btn">全屏</button>
-            <button class="btn btn-small btn-default" onclick="exitFullScreen('#article')">取消全屏</button>
+            <button class="btn btn-small btn-default" onclick="fullScreenSwitch('#full_screen_switch_1','#article')"
+                    status="off" on="全屏" off="取消全屏" id="full_screen_switch_1">全屏</button>
+            <button class="btn btn-small btn-default" onclick="speakInnerTextSwitch('#speak_switch_btn','#blog_content_{{blog.id}}')"
+                    status="off" on="朗读全文" off="停止阅读" id="speak_switch_btn">朗读全文</button>
+            <button id="pull_btn" onclick="pullUpSwitch('#pull_btn','#blog_content_{{blog.id}}')" class="btn btn-default"
+                    type="submit" status="off" on="收起" off="显示全部">收起</button>
         </div>
         <div id="blog_content_{{blog.id}}" class="markdown" data="{{blog.content}}">
             {{blog.content}}

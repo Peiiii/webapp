@@ -71,11 +71,67 @@ function log(text){console.log(text)}
 function getData(selector){
 // 返回结点$(selector)[0]的data属性值；
     data= $(selector)[0].getAttribute('data');
-    log('data:'+data);
-    return data
+    //log('data:'+data);
+    return data;
 }
 // 笔记：js 默认参数；js 类；
-//----------------------页面控件-------------------------------//
+//---------------------------------------------------页面控件--------------------------------------------------------//
+//笔记： 添加控件服务
+//switch服务：
+//    控制按钮需添加属性：
+//            onclick:服务函数名；
+//            status:初始状态；
+//            on:处于on状态是按钮所显示的文字
+//            off:处于off状态是按钮所显示的文字
+//---------------------------！！！控件系统！！！----------------------------//
+//--------------------------控件服务----------------------------//
+//基础支持函数
+function getStatus(sel_btn){
+    return $(sel_btn)[0].getAttribute('status');
+}
+function getOnMsg(sel_btn){
+    return $(sel_btn)[0].getAttribute('on');
+}
+function getOffMsg(sel_btn){
+    return $(sel_btn)[0].getAttribute('off');
+}
+function getStatusAndMsg(sel_btn){
+    return [getStatus(sel_btn),getOnMsg(sel_btn),getOffMsg(sel_btn)];
+}
+function setStatusOn(sel_btn,on_msg){
+    $(sel_btn)[0].setAttribute('status','on');
+    $(sel_btn)[0].innerText=on_msg;
+}
+function setStatusOff(sel_btn,off_msg){
+    $(sel_btn)[0].setAttribute('status','off');
+    $(sel_btn)[0].innerText=off_msg;
+}
+//----------------语音朗读控件--------------------//
+function startSpeaking(sel_box){
+    var speechSU = new window.SpeechSynthesisUtterance();
+    speechSU.text = $(sel_box)[0].innerText;
+    window.speechSynthesis.speak(speechSU);
+    return speechSU;
+}
+function stopSpeaking(){
+//    var speechSU = new window.SpeechSynthesisUtterance();
+//    speechSU.text ='停止朗读';
+    window.speechSynthesis.cancel();
+    console.log('停止朗读');
+}
+function speakInnerTextSwitch(sel_btn,sel_box){
+    status=getStatus(sel_btn);
+    on_msg=getOnMsg(sel_btn);
+    off_msg=getOffMsg(sel_btn);
+    if (status==='on'){
+        stopSpeaking();
+        setStatusOff(sel_btn,on_msg);
+    }
+    else{
+        startSpeaking(sel_box);
+        setStatusOn(sel_btn,off_msg);
+    }
+}
 
 //------------全屏控件-------------------//
 function getreqfullscreen(){
@@ -98,30 +154,40 @@ function exitFullScreen(sel_box){
     getExitfullScreen().call(document);
 }
 
-//----------------testarea控件-------------------//
-function pull_up_down(sel_btn,sel_ta){
-// textarea 下拉收起控件；
-    btn=$(sel_btn)[0];
-    status=btn.getAttribute('status');
-    info_up=btn.getAttribute('up');
-    info_down=btn.getAttribute('down');
-    if(status==='up'){
-        taDown(sel_ta);
-        btn.setAttribute('status','down');
-        btn.innerText=info_down;
+function fullScreenSwitch(sel_btn,sel_box){
+    [status,on_msg,off_msg]=getStatusAndMsg(sel_btn);
+    if (status==='on'){
+         exitFullScreen(sel_box);
+         setStatusOff(sel_btn,on_msg);
     }
     else{
-        taUp(sel_ta);
-        btn.setAttribute('status','up')
-        btn.innerText=info_up;
+        fullScreen(sel_box);
+        setStatusOn(sel_btn,off_msg);
+    }
+}
+//-----------------------容器下拉收起控件---------------------------//
+function pullUpSwitch(sel_btn,sel_box){
+    return ;
+}
+
+//----------------testarea下拉收起控件-------------------//
+function pullTextAreaUpSwitch(sel_btn,sel_ta){
+    [status,on_msg,off_msg]=getStatusAndMsg(sel_btn);
+    if(status=='on'){
+        pullTextAreaUpOff(sel_ta);
+        setStatusOff(sel_btn,on_msg);
+    }
+    else{
+        pullTextAreaUpOn(sel_ta);
+        setStatusOn(sel_btn,off_msg);
     }
 }
 //----------textarea操作-----------//
-function taDown(sel_ta){
-    return corWithContent(sel_ta);
-}
-function taUp(sel_ta){
+function pullTextAreaUpOn(sel_ta){
     return corWithRows(sel_ta);
+}
+function pullTextAreaUpOff(sel_ta){
+    return corWithContent(sel_ta);
 }
 
 function plain_corWithContent(n,ta){
@@ -131,7 +197,12 @@ function plain_corWithContent(n,ta){
     var arr = v.split('\n');
     var len = arr.length;
     var min=ta[0].rows;
-    if(len>min) ta.height(len*20);//20为行高
+    max_height=ta[0].style['max-height'];
+    max_height=Number(max_height.split('px')[0]);
+    if(len>min) {
+        new_height=Math.min(len*20,max_height);
+        ta.height(new_height);//20为行高
+    }
     log('height changed-->:'+ta.height())
 }
 function corWithContent(selector){
@@ -148,6 +219,8 @@ function corWithRows(selector){
         ta.height(ta[0].rows*20);//20为行高；
     });
 }
+//----------------------------------------------------------------------------------------//
+
 //----------------markdown及其它渲染操作---------------------//
 function richMarkImg(selector){
 // 对markdown解析后的html节点内部img元素进行进一步解析；
@@ -193,19 +266,27 @@ function parseMarkdown(selector){
     mks.addClass('rich-text');
     wrapRichText();
 }
-function wrapTextarea() {
-//将所有teaxtarea的行高设置为与其内容行数一致，但行数不低于其原始的rows值
-                selector='textarea';
-                for(var i=0;i<$(selector).length;i++){
-                    ta=$($(selector)[i]);
-                    var v = ta.val();
-                    var arr = v.split('\n');
-                    var len = arr.length;
-                    var min=ta[0].rows;
-                    if(len>min) ta.height(len*20);//20为行高;
-                }
-                log('Run wrapTextarea()');
-};
+////--------------Textarea初始化------------------//
+//function wrapTextarea() {
+////将所有teaxtarea的行高设置为与其内容行数一致，但行数不低于其原始的rows值
+//                selector='textarea';
+//                for(var i=0;i<$(selector).length;i++){
+//                    ta=$($(selector)[i]);
+//                    var v = ta.val();
+//                    var arr = v.split('\n');
+//                    var len = arr.length;
+//                    var min=ta[0].rows;
+//                    if(len>min) ta.height(len*20);//20为行高;
+//                }
+//                log('Run wrapTextarea()');
+//};
+//----------------------------------------Initialization 初始化函数------------------------------------------------//
+function  initTextArea(){
+    corWithContent('.textarea');
+}
+
+
+
 
 //-----------------------------------------------//
 //--------------------网站初始化----------------------------//
@@ -230,9 +311,9 @@ function init(){
     btn.click(function(){
         switchMode();
     });
-    $('textarea').on('input propertychange',wrapTextarea);
+    $('textarea').on('input propertychange',initTextArea);
     //$('textarea').on('input propertychange',corWithContent);
     parseMarkdown('.markdown');
     wrapRichText();
-    wrapTextarea();
+    initTextArea();
 }

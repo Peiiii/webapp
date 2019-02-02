@@ -48,6 +48,10 @@ body{
 .session{
     border-top:rgb(26,26,26) solid 4px;
 }
+.sidebar{
+    border-left:#288823 solid 4px ;;
+}
+
 .a-plain{
     color:black;
 }
