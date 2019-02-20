@@ -4,58 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>摩比大陆</title>
-    <script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
-    <link href="/bootstrap.min.css" rel="stylesheet">
-    <link href="/style1.css" rel="stylesheet">
-    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
-    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
-    <script src="/html5shiv.min.js"></script>
-    <script src="/respond.min.js"></script>
-    <script src="/vue.js"></script>
-    <script src="/marked.min.js"></script>
-    <script src="/highlight.js"></script>
-    <script src="/handle.js"></script>
-    <script src="/base.js"></script>
-    <script src="/js.js"></script>
+    <title>新年快乐</title>
+    {%include "html/include.html"%}
     <style>
+
         .img-responsive{
             height:200px;
             min-width:50%;
         }
     </style>
 </head>
-<body>
-
-<div class="site container-fluid mode">
+<body class="mode">
+<script type="text/javascript" color="255,0,0" opacity='0.5' dark-opacity="1" normal-opacity="0.5" zIndex="-2" count="99" src="/canvas-nest.min.js" class="canvas-script"></script>
+<div class="site container-fluid mode" >
     <div class="row site-header mode">
         <!--<img src="/ball.jpg" style="z-index:-10;">-->
         <script>executeMode();</script>
         <div class="site-header-main col-md-8">
             <div class="site-branding">
                 <p class="site-title">
-                    <a href="#">Moonpflow Stang 摩比大陆</a>
+                    <a href="#">新年快乐</a>
                 </p>
                 <p class="site-description">
-                    Leave love , leave life
+                    Happy new year
                 </p>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mode">
             <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
             <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
             <button class="btn btn-default mode"><a href="/user/create_blog">Create Blog</a></button>
             <br><br>
             <button class="btn btn-default mode"><a href="/user/home">My Home</a></button>
             <button class="btn btn-default mode"><a href="/user/manage/">Manage</a></button>
-            <button id="mod-switch" class="btn btn-default mode"><a href="#!">切换模式</a></button>
+            <button class="btn btn-default mode"><a href="/test.html">Test</a></button><br><br>
+            <button class="btn btn-default mode"><a href="/path/e:%2F ">Local File</a></button>
+            <button id="mod-switch" class="btn btn-default mode"><span class="text-primary">切换模式</span></button>
             <br>
             <script>executeMode();</script>
         </div>
     </div>
     {%block site_body%}{%endblock%}
     <!--site-footer,网页尾-->
-    <div class="row site-footer session">
+    <div class="row site-footer session mode">
         <h1 class="btn btn-default mode">谢谢观赏</h1>
     </div>
     <iframe name="hidden-iframe" style="display:none;"></iframe>

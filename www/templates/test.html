@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Manager</title>
+    <script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+.box-row{
+    border:brown solid 4px;
+}
+.box-col{
+    border:green solid 4px;
+}
+.box{
+    max-width:500px;
+    border:solid 2px;
+    border-radius:10px;
+    margin:20px;
+    padding:20px;
+}
+.cell{
+    width:400px;
+    margin:5px;
+    margin-left:0px;
+}
+.data-box{
+    display:none;
+}
+    </style>
+    <script src="/vue.js"></script>
+    <script src="/handle.js"></script>
+    <script>{%include "base1.js"%}</script>
+    <script>{%include "js1.js"%}</script>
+    <script>{%include "test.js"%}</script>
+    <script>{%include "run_script.js"%}</script>
+    <script>{%include "file.js"%}</script>
+</head>
+<body>
+<div class="mode">
+     jsReadFile:<input type="file" onchange="jsReadFiles(this.files)"/>
+    <div class="row box-row">
+        <div class=" col-md-6">
+            <textarea rows="10" class="form-control script-input" id="test_teatarea_1" style="width:100%;" target="#data_box_1"></textarea>
+            <button class="btn btn-default" onclick="runInnerScriptAndMore('#data_box_1')">Run</button>
+        </div>
+        <div class=" col-md-6">
+            <div class="viewport panel text-info"></div>
+        </div>
+            <div class="html-data-box hdden" src-textarea="#test_teatarea_1" run-script="yes" id="data_box_1"><script></script></div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12 container">
+            <form class="form " target="hidden-iframe">
+                <div class="form-group box" id="app">
+
+                    <button class="btn btn-default" onclick="insertCellBefore('#base_line_1','#data_box_2')"><span
+                            class="glyphicon glyphicon-plus"></span></button>
+                    <button class="btn btn-default" onclick="deleteCellFromEnd('#cell_box_1')"><span
+                            class="glyphicon glyphicon-minus"></span></button>
+                    <div id="cell_box_1" count="1">
+                        <div class="form-group cell-box" style="text-align:right;">
+                            <button class="btn btn-sm btn-default" onclick="removeParent(this)"
+                                    style="margin-right:56px;"><span
+                                    class="glyphicon glyphicon-minus"></span></button>
+                            <textarea class="form-control cell textarea-responsive" rows="1"
+                                      placeholder="请输入"></textarea>
+                        </div>
+                        <div id="base_line_1" class="base-line"></div>
+                        <div class="data-box" id="data_box_2">
+                            <div class="form-group cell-box" style="text-align:right;">
+                                <button class="btn btn-sm btn-default" onclick="removeParent(this)"
+                                        style="margin-right:56px;"><span
+                                        class="glyphicon glyphicon-minus"></span></button>
+                                <textarea class="form-control cell textarea-responsive" rows="1"
+                                          placeholder="请输入"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<iframe name="hidden-iframe" style="display:none"></iframe>
+</body>
+</html>

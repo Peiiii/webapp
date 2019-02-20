@@ -1,15 +1,16 @@
 {%extends "base.html"%}
 {%block site_body%}
 {%for blog in blogs%}
-<div class="article-entry" id="blog_box_{{blog.id}}">
+<div class="article-entry mode" id="blog_box_{{blog.id}}">
     <h3 class="article-title">
         <span class="text-primary"> {{blog.name}}</span>
     </h3>
     <div class="article-summary">
-        <div class="markdown" id="user_manage_article_display_{{blog.id}}" data="{{blog.summary}}" no-full-img="yes">
-            {{blog.summary}}
+        <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.summary}}</textarea>
+        <div class="markdown" id="article_display_{{blog.id}}" data-box-id="data_box_{{blog.id}}">
+
+            <span>......</span>
         </div>
-        <span>......</span>
     </div>
     <div class="more">
         <button class="btn btn-primary"><a href="/user/blog/{{blog.id}}/" style="color:white;">显示全部</a></button>

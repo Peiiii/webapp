@@ -1,0 +1,38 @@
+<div class="article-content-box">
+<h3 class="subject">如何确保数字革命的安全？</h3>
+<div class="intro">
+<p>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong>对于欧洲而言，这不仅意味着保护供应链，还意味着对我们自身的技术行业展开统一的大规模投资行动。</p>
+</div>
+<div class="info">
+<span class="author">
+作者：朱利安·金 （Julian King）</span>                <span class="author">
+来源：南风窗</span>                <span class="author">
+日期：2019-01-26</span>                                                            </div>
+<div class="content">
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">那些在铁路开始运营之前大笔投资运河的人，真的非常可怜。例如，我们可以理解布里奇沃特运河（也许是英国第一条运河）的投资者会强烈反对计划中的利物浦和曼彻斯特铁路线。但技术进步的脚步却是无法阻止的—同样无法逃避的还有技术进步所带来的全新挑战。今天的数字创新也同样如此。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">当利物浦和曼彻斯特铁路线终于在1830年开通时，它带来了一场革命性的胜利，不仅开启了蒸汽时代，而且以人们从未预见的方式改变了世界。随着铁路时代的展开，金属轨道像树叶上的脉络一样铺遍了工业化世界，实现了前所未有的联通能力，而犯罪分子迅速对这种能力加以利用。事实上，最终人们不得不建立一支完整的警察部队，来对铁路安全进行管理。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">随着世界来到又一次连通性革命的边缘，特别是基础设施将从根本上改变我们彼此联系的方式，这样的经验教训不应当被忽视。即将到来的数字时代，影响将远远超出交通运输领域。我们不是在谈论物联网，而是在谈论万物互联：即将到来的数字未来更加分散化，并以前所未有的方式联系数据、物体和人。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">在安全方面，我们需要确保我们不是像过去那样，坐在一条缓慢移动的运河驳船上，而8:15抵达曼彻斯特的火车在我们身边呼啸而过。我们需要清楚地看到这些技术将会带来的战略漏洞，并预测恶意行为主体可能如何利用全新数字基础设施来牟取自身利益或进行武器部署。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">某些挑战已经十分明确，例如滥用社交媒体传播虚假信息—以及利用诸如深度换脸视频和人工智能等尖端工具。但至关重要的是，我们同样在谈论基础设施本身。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">第五代移动通讯技术5G构成了某种特别的挑战。它将成为全球联通的支柱，这就提出了有关供应链安全和起源等事务的战略和安全问题。我们怎样才能确保所使用的未来几代欧洲技术—不仅限于5G—的安全性？</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">目前的状况是，数字供应链安全远非密不透风。英国政府已经警告电信企业要非常谨慎地考量它们的供应商，而美国则一直在寻求限制某些形式的外国直接投资，所涉及的领域包括半导体和机器人等关键技术。为保障数字基础设施供应链安全，我们需要提高技术组件来源的透明度；保持供应企业多样化也至关重要。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">此外，需要共同的标准和规则来建立国际合作伙伴的可信度。这是法国总统伊曼纽尔·马克龙日前在《巴黎网络空间信任和安全倡议》中所描绘的提案基础。按照马克龙的说法，恶意行为主体对数字产品和服务的漏洞加以利用，已经使互联网成为冲突的策源地。他提议欧洲以合法与合作为基础，建立起“信任网络”。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">随着技术培训已经走上正轨，我们必须为缓解当前风险迅速采取行动，同时还要确保我们正在为避免未来威胁奠定所需的基础。我们需要避免做出短视的反应，例如保护主义和其他扼杀创新的举措。相反，我们必须清楚地了解风险的范围和规模，并确定真正的战略是什么。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">对于欧洲而言，这不仅意味着保护供应链，还意味着对我们自身的技术行业展开统一的大规模投资行动。欧盟委员会尤其有能力推动这项跨部门的工作。现在欧洲捍卫其数字未来，仍然为时未晚。即使是布里奇沃特运河的所有者，最终也看到了潮流的走向，并斥巨资投入竞争性的铁路项目。</span></div>
+<div>
+ </div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="color:#696969;"><span style="font-size:12px;">本文由Project Syndicate授权《南风窗》独家刊发中文版。朱利安·金，曾任英国驻爱尔兰和法国大使，现任欧盟安全联盟事务专员。</span></span></div>
+</div>
+<div id="articlePager">

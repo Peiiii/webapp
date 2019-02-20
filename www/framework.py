@@ -136,14 +136,17 @@ class Application(web.Application):
                     last = args.pop()
                     if last != 'request':
                         raise Exception('函数%s最后一个参数应为request,而非%s' % (func.__name__, last))
-
+                data={}
                 if form:  ## 参数来源：表单
-                    data = await req.post()
+                    fd = await req.post()
+                    data.update(fd)
                 elif json:  ##参数来源： json
-                    data = await req.json()
+                    jd = await req.json()
+                    data.update(jd)
                     logging.info('json data:%s' % (data))
-                else:
-                    data = req.match_info
+
+                md = req.match_info
+                data.update(md)
                 params = []
                 for i in args:
                     try:

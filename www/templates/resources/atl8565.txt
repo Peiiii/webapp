@@ -1,0 +1,124 @@
+<div class="article-content-box">
+<h3 class="subject">“中国整机厂”的全球雄心</h3>
+<div class="intro">
+<p>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong>“芯片之痛”正让“部件国产化”成为中国手机行业一个口号，但不要忘记，产业链跨国家分配的合理性和经济性，早已被证明了几十年。</p>
+</div>
+<div class="info">
+<span class="author">
+作者：本刊记者 胡万程 发自东莞</span>                <span class="author">
+来源：南风窗</span>                <span class="author">
+日期：2019-01-26</span>                                                            </div>
+<div class="content">
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">“Designed by Apple in California Assembled in  China.”（苹果加利福尼亚设计，中国组装。）</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这行标在iPhone包装盒上的小字，或许是苹果公司全球化生产最著名的象征。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">iPhone有近400家供应商，2018年苹果公司曾经公布过一份200大供应商的名单，涉及CPU、储存、电池、显示、光学器件、电声器件、天线、组装代工、分销商等多个领域，从上到下，一应俱全。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">而这些占到苹果制造成本总支出98%的公司，分布在中国台湾、日本、中国大陆、美国、韩国、德国等多个地区。</span></div>
+<div>
+<span style="font-size:14px;">可以说，这家赚走全世界智能手机市场六成利润的公司，集合了各国人才、资本、技术和劳动力等优势资源之大成。能够参与到这条供应链的公司也都能“背靠大树好乘凉”，在其中分一杯羹。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">小小的iPhone手机，从硅谷库比蒂诺总部，到日本古都京都的电子工厂、韩国“三八线”附件的产业基地，最后到中国深圳富士康的流水线，接着它们又被送回美国，然后再产销全球。一部iPhone的全球之旅，就是全球产业链的缩影。</span></div>
+<div>
+ </div>
+<div>
+<strong><strong><strong><strong>　　</strong></strong></strong><span style="font-size:16px;">王侯将相，宁有种乎？</span></strong></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">智能手机在全球普及开来，仅仅用了十多年的时间。就像数年前科幻小说家描绘的那般，智能手机成为了现代人类器官功能的延展，是连接现实世界与虚拟世界之间的移动数据终端。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">随着通讯技术的更新迭代，通讯与信息消费市场产生了前所未有的融合与重塑。智能机赶上风口，一跃而起。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">iPhone的横空出世，把“苹果模式”普及开来，世界各国形成了一个完整的协同产业链：总部投入资源，汇聚创意、材料、技术、部件、组装，从无到有的把手机做出来。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">当今智能机的全球化产业链分工由美国主导，加利福尼亚总部牢牢控制着品牌价值、产品研发和终端销售，自然分到价值“蛋糕”最大份。美国、日本、韩国和中国台湾的公司，生产价格高的零部件，分中份。中国大陆在努力靠近中端生产环节，但依托人力资源、材料供应的比重仍然较高，只能分到小份。</span></div>
+<div>
+<span style="font-size:14px;">但中国企业并不满足于这个“小份”。随着组装技术外溢，专业人才增多，零部件供应商愈加齐全。受益于iPhone的崛起，国产手机品牌也有了跟国际品牌一样的产业链资源。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">到了2009年前后，国产品牌手机终于迎来了崛起机会。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">从全球市场来看，当时有着三大机遇：最底层的智能手机操作系统、终端智能手机硬件以及应用程序。在最底层操作系统方面iOS与安卓系统分庭抗礼，中国丧失了构建机会，只能在开源的安卓上“修修补补”做一些个性化改动。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">王侯将相，宁有种乎？苹果做得了，凭什么我们做不了？</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">华为在经过技术研发后，2009年于西班牙亮相了自家的第一款智能手机；2011年，雷军带着创始团队在7月份正式宣布进军手机市场；OPPO也从当初的“音乐手机”带着“X903”正式进军智能手机，同年兄弟品牌的vivo也涉足智能手机。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">2010年，国产手机在中国国内市场份额只有16%，在国际市场上的份额约等于零。2017年，全球手机出货量约20亿部，其中，中国品牌出货量已超过9亿部，占比约45%。各大国产品牌的旗舰机即便与最新款的iPhone同台竞争，也有其独特优势。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">行业里有个笑话，美国人把产品发明出来，日本人把产品做好，韩国人把产品做烂，中国人把产品做得没钱赚。从一无所有到半壁江山，在智能手机市场上，中国再一次用“人民战争”的战略，蚕食了市场份额。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">短短七年间，中国各大厂商究竟是如何掌控了智能手机的产业链呢？</span></div>
+<div>
+ </div>
+<div>
+<strong><strong><strong><strong>　　</strong></strong></strong><span style="font-size:16px;">国产品牌崛起“秘史”</span></strong></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">目光依然是回到全球产业链上。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">行业标杆是苹果公司，善于模仿的国产厂商在初期自然也是亦步亦趋地跟着老大走。老大玩的是总部设计贩卖，全球采购和组装，小弟们自然也学会了这招。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">重金砸下招揽人才，主攻核心技术研发—工业设计、结构设计、硬件设计、软件设计。中国国产厂商虽然起步晚，但是在零部件整合方面，并不是一道不可逾越的天堑。只要有可以攻克技术难关、实现需求的工程师，项目就可以立得起来。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">在核心技术研发上，国产手机首先要克服的是大公司的专利墙。苹果、三星等公司铺设了不少专利地雷与屏障，国产手机必须要小心翼翼地避开、自主创造或直接购买，否则高额的专利赔偿很容易让一家新兴整机厂胎死腹中。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">拿如今亚洲手机市场占有率第一的OPPO公司来说，最开始就是在东莞长安镇的一座占地330亩的工业园起家的。CEO陈明永带着3亿元人民币，从无到有地搞专利。时至今日，在国家知识产权局服务平台上，你已经能找到属于OPPO的两万五千多条专利了。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这其中大量专利就集中在摄像、快充这些被看作是OPPO强处的领域。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">OPPO摄像部门的一位核心人士告诉《南风窗》记者，关于自拍体验，公司内部就有一个30多人的测试团队。对于成像的肤色呈现、柔化程度、曝光平衡进行反复测试。每个专利的后面都凝聚了大量的人力与物力的支持。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">立项过后，接下来就是元器件采购了。在几近透明的安卓阵营，用的什么处理器、储存、摄像头、液晶板基本就决定了手机的性能与市场定位。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">一部手机涉及的部件数千个，用哪家供应商的，如何在保证质量的基础上找到更具有性价比的零部件，这可以说是“全球化生产”中最重要的一步了。通常物料认证需要经过四大步：选型评审、设计评审、试产评审、可靠性试验。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">在国产整机厂中，这一项工作一般由采购工程实验室完成—一定高度自由落体验证是否经摔、冷热交替验证能否在极端环境下正常运行、加热电池验证是否有爆炸危险等等。之前三星Galaxy Note7爆炸事件，就是因为三星SDI制造的电池本身有瑕疵，在可靠性试验时未检测出危险就匆忙上市的结果。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">手机中最贵的是显示屏，其次为基带，然后是处理器、摄像头和内存。而在这其中，除了在显示屏领域，国内京东方有慢慢后来居上的趋势之外，其他部件仍然是美国、韩国、日本、中国台湾的天下，大多昂贵的部件都需要从上述地区进口。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">中国虽然有世界上最完整的产业链与工业基础，但涉及零部件上，整机厂们对于“国产”的选择还是十分谨慎。手机的更新换代太快，最新技术的应用期现在往往只有6个月左右。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">而零部件的技术积累需要相当长的时间，国产零部件一方面是技术不够先进，另一方面也是缺乏市场试错机会，整机厂面对的是对于智能手机相对挑剔的消费者，相比之下，采购海外大厂的产品要安全得多。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">采购测试评审结束，所有的零部件进入表面贴装技术中心，训练有素的工人将把手机的元器件贴装在主板上，随后组装整机。就这样，一部手机才算有了自己的实体。至于对应用程序、操作系统的打磨，那又是整机厂另一块重要工作了。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">总而言之，“整机厂”远远不是名字那般，“整合机子”就能完事的。</span></div>
+<div>
+ </div>
+<div>
+<strong><strong><strong><strong>　　</strong></strong></strong><span style="font-size:16px;">零部件的国产化</span></strong></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">有人把DIY组装电脑与组装手机放在一起比较。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这里面既有相像的，也有不同的。相像的是零部件都是通过全球采购的方式，不同的是普通人组装一台手机几乎不现实。同样是整机厂，手机厂商在整机过程中花费的成本要比其他产品高昂得多。当然，相对的，技术门槛越高获得的回报也就越高。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">一路走来，中国智能手机市场逐渐饱和，市场不再有明显增量，各方开始了在存量市场的大逃杀。在此期间，无数玩家在进入决赛圈之前倒了下去，酷派、ZUK、锤子……不少代工厂、供应商也因为这些品牌的沦陷而被迫关门停工。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">国产整机厂每时每刻都可能遇到危机，活下去并不容易，“华米OV”等成为了少数的幸存者。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">从一无所有到半壁江山，国产厂家既是全球产业链的参与者，又是受益者。一方面，他们采购他国的零部件，给予他人利润。另一方面，他们把这些零部件聚合一起组装成机，谋取利润。这是一种互利互惠的共生关系。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">然而，去年的“中兴事件”与“关税战争”，让中国厂商不得不面对一个之前从未想过的问题—如果整机厂采购不到他国的零部件怎么办？如果他国因为关税过高不买自己的零部件怎么办？</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">伴随摩擦的持续，产业转移显现。在中国大陆投入不少工厂资源的三星，将目光与战略重心放到了印度市场，在诺伊达建成了迄今为止全球最大的手机工厂，将实现每年最高 1.2 亿部手机的产量。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">vivo、OPPO、小米、金立等，几乎所有的中国手机厂商都在印度设立了工厂，其中小米已经拥有两座工厂。苹果也钦点了纬创（Wistron）在印度代工新一代iPhone。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">一个是增长放缓的饱和市场，一个是生机勃勃的潜力市场。从市场需求看也好，从经营成本看也好，未来几年一些新兴发展中国家承接中国的部分产业链成为明显趋势。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">产业的转移，阵痛在所难免，但也不必太过悲观。七年的发展中，中国创造出的华为、小米、OPPO、vivo的品牌价值巨大，只要解决了关键零部件的采购封锁问题，依然可以延续“iPhone模式”，把其他新兴市场纳入中国企业掌控的产业链。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">拿印度举例，经过2015~2018四年的耕耘，小米已经成为了印度第一品牌的智能手机厂商。而OPPO、vivo、金立等则深入线下实体门店，也完成了覆盖全印度的实体门店销售网络。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">随着这些手机厂商在印度及其他南亚国家与地区的手机组装工厂陆续建成与投产，大量的手机零组件采购，也开始由中国的采购中心间接调拨，往当地的工厂采购转移，以适应本土化生产下的计划排期与库存管控，而中国的手机供应链厂商也将会迎来了大量的出口采购订单。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">成熟的全球分工协作体系下，本不要求每个国家具备完整的产业链。但面临被“卡脖子”的危险，中国在高端部件领域的大额投资未曾中断。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">效果是有的，比如相较于2017年进入苹果200大供应商的中国大陆公司，2018年中国多了7家，且领域继续扩展，京东方在显示面板上的突破尤为突出。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">但在半导体、储存、光学仪器等领域都要求长期的技术积累，短时间的技术攻关与投资依然很难达到高端市场的一流标准。去年，不少资本进军半导体，犹如大炼钢铁，让人不免担忧。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">核心部件国产化，出发点颇有爱国心，但不能否认，产业链的全球配置是全球市场半个世纪自由选择的结果。一个大国要获得经济安全和产业安全，“什么都要自己造”，并不是唯一的途径。而且，它的经济成本和非经济成本都不低。</span></div>
+</div>
+<div id="articlePager">

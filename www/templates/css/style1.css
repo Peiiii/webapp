@@ -77,14 +77,13 @@ body{
     padding:20px;
     border-bottom:#288823 solid ;
 }
-.article-content{
+.plain-content{
     text-indent:2em;
 }
 .center-btn{
     padding-left:20%;
     padding-right:20%;
 }
-
 .categories, .category{
 
 }

@@ -30,6 +30,9 @@ class User(Model):
             blogs.reverse()
         else:
             blogs=[]
+        for b in blogs:
+            b.addDateTime()
+            b.addDate()
         return blogs
     async def deleteBlog(self):
         pass
@@ -142,6 +145,19 @@ class Blog(Model):
         comments=await self.getComments()
         for i in comments:
             await i.chown(bid)
+    def dateTime(self):
+        t=self.created_at
+        t=time.localtime(t)
+        return time.strftime('%Y/%m/%d--%H:%M:%S',t)
+    def addDateTime(self):
+        self.date_time=self.dateTime()
+    def date(self):
+        t = self.created_at
+        t = time.localtime(t)
+        return time.strftime('%Y/%m/%d', t)
+    def addDate(self):
+        self.Date=self.date()
+        ##print(self.date)
 
 
 
@@ -178,7 +194,11 @@ def loadText(file):
     text=f.read()
     f.close()
     encoding=chardet.detect(text)['encoding']
-    text=text.decode(encoding=encoding)
+    if encoding:
+        text=text.decode(encoding=encoding)
+    else:
+        print(text)
+        text=text
     return text
 def wrapText(text):
     return text.replace('\n','</p> <p>')

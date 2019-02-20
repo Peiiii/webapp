@@ -7,18 +7,24 @@ from framework import Application, templates_dir
 from config import database,files
 from jinja2 import Template, Environment, PackageLoader
 from apis import apiError, jsonResponse
+from tool import  initTools,log,Path,T
 env = Environment(loader=PackageLoader('templates',''))
 loop = asyncio.get_event_loop()
 app = Application(loop=loop)
 
 uid = '001548596745000dc6daec087f34186a7e5f2c6145613fd000'
-
+initTools()
 
 @app.get2('/')
 async def home():
     u = await User.find(uid)
     r = await User.getUserHome(u)
     return app.wrapAsResponse(r)
+@app.get2('/test.html')
+async def home():
+   return  app.wrapAsResponse({
+       '__template__':'error.html'
+   })
 
 
 @app.get2('/user/home', cookies=True)
@@ -267,7 +273,73 @@ async def api_delete_blog(blog_id,cookies):
     await Blog.delete(blog_id)
     json['message']='成功删除博客'
     return jsonResponse(**json)
+###############################################################
+############################File 操作###################################
 
+@app.get2('/file/edit/{filename}')
+async def do_file_edit(filename):
+    log(filename)
+    filename=decodePath(filename)
+    content=loadText(filename)
+    name=os.path.basename(filename)
+    return  app.wrapAsResponse({
+        '__template__':'file.html',
+        'file':{
+            'name':name,
+            'content':content,
+            'url':filename
+        }
+    })
+@app.post4('/file/read/{filename}')
+async def do_file_read(filename):
+    #filename=json['filename']
+    content=loadText(filename)
+    return jsonResponse(data=content)
+@app.post4('/file/write/{filename}',json=True)
+async def do_file_write(filename,content):
+    log('filename',filename)
+    writeFile(filename,content)
+    return jsonResponse(message='successfully write into file '+filename)
+def writeFile(fn,content):
+    import chardet
+    f=open(fn,'wb')
+    content1=bytes(content,encoding='utf-8')
+    log(chardet.detect(content1))
+    f.write(content1)
+    f.close()
+    return True
+
+@app.get2('/path/{path}')
+async def do_path_get(path):
+    print('path'+path)
+    #path=decodePath(path)
+    ##print(path)
+    p=Path(path)
+
+    return app.wrapAsResponse({
+        '__template__':"file.html",
+        'path':p
+    })
+def fileAndDir(path,list):
+    file_list,dir_list=[],[]
+    for i in list:
+        if os.path.isdir(path+r'/'+i):
+            dir={
+                'name':i,
+                'url':encodePath(path+'/'+i)
+            }
+            dir_list.append(dir)
+        else:
+            file = {
+                'name': i,
+                'url': encodePath(path+'/'+i)
+            }
+            file_list.append(file)
+    return {'name':os.path.basename(path),'files':file_list,'dirs':dir_list,'url':path}
+def encodePath(path):
+    return path.replace('/','%2F')
+def decodePath(path):
+    return path.replace('%20','/')
 ##############################################
 #############################################
 
@@ -322,6 +394,7 @@ async def checkBlog(blog_id,cookies):
         },
         'user':user
     }
+
 ###############################################################
 ###############################################################
 
@@ -353,6 +426,7 @@ print('http://127.0.0.1')
 loop.run_until_complete(init(loop))
 import webbrowser
 print('open in a minute:')
+#webbrowser.open('http://127.0.0.1:80/test.html')
 webbrowser.open('http://127.0.0.1:80/user/home')
 loop.run_forever()
 

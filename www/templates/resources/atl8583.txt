@@ -1,0 +1,44 @@
+<div class="article-content-box">
+<h3 class="subject">改掉STEM课程大纲</h3>
+<div class="intro">
+<p>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong>制定全新的STEM（科学、技术、工程和数学）课程表，将伦理学、经济学、心理学等所谓的人文科学纳入考量，保证技术以基本积极的性质服务于社会。</p>
+</div>
+<div class="info">
+<span class="author">
+作者：米切尔·贝克尔 （Mitchell Baker）</span>                <span class="author">
+来源：南风窗</span>                <span class="author">
+日期：2019-01-26</span>                                                            </div>
+<div class="content">
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">在经过漫长的数字经济蜜月后，近几年来，互联网、社交媒体和“科技巨头”的黑暗面逐渐暴露。在线对商业有利，对个人或社会则未必。科技巨头平台让操纵民意、散播仇恨和煽动暴力变得容易。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">我们曾经天真地以为，全民上网将势不可挡地带来信息民主化；如今，我们担心危害全民的“上瘾经济”。怎样才能支持更加人道、道德和有效的技术？</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">系统性地解决这个问题的一个重要办法，是改革所谓的STEM学科的教育，即科学、技术、工程和数学。全世界的决策者，已在关注如何增加STEM毕业生的数量和STEM学生的多样性。但我们还应该扩大STEM教育的范围，以确保学生学会评估和应对其工作所带来的社会、经济和政治后果。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这并不意味着在STEM课程表中加入已有的人文或社会科学课程。相反，这要求制定全新的课程表，让下一代技术人员、工程师、科学家和数学家打下形式基础—包括共同的用语和知识框架—来考虑他们的行为对社会所产生的宏观影响。如果没有这样一套框架，对创新的憧憬和人类所体验的现实之间的差距，将越来越大。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">幸运的是，这场教育革命的种子已经开始发芽。一些大学在STEM课程表中加入了伦理内容。以工科著称的斯坦福大学最近增加了《伦理、公共政策和科技变迁》和《计算机、伦理学和公共政策》等主题课程，还启动了新的“以人为本的人工智能”计划。2017年，康奈尔大学启动了“米尔斯坦科技和人文计划”。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这些初步计划，可以为新课程表和方法提供重要的试验场。但只有等到STEM计划能够向学生提供对自己的工作的人文影响进行可信评估所需要的工具时，才可能产生真正的变化。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">当然，如果我们不知道最有效的工具到底是什么，这些变化就毫无意义。因此，不断地进行试验也非常重要。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">科罗拉多大学波尔德分校的凯西·费斯勒，正在探索这一试验方法。他将以科技伦理为主题的课程大纲进行众包。不断扩大的在线数据库，已经包含了世界各地大学的200多项不同课程的大纲。但这些课程中只有1/4是由计算机科学教员讲授的。剩余部分为法律、哲学、通讯等院系的课程，这意味着它们并非为STEM相关院校量身定制的。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">更为根本性的是，这些单独设置的课程并不理想。费斯勒本人也同意，更好的方针应该集中关注将伦理学与STEM领域的“日常实践”相整合。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这也是负责任的计算机科学任务（Responsible CS Challenge）项目的目标。该项目由Omidyar Network公司、Schmidt Futures公司、Craig Newmark慈善基金会和Mozilla公司发起。这项为期两年的任务，将鼓励美国计算机科学教授在本科课程中加入伦理学内容，以便STEM学生更加深刻地理解技术如何影响人文。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这是一个良好的开端，但还远远不够。首先，开始关注伦理学固然很有意义，但对于经济学、心理学和其他众多所谓的人文科学，也需要进行类似的探索。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">扩大STEM教育，将这些更加宽泛的考量也纳入，这应该成为更加全面的长期战略的基础，保证技术以基本积极的性质服务于社会。这套战略还必须包括商业模式、激励、创新战略和监管机制方面的变化—而实现这些变化的，应该是那些所受教育让他们做好了“纠正其工作给我们所有人带来影响”之准备的人。</span></div>
+<div>
+ </div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="color:#696969;">本文由Project Syndicate授权《南风窗》独家刊发中文版。米切尔·贝克尔是Mozilla基金会和Mozilla公司共同创始人、主席。</span></div>
+<div>
+ </div>
+</div>
+<div id="articlePager">

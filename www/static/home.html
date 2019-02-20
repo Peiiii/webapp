@@ -16,7 +16,32 @@
 
 </head>
 <body>
-<div class="container-fluid">
+
+<!-- Include Quill stylesheet -->
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+
+<!-- Create the toolbar container -->
+<div id="toolbar">
+  <button class="ql-bold">Bold</button>
+  <button class="ql-italic">Italic</button>
+</div>
+
+<!-- Create the editor container -->
+<div id="editor">
+  <p>Hello World!</p>
+</div>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var editor = new Quill('#editor', {
+    modules: { toolbar: '#toolbar' },
+    theme: 'snow'
+  });
+</script>
+<aside class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
         <li class="active" role="presentation"><a href="#!">Home</a></li>
         <li class="" role="presentation"><a href="#!">About</a></li>
@@ -172,7 +197,7 @@
         </div>
     </div>
 
-</div>
+</aside>
 
 
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->

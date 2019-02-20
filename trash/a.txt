@@ -1,0 +1,46 @@
+<div class="article-content-box">
+<h3 class="subject">王充，东汉基层干部里的“苏格拉底”</h3>
+<div class="intro">
+<p>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong>王充的确是一个非常享受论辩过程，而相对轻视论辩结果的“希腊风”思想家。</p>
+</div>
+<div class="info">
+<span class="author">
+作者：徐英瑾 复旦大学哲学学院教授</span>                <span class="author">
+来源：南风窗</span>                <span class="author">
+日期：2019-01-26</span>                                                            </div>
+<div class="content">
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">现在很多人说中国传统文化，看重的都是诸如《论语》《孟子》《大学》之类的经典，对处于“子部”的书籍却不太重视，白白浪费了传统文化中的很多资源。比如自身代表作无缘进入“经部”的东汉思想家王充（字仲任，公元27年-约公元97年）。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">在历史教科书里，王充时常被冠以“伟大的唯物主义者”的大名，但在我看来，他最大的思想价值却未必在于此，而在于他以苏格拉底式的诘问法来从事哲学研究，活脱脱是一个从古希腊穿越到东汉的“穿越党”。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">要说清楚王充是怎么进行苏格拉底式的哲学思考的，我们就不得不顺便说一下他的宦海沉浮。东汉公务员有两条路走，一条是拿了“孝廉”“茂才”名头的“人才直通绿色通道”，运气好可以升到省部级干部（郡太守或州刺史）。走这条路的人除了必修“拼爹”这一课之外，还得在首都洛阳的“太学”里“镀金”，熟悉以《春秋》为核心的儒家经典。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">而与一天到晚研究《春秋》案例的这些官僚不同，东汉公务员的另一支队伍则由大量的基层办事人员构成：他们“拼爹”无望，却得负责缉盗、收税、赈灾、修水利、写文书、传递文书等繁重日常事务，工资还很寒酸，其中诸如焦仲卿（《孔雀东南飞》中的男主角）者，甚至因为没时间归家而导致严重的家庭矛盾。但幸运的是，由于这些基层官吏多接触实务，办事能力与逻辑头脑也得到了一定的锻炼。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">王充就是这样的一位具有基层工作经验，同时又具备哲学反思的能力的公务员。他本人一直做郡县幕僚，没机会往上走，但多了解民间疾苦，也有点愤世嫉俗。他的代表作《论衡》因为观点有点不太主流，是在汉末才在蔡邕等人的引荐下才为世人所知的。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">《论衡》的内容很丰富，我就选择其中《乱龙》一篇来说明王充哲学是如何与希腊哲学暗合的。他的议论焦点是董仲舒根据《春秋》大义，通过制造土龙来招雨的做法。和不太喜欢给出明确结论的苏格拉底一样，王充似乎也并不急于给自己贴上一个“反董仲舒”与“亲董仲舒”的标签，而更乐于将董氏做法的理论说清楚。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">为了能够将论辩的复杂性加以呈现，他先提到了两种反董的意见，即：一、真龙固然能够引来雨水，但土龙既然是假货，怎么可能引来雨水？所以董的做法无效；二、龙与雨的相似并不能够保证前者通过“感应”引发后者，否则，为何我们画雷樽一般并不会引发大雨？所以董的做法无效。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">王充的正面论点则是：反董派提出的第一个论证有效，而第二个论证无效，而有鉴于第二个论证与第一个论证逻辑上彼此独立，所以，董的求雨法的有效性还是应当得到肯定的。而他之所以支持“相似者彼此感应”这一说法，乃是因为否定这一说法的代价太高—譬如，我们就会因此无法解释为何人学鸡叫能够引发鸡的真叫；为何叶公画的假龙能够因为其与真龙的相似而引来真龙等等。王充的论证是，既然后面说的这些事项成立，那么，龙与雨的相似也就能够保证前者通过“感应”引发后者。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">王充的论证结论或许会让今天的读者感到震惊，因为王充所不愿意否认的“事实”（即叶公画龙会引来真龙等）恰恰是今天的读者非常愿意否认的。但需要注意的是，尽管在事实认定的向度上我们与王充的确有巨大分歧，但是他的逻辑论证思路还是非常清楚的。</span></div>
+<div>
+<strong style="font-size:12.6316px;"><strong><strong><strong>　　</strong></strong></strong></strong><span style="font-size:14px;">这就好比说，尽管今天我们会对古希腊哲学家所援引的古希腊神话的案例感到好笑，但是他们在论辩中所蕴含的逻辑，却一直沿用至今。从这个意义上说，王充的确是一个非常享受论辩过程，而相对轻视论辩结果的“希腊风”思想家。</span></div>
+<div>
+ </div>
+<div>
+ </div>
+<div>
+ </div>
+<div>
+ </div>
+<div>
+ </div>
+<div>
+ </div>
+</div>
+<div id="articlePager">

@@ -1,0 +1,54 @@
+
+
+.bg-gray{
+    background-color:#f8f8f8;
+}
+.divider{
+    background:#e7e7e7;
+    height:1px;
+}
+.box{
+    border:;
+}
+.drop-white{
+    background:#fff;
+}
+.message-box{
+    padding:6px;
+}
+.padding-box{
+    padding:20px;
+}
+.place-hold-box{
+    min-height:30px;
+}
+.light-padding-box{
+    padding:5px 20px;
+}
+.light-hr{
+    margin:1px 0px;
+}
+.editor-backdrop{
+    background:#eee;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.fill-parent{
+    width:100%;
+
+}
+.menubar{
+    border-top:#e8e8e8 solid 2px;
+    border-bottom:#d8d8d8 solid 2px;
+}
+.edit-area{
+
+}
+.edit-textarea{
+    border:#d8d8d8 solid 2px;
+    width:1000px;
+    padding:20px;
+    margin-bottom:-5px;
+    margin-left:auto;
+    margin-right:auto;
+}

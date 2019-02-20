@@ -1,12 +1,13 @@
 {%extends "site_body_base.html"%}
 {%block site_primary%}
 {%for blog in blogs%}
-<div class="article-entry">
+<div class="article-entry mode">
     <h3 class="article-title">
-        <span class="text-primary"> {{blog.name}}</span>
+        <span class=""> {{blog.name}}</span>
     </h3>
     <div class="article-summary" >
-        <div class="markdown" id="article_display_{{blog.id}}" data="{{blog.summary}}">
+        <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.summary}}</textarea>
+        <div class="markdown" id="article_display_{{blog.id}}" data-box-id="data_box_{{blog.id}}">
 
             <span>......</span>
         </div>

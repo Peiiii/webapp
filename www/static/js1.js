@@ -68,12 +68,13 @@ function log(text){console.log(text)}
 
 //--------------------html页面操作支持函数-----------------//
 
-function getData(selector){
-// 返回结点$(selector)[0]的data属性值；
-    data= $(selector)[0].getAttribute('data');
-    //log('data:'+data);
-    return data;
-}
+
+//function getData(selector){
+//// 返回结点$(selector)[0]的data属性值；
+//    data= $(selector)[0].getAttribute('data');
+//    //log('data:'+data);
+//    return data;
+//}
 // 笔记：js 默认参数；js 类；
 //---------------------------------------------------页面控件--------------------------------------------------------//
 //笔记： 添加控件服务
@@ -105,6 +106,14 @@ function setStatusOn(sel_btn,on_msg){
 function setStatusOff(sel_btn,off_msg){
     $(sel_btn)[0].setAttribute('status','off');
     $(sel_btn)[0].innerText=off_msg;
+}
+
+//--------页面操作---------//
+function removeParent(ele){
+    ele.parentElement.remove();
+}
+function getDataFromDiv(sel_div){
+    return $(sel_div)[0].innerHTML;
 }
 //----------------语音朗读控件--------------------//
 function startSpeaking(sel_box){
@@ -190,7 +199,7 @@ function pullTextAreaUpOff(sel_ta){
     return corWithContent(sel_ta);
 }
 
-function plain_corWithContent(n,ta){
+function plain_corWithContent(ta){
 //输入：ta 为dom 节点
     ta=$(ta);
     var v = ta.val();
@@ -199,15 +208,42 @@ function plain_corWithContent(n,ta){
     var min=ta[0].rows;
     max_height=ta[0].style['max-height'];
     max_height=Number(max_height.split('px')[0]);
+    max_height=max_height>0?max_height:len*20;
     if(len>min) {
         new_height=Math.min(len*20,max_height);
         ta.height(new_height);//20为行高
     }
-    log('height changed-->:'+ta.height())
+    log('height changed-->:'+ta.height());
+}
+function onTextareaInput(event){
+//输入：ta 为dom 节点
+    ta=$(event.target);
+    log(ta);
+    var v = ta.val();
+    var arr = v.split('\n');
+    var len = arr.length;
+    var min=ta[0].rows;
+    log('rows:'+min+' len:'+len);
+    max_height=ta[0].style['max-height'];
+    max_height=Number(max_height.split('px')[0]);
+    max_height=max_height>0?max_height:len*20;
+    if(len>=min) {
+        log(max_height);
+        log('len:'+len);
+        new_height=Math.min(len*20,max_height);
+        ta.height(new_height);//20为行高
+        log('height changed-->:'+ta.height());
+    }
+
 }
 function corWithContent(selector){
+    log('cor');
     textAreas=$(selector);
-    textAreas.map(plain_corWithContent);
+    for(var i=0;i<textAreas.length;i++){
+        plain_corWithContent(textAreas[i]);
+        textAreas[i].addEventListener('input',onTextareaInput);
+    }
+
 }
 
 function corWithRows(selector){
@@ -219,9 +255,56 @@ function corWithRows(selector){
         ta.height(ta[0].rows*20);//20为行高；
     });
 }
+//----------------------Cell操作--------------------//
+String.prototype.replaceAll = function(s1,s2){
+　　return this.replace(new RegExp(s1,"gm"),s2);
+　　}
+function deleteCellFromEnd(sel){
+    box=$(sel+'>.cell-box');
+    //log(box);
+    if(box.length>1)box[box.length-1].remove();
+
+}
+
+function insertCellBefore(sel_base,sel_data_box){
+    base=$(sel_base)[0];
+    cell_html=getDataFromDiv(sel_data_box);
+    base.insertAdjacentHTML('beforeBegin',cell_html);
+    initTextArea();
+}
+//-----------------------------------------//
+function runInnerScript(selector){
+    selector=selector+' script';
+    //log('runinnerScript:'+selector);
+    scripts=$(selector);
+    //log('scripts:'+scripts);
+    for(var i=0;i<scripts.length;i++){
+        //log(scripts[i].innerHTML);
+        window.eval(scripts[i].innerHTML);
+    }
+}
 //----------------------------------------------------------------------------------------//
 
 //----------------markdown及其它渲染操作---------------------//
+function preview(text){
+    l=text.length;
+    //log('length: '+l);
+    if (l>=30){
+        log(text.slice(0,10)+'......'+text.slice(l-10,l-1));
+        return;
+    }
+    log(text);
+
+}
+function getData(selector){
+// 返回结点$(selector)[0]的data属性值；
+    log('getData selector:'+selector);
+    data= $(selector).val();
+    data=data.replaceAll('&lt;','<');
+    data=data.replaceAll('&gt;','>');
+    //preview('data:'+data);
+    return data;
+}
 function richMarkImg(selector){
 // 对markdown解析后的html节点内部img元素进行进一步解析；
 //对每个img元素，解析其alt属性的值，根据alt中的内容改变该img元素的属性；
@@ -252,16 +335,17 @@ function wrapRichText(){
     executeMode();
 }
 
-function parseMarkdown(selector){
+function parseMarkdown(sel_show_box,sel_data_box){
 //对$(selector)所选择的每一个节点：获取其data属性作为原始markdown字符串，
 //将其解析后插入为节点的innerHTML,再调用其它函数进行进一步的渲染
-    mks=$(selector);
+    mks=$(sel_show_box);
     //log('parsemarkdown selector:'+selector);
     for(var i=0;i<mks.length;i++){
-        mk=mks[i];
-        selector='#'+mk.id;
+        mk=$(mks[i]);
+        selector='#'+mk[0].id;
         //log('mk.id:'+mk.id);
-        mk.innerHTML=marked(String(getData(selector)));
+        sel_data_box='#'+mk[0].getAttribute('data-box-id');
+        mk.html(marked(String(getData(sel_data_box)))    );
     }
     mks.addClass('rich-text');
     wrapRichText();
@@ -283,6 +367,7 @@ function parseMarkdown(selector){
 //----------------------------------------Initialization 初始化函数------------------------------------------------//
 function  initTextArea(){
     corWithContent('.textarea');
+    corWithContent('.textarea-responsive');
 }
 
 
@@ -291,6 +376,8 @@ function  initTextArea(){
 //-----------------------------------------------//
 //--------------------网站初始化----------------------------//
 function init(){
+isDefined=(typeof maeked != "undefined" ? true : false);
+if(isDefined){
     marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -305,6 +392,7 @@ function init(){
             return hljs.highlightAuto(code,[lang]).value;
         }
     });
+    }
     executeMode();
     btn=$('#mod-switch');
     elms=$('.mode');
@@ -317,3 +405,6 @@ function init(){
     wrapRichText();
     initTextArea();
 }
+$(document).ready(function(){
+    init();
+})

@@ -18,7 +18,7 @@
             </div>
             <div class="form-group " id="content_input_box">
                 <label class="">内容</label>
-                <div style="text-align:right;">
+                <div style="text-align:right">
                     <button class="btn btn-default"
                             onclick="fullScreenSwitch('#full_screen_switch_edit_box','#content_input_box')"
                             id="full_screen_switch_edit_box" status="off" on="全屏" off="取消全屏">全屏
@@ -51,7 +51,7 @@
             <div class=" panel-heading">
                 <span class="label label-warning">Preview</span>
                 <h1 class="panel-title " id="blog_heading_view"> {{blog_heading}}</h1>
-                <small id="blog_summary_view">{{blog_summary}}</small>
+                <!--<small id="blog_summary_view">{{blog_summary}}</small>-->
             </div>
             <div id="blog_preview_view" class="panel-body rich-text">
 
@@ -96,6 +96,7 @@
                     v0.innerHTML=mkd;
                     view.addClass('rich-text');
                     wrapRichText();
+                    runInnerScript('#blog_preview_view');
                 }
             },
             methods:{

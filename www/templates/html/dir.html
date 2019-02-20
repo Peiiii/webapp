@@ -1,0 +1,35 @@
+<div id="edit_app_1">
+    <div class="light-padding-box">
+        <div class="hidden filename-box">{{path.epath}}</div>
+        <label class="">{{path.path}}</label>
+        <button class="btn btn-default btn-sm btn-submit" style="float:right;"><a href="/user/home">Home</a></button>
+    </div>
+    <div class="divider"></div>
+    <div class="place-hold-box menubar box bg-gray">
+
+    </div>
+    <div class="editor-backdrop">
+        <div class="margin-side edit-area centor-block" style="text-align:center;">
+            <div class="message-box alert alert-info" style="display:none;"></div>
+            <div rows="10" class="text-input edit-textarea centor-block drop-white" style="text-align:left; min-width:400px;">
+                <header>{{path.name}}</header>
+                <div class="divider"></div>
+                {%for d in path.dirChildren()%}
+                <a href="/path/{{d.epath}}">{{d.name}}</a>
+                <span class="text-info" style="float:right;"><small>{{d.ctime}} </small></span>
+                <span class="text-info" style="float:right;"><small>{{d.size}} Bytes&nbsp;&nbsp;</small></span>
+                <span class="text-info" style="float:right;"><small>{{d.type}}&nbsp;&nbsp;</small></span>
+                <div class="divider"></div>
+                {%endfor%}
+                {%for f in path.fileChildren()%}
+                <a href="/file/edit/{{f.epath}}">{{f.name}}</a>
+                <span class="text-info" style="float:right;"><small>{{f.ctime}}</small></span>
+                <span class="text-info" style="float:right;"><small>{{f.size}} Bytes&nbsp;&nbsp;</small></span>
+                <span class="text-info" style="float:right;"><small>{{f.type}}&nbsp;&nbsp;</small></span>
+
+                <div class="divider"></div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
