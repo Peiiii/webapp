@@ -4,7 +4,7 @@ from aiohttp import web
 from orm import create_pool
 from models import User, Blog, Comment, loadText, next_id
 from framework import Application, templates_dir
-from config import database,files
+from config import database,files,net
 from jinja2 import Template, Environment, PackageLoader
 from apis import apiError, jsonResponse
 from tool import  initTools,log,Path,T
@@ -485,7 +485,7 @@ async def do_api_get_blog(blog_id, cookies):
 
 
 async def init(loop):
-    server = await loop.create_server(app.make_handler(), '127.0.0.1', 80)
+    server = await loop.create_server(app.make_handler(), net['ip'], net['port'])
     logging.info('server started at http://127.0.0.1:80....')
     return server
 

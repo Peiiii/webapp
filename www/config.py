@@ -5,6 +5,11 @@ admin={
     'id':'00000000001',
     'email':'1535376447@qq.com'
 }
+net={
+    'ip':'0.0.0.0',
+    'port':80,
+    'domain':'localhost'
+}
 database={
     'user':'root',
     'password':'password',
