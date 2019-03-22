@@ -35,7 +35,22 @@ class User(Model):
             b.addDate()
         return blogs
     async def deleteBlog(self):
-        pass
+        blogs=await self.getBlogs()
+        for b in blogs:
+            await b.deepDelete()
+    @classmethod
+    async def quickDelete(cls,**kws):
+        us=await cls.findAll(**kws)
+        for u in us:
+            await u.deepDelete()
+    async def deepDelete(self):
+        await self.deleteBlog()
+        await User.delete(self.id)
+    @classmethod
+    async def deleteAll(cls,**kws):
+        us=await User.findAll(**kws)
+        for u in us:
+            await u.deepDelete()
 
     async def setKey(self,key):
         '''
@@ -46,8 +61,8 @@ class User(Model):
         return await self.update(key=key)
     async def getUserHome(self):
         blogs=await self.getBlogs()
-        if not blogs:
-            return '''你还没有博客'''
+        # if not blogs:
+        #     return '''你还没有博客'''
         return {
             '__template__':'article-display.html',
             'blogs':blogs,
@@ -100,7 +115,13 @@ class Blog(Model):
     content = TextField(default='...')
     created_at = FloatField(default=time.time)
     public=BooleanField(default=False)
+    type=StringField(ddl='varchar(50) not null',default='plain')
 
+    async def deepDelete(self):
+        cos=await self.getComments()
+        for c in cos:
+            await Comment.delete(c.id)
+        await Blog.delete(self.id)
     async def appendComments(self): ## 为Blog对象添加comments属性，
         cs= await self.getComments()
         if cs:
@@ -174,6 +195,7 @@ class Comment(Model):
     user_image = StringField(ddl='varchar(500)')
     content = TextField()
     created_at = FloatField(default=time.time)
+    reply_to=StringField(ddl='varchar(50)')
     def wrap(self,template=TEM_COM_WRAP):
         from jinja2 import Template
         tem=Template(template)

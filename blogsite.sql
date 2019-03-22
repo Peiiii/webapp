@@ -1,5 +1,3 @@
--- schema.sql
-
 drop database if exists webapp;
 
 create database webapp;
@@ -32,6 +30,7 @@ create table blogs (
     `content` mediumtext not null,
     `created_at` real not null,
     `public` bool not null,
+    `type` varchar(50) not null,
     key `idx_created_at` (`created_at`),
     primary key (`id`),
     foreign key (`user_id`) references users (`id`)
@@ -45,6 +44,7 @@ create table comments (
     `user_image` varchar(500) not null,
     `content` mediumtext not null,
     `created_at` real not null,
+    `reply_to` varchar(50),
     key `idx_created_at` (`created_at`),
     primary key (`id`),
     foreign key (`blog_id`) references blogs(`id`)

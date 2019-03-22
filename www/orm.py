@@ -133,7 +133,7 @@ class Model(dict,metaclass=ModelMetaclass):
         args=None if args==[] else args
         rs=await select(sql,args)
         if len(rs)==0:
-            return None
+            return []
         all=[]
         for i in rs:
             all.append(cls(**i))

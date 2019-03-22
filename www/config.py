@@ -1,9 +1,14 @@
 
-
+admin={
+    'name':'top',
+    'password':'password',
+    'id':'00000000001',
+    'email':'1535376447@qq.com'
+}
 database={
     'user':'root',
     'password':'password',
-    'db':'webapp'
+    'db':'webapp2'
 }
 files={
     'base':'base.html',

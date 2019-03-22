@@ -8,18 +8,18 @@ from config import database,files
 from jinja2 import Template, Environment, PackageLoader
 from apis import apiError, jsonResponse
 from tool import  initTools,log,Path,T
+import tool
 env = Environment(loader=PackageLoader('templates',''))
 loop = asyncio.get_event_loop()
 app = Application(loop=loop)
 
-uid = '001548596745000dc6daec087f34186a7e5f2c6145613fd000'
-initTools()
+
 
 @app.get2('/')
 async def home():
-    u = await User.find(uid)
-    r = await User.getUserHome(u)
-    return app.wrapAsResponse(r)
+    return app.wrapAsResponse({
+        '__template__': 'test.html'
+    })
 @app.get2('/test.html')
 async def home():
    return  app.wrapAsResponse({
@@ -50,7 +50,7 @@ async def do_signup_get():
 @app.post4('/sign-up', form=True)
 async def do_signup_post(username, email, password):
     uid = next_id()
-    passwd = hashlib.sha1(('%s:%s' % (uid, password)).encode('utf-8')).hexdigest()
+    passwd = tool.encrypt(uid,password)
     exist = await User.findAll(email=email)
     if exist:
         json = {'status': 1, 'info': 'Email already used.'}  # 0表示失败
@@ -82,8 +82,9 @@ async def do_signin_post(email, password, headers):
         }
         return app.wrapAsResponse(dic)
     u = u[0]
-    passwd = hashlib.sha1(('%s:%s' % (u.id, password)).encode('utf-8')).hexdigest()
+    passwd = tool.encrypt(u.id,password)
     if u.passwd != passwd:
+        log('expected user:',u)
         print(passwd, ' ', u.passwd)
         dic = {
             '__template__': files['sign_up_in'],
@@ -92,7 +93,7 @@ async def do_signin_post(email, password, headers):
         }
         return app.wrapAsResponse(dic)
     import time
-    key = str(int(time.time())) + uid + u.passwd
+    key = str(int(time.time())) + u.id + u.passwd
     key = hashlib.sha1(key.encode('utf-8')).hexdigest()
     await u.setKey(key)
     r = web.Response(status=303)
@@ -490,12 +491,12 @@ async def init(loop):
 
 print('current dir:',os.getcwd())
 app.router.add_static('/', 'static', show_index=True)
-print('http://127.0.0.1')
+print('http://127.0.0.1/user/home')
 loop.run_until_complete(init(loop))
 import webbrowser
 print('open in a minute:')
 #webbrowser.open('http://127.0.0.1:80/test.html')
-webbrowser.open('http://127.0.0.1:80/user/home')
+# webbrowser.open('http://127.0.0.1:80/user/home')
 loop.run_forever()
 
 

@@ -1,4 +1,4 @@
-import os, time
+import os, time,hashlib
 
 
 def initTools():
@@ -34,6 +34,11 @@ def loadText(file):
 def formatTime( t):
     t = time.localtime(t)
     return time.strftime('%Y/%m/%d  %H:%M:%S', t)
+
+def encrypt(*args):
+    text=':'.join(args)
+    encrypted=hashlib.sha1(text.encode('utf-8')).hexdigest()
+    return encrypted
 
 
 class PathType:
