@@ -23,7 +23,7 @@ async def home():
 @app.get2('/test.html')
 async def home():
    return  app.wrapAsResponse({
-       '__template__':'error.html'
+       '__template__':'test.html'
    })
 
 
@@ -274,7 +274,7 @@ async def api_delete_blog(blog_id,cookies):
     json['message']='成功删除博客'
     return jsonResponse(**json)
 ###############################################################
-############################File 操作###################################
+############################File &  Dir###################################
 
 @app.get2('/file/edit/{filename}')
 async def do_file_edit(filename):
@@ -340,6 +340,74 @@ def encodePath(path):
     return path.replace('/','%2F')
 def decodePath(path):
     return path.replace('%20','/')
+#--------------API---------------#
+@app.get2('/api/file/get/{filename}')
+async def do_api_file_get(filename):
+    log(filename)
+    #filename=decodePath(filename)
+    f=Path(filename)
+    f.addContent()
+    return jsonResponse(f.toJson())
+
+##############################################
+#############################################
+@app.get2('/cloud_app/get/{app_name}')
+async def do_cloud_app_get(app_name):
+    app_dir='app/'+app_name
+    file_name=app_dir+'/'+app_name+'.html'
+    html=getEasyTemplate(file_name)
+    return jsonResponse(data=html)
+@app.get2('/module/get/{module_name}')
+async def do_mudule_get(module_name):
+    module_dir='js'
+    file_name=module_dir+'/'+module_name+'.js'
+    js=getEasyTemplate(file_name)
+    return jsonResponse(data=js)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##############################################
+#############################################
+def getEasyTemplate(file_name):
+    tem=env.get_template(file_name)
+    return tem.render({})
+def getTemplate(dic):
+    found=dic.get('__template__')
+    if found:
+        file=dic.pop('__template__')
+        tem=env.get_template(file)
+        return tem.render(dic)
 ##############################################
 #############################################
 

@@ -376,7 +376,7 @@ function  initTextArea(){
 //-----------------------------------------------//
 //--------------------网站初始化----------------------------//
 function init(){
-isDefined=(typeof maeked != "undefined" ? true : false);
+isDefined=(typeof marked != "undefined" ? true : false);
 if(isDefined){
     marked.setOptions({
         renderer: new marked.Renderer(),

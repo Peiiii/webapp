@@ -1,5 +1,5 @@
 // base:  jquery
-
+trash.modules.push('view')
 function getInnerContent(el){
     tag=el.prop('nodeName')
     if(tag==='textarea' || tag==='input' ){return el.val();}
@@ -27,4 +27,11 @@ function exitView(src,tar){
     show(src);
     //log('show:');
     //log(src);
+}
+function showMsg(msg_box,msg){
+    msg_box.css('display','block');
+    msg_box.html(msg);
+}
+function hideMsg(msg_box){
+    msg_box.css('display','none');
 }

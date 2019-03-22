@@ -1,8 +1,12 @@
 //base : jquery,Bootstrap
 //----------------------通用函数-----------------------------//
+//--------Initialize System---------//
+var trash={app:{},modules:['base']}
 hi1='hi1';
 hi2='hi2';
 hi3='hi3';
+
+
 String.prototype.replaceAll = function(s1,s2){
 return this.replace(new RegExp(s1,"gm"),s2);
 }
@@ -59,10 +63,12 @@ function escapeToHTML(str) {
  var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
  return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
 }
-function runInnerScript(selector){
-    selector=selector+' script';
+
+
+function runInnerScript(el){
+    //selector=selector+' script';
     //log('runinnerScript:'+selector);
-    scripts=$(selector);
+    scripts=el.find('script');
     //log('scripts:'+scripts);
     ts=[];
     for(var i=0;i<scripts.length;i++){

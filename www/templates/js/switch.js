@@ -66,7 +66,10 @@ log(el)
         else self.turnOn();
     });
     this.init();
+
 }
+
+
 //----------------------------------------------//
 
 
@@ -127,6 +130,7 @@ function initFullScreenSwitch(){
     var sw1=new Switch(sw,function(){fullScreen(tar)},function(){exitFullScreen(tar)});
 
 }
+//-----------FullScreenSwitch 类
 
 //----------------View 开关--------------------//
 

@@ -20,7 +20,7 @@
     <div class="row site-header mode">
         <!--<img src="/ball.jpg" style="z-index:-10;">-->
         <script>executeMode();</script>
-        <div class="site-header-main col-md-8">
+        <div class="site-header-main col-md-6">
             <div class="site-branding">
                 <p class="site-title">
                     <a href="#">新年快乐</a>
@@ -30,21 +30,23 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-4 mode">
+        <div class="col-md-6 mode">
             <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
             <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
             <button class="btn btn-default mode"><a href="/user/create_blog">Create Blog</a></button>
-            <br><br>
             <button class="btn btn-default mode"><a href="/user/home">My Home</a></button>
-            <button class="btn btn-default mode"><a href="/user/manage/">Manage</a></button>
-            <button class="btn btn-default mode"><a href="/test.html">Test</a></button><br><br>
+            <button class="btn btn-default mode"><a href="/user/manage/">Manage</a></button><br><br>
+            <button class="btn btn-default mode"><a href="/test.html">Test</a></button>
             <button class="btn btn-default mode"><a href="/path/e:%2F ">Local File</a></button>
+            <button class="btn btn-default mode" onclick="addAppToDoList($('.app-box'))"><span class="text-primary">To Do List</span></button>
             <button id="mod-switch" class="btn btn-default mode"><span class="text-primary">切换模式</span></button>
-            <br>
+            <button class="btn btn-default mode" onclick="addAppFileEditor($('.app-box'))"><span class="text-primary">File Editor</span></button>
             <script>executeMode();</script>
         </div>
     </div>
+    <div class="app-box">
     {%block site_body%}{%endblock%}
+    </div>
     <!--site-footer,网页尾-->
     <div class="row site-footer session mode">
         <h1 class="btn btn-default mode">谢谢观赏</h1>

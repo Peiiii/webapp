@@ -76,7 +76,7 @@ class Path:
             list = self.listdir()
             return [Path(i) for i in list]
 
-    def content(self):
+    def getContent(self):
         if self.type == T.F:
             return loadText(self.path)
 
@@ -100,6 +100,11 @@ class Path:
     def mountChildren(self):
         list = self.children()
         return [i for i in list if i.type == T.M]
+    def toJson(self):
+        return self.__dict__
+    def addContent(self):
+        self.content=self.getContent()
+
 
 # p=Path('e:/webapp/www/templates')
-# print(p.children())
+# print(p.__dict__)

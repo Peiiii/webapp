@@ -1,5 +1,6 @@
 function log(text){console.log(text)}
 var hi='hi';
+
 //------------??cookie??????????cookie??????????cookie;-------------------//
         function getCookie(){
                     strcookie=document.cookie;
@@ -220,7 +221,7 @@ function preview(text){
 }
 function getData(selector){
 // ??????$(selector)[0]??data???????
-    log('getData selector:'+selector);
+    //log('getData selector:'+selector);
     data= $(selector).val();
     data=data.replaceAll('<','<');
     data=data.replaceAll('>','>');

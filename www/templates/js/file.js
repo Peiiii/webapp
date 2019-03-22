@@ -1,3 +1,5 @@
+
+trash.modules.push('file');
 function encodePath(path){
     return path.replaceAll('/','%2F');
 }
@@ -41,4 +43,11 @@ function FilePath(path){
         return getDir(this.name);
     }
 
+}
+function cGetFile(path){
+    file=getJson('/api/file/get/'+path);
+    return file;
+}
+function cGetDir(path){
+    dir=getJson('/api/dir/get/'+path);
 }

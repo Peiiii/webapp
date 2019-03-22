@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>File</title>
+    <!--include "html/include.html"%-->
+</head>
+<body>
+<div id="file_editor">
+    <div class="light-padding-box">
+        <div class="hidden filename-box"><%file.url%></div>
+        <label class=""><%file.name%></label>
+        <button class="btn btn-default btn-sm btn-submit" style="float:right;">提交</button>
+        <button class="btn btn-default btn-sm switch-speakInnerText" style="float:right;" status="off"
+                on-msg="停止朗读" off-msg="阅读全文" tar-sel="#input_textarea_1">阅读全文</button>
+        <button class="btn btn-default btn-sm  switch-fullscreen"    id="switch_1"  status="off" tar-sel="#dir_app_1"
+                style="float:right;" on-msg="取消全屏" off-msg="全屏">全屏</button>
+        <button class="btn btn-default btn-sm switch-view" style="float:right;" src-sel="#input_textarea_1"
+                on-msg="View Plain Text" off-msg="View HTML" status="off" tar-sel="#view_box_1">View HTML</button>
+
+
+    </div>
+    <div class="divider"></div>
+    <div class="place-hold-box menubar box bg-gray">
+
+    </div>
+    <div class="editor-backdrop">
+    <div class="margin-side edit-area centor-block" style="text-align:center;">
+        <div class="message-box alert alert-info" style="display:none;"></div>
+        <textarea rows="10" class="text-input edit-textarea centor-block" style="height:400px;color:black;" id="input_textarea_1"><%file.content%></textarea>
+        <div class=" edit-textarea centor-block view-html hidden" style="background:white;line-height:2em;max-height:400px;overflow:scroll;text-align:left;" id="view_box_1"></div>
+    </div>
+    </div>
+</div>
+<script>{%include "app/file_editor/file_editor.js"%}</script>
+</body>
+</html>
