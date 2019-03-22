@@ -1,8 +1,8 @@
-drop database if exists webapp;
+drop database if exists webapp2;
 
-create database webapp;
+create database webapp2;
 
-use webapp;
+use webapp2;
 
 
 
