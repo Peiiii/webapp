@@ -51,7 +51,12 @@ class User(Model):
         us=await User.findAll(**kws)
         for u in us:
             await u.deepDelete()
-
+    async def getPublicBlogs(self):
+        blogs=await self.getBlogs()
+        for i in range(len(blogs)):
+            if not blogs[i].public:
+                blogs.pop(i)
+        return blogs
     async def setKey(self,key):
         '''
         修改用户的cookies中的key值，用于登录。
@@ -64,9 +69,10 @@ class User(Model):
         # if not blogs:
         #     return '''你还没有博客'''
         return {
-            '__template__':'article-display.html',
+            '__template__':'_feedlist.html',
             'blogs':blogs,
-            'dir_name':'%s的作品'%self.name
+            'dir_name':'%s的作品'%self.name,
+            'blog_path_pre':'/user/blog'
         }
 
     @classmethod
@@ -114,7 +120,7 @@ class Blog(Model):
     summary = StringField(ddl='varchar(200)',default='...')
     content = TextField(default='...')
     created_at = FloatField(default=time.time)
-    public=BooleanField(default=False)
+    public=BooleanField(default=True)
     type=StringField(ddl='varchar(50) not null',default='plain')
 
     async def deepDelete(self):
@@ -158,6 +164,10 @@ class Blog(Model):
         brace(b,'new blog')
         await b.save()
         return b
+    @classmethod
+    async def getAllPublic(cls,**kws):
+        blogs=await cls.findAll(public=True,**kws)
+        return blogs
     def checkBlog(self,len_summary=150):  ### 检查一个Blog的summary若为空，则快速生成一个
         ##if len(self.summary)==0:## 仅当用户未填写summary时才自动生成summary
         ## 暂时采取这样的策略： 无论用户有没有填写summary最终summary都会有机器自动生成。
@@ -269,7 +279,7 @@ def wrapText(text):
     # async def getUserPage(cls, uid, env):
     #     u = await User.find(uid)
     #     if u:
-    #         temArtl = env.get_template('article-display.html')  ## env是从app模块导入的
+    #         temArtl = env.get_template('_feedlist.html')  ## env是从app模块导入的
     #         articles = await u.formBlogShortCut(temArtl, {'title': 'name', 'summary': 'summary', 'url': 'blog_url'},
     #                                             max=5)
     #         blog_list = await u.formList()

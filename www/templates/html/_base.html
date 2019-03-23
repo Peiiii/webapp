@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新年快乐</title>
-    {%include "html/include.html"%}
+    {%include "html/_include.html"%}
     <style>
 
         .img-responsive{
@@ -33,14 +33,16 @@
         <div class="col-md-6 mode">
             <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
             <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
-            <button class="btn btn-default mode"><a href="/user/create_blog">Create Blog</a></button>
-            <button class="btn btn-default mode"><a href="/user/home">My Home</a></button>
+            <button class="btn btn-default mode"><a href="/me/editor">Create Blog</a></button>
+            <button class="btn btn-default mode"><a href="/me">My Home</a></button>
             <button class="btn btn-default mode"><a href="/user/manage/">Manage</a></button><br><br>
             <button class="btn btn-default mode"><a href="/test.html">Test</a></button>
             <button class="btn btn-default mode"><a href="/path/e:%2F ">Local File</a></button>
             <button class="btn btn-default mode" onclick="addAppToDoList($('.app-box'))"><span class="text-primary">To Do List</span></button>
             <button id="mod-switch" class="btn btn-default mode"><span class="text-primary">切换模式</span></button>
-            <button class="btn btn-default mode" onclick="addAppFileEditor($('.app-box'))"><span class="text-primary">File Editor</span></button>
+            <button class="btn btn-default mode" onclick="addAppFileEditor($('.app-box'))"><span class="text-primary">File Editor</span></button><br><br>
+            <button class="btn btn-default mode"><a href="/">首页</a></button>
+
             <script>executeMode();</script>
         </div>
     </div>

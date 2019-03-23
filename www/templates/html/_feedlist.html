@@ -1,10 +1,10 @@
-{%extends "site_body_base.html"%}
-{%block site_primary%}
+
 {%for blog in blogs%}
 <div class="article-entry mode">
     <h3 class="article-title">
         <span class=""> {{blog.name}}</span>
     </h3>
+    <div class="text-warning"><small class=""> {{blog.user_name}}</small></div>
     <div class="article-summary" >
         <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.summary}}</textarea>
         <div class="markdown" id="article_display_{{blog.id}}" data-box-id="data_box_{{blog.id}}">
@@ -13,8 +13,7 @@
         </div>
     </div>
     <div class="more">
-        <button class="btn btn-primary"><a href="/user/blog/{{blog.id}}/" style="color:white;">继续阅读</a></button>
+        <button class="btn btn-primary"><a href="{{blog.href}}" style="color:white;">继续阅读</a></button>
     </div>
 </div>
 {%endfor%}
-{%endblock site_primary%}

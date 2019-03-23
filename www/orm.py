@@ -195,7 +195,7 @@ class Model(dict,metaclass=ModelMetaclass):
         for k,v in kws.items():
             where.append('`%s`=?'%k)
             args.append(v)
-        return  ' '+' and '.join(where),  args
+        return  ' '+' , '.join(where),  args
 
 
 

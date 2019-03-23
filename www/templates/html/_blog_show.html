@@ -1,0 +1,74 @@
+<div class="panel panel-primary mode" id="article" v-bind:blog-id="blog_id">
+
+    <script>executeMode();</script>
+    <div class=" panel-heading">
+        <h1 class="panel-title "> {{blog.name}}</h1>
+        <small>{{blog.user_name}}</small>
+    </div>
+    <div class=" panel-body article-content">
+        <div style="text-align:right;">
+            {%if me%}
+            <button class="btn btn-small btn-default" style=""><a href="/me/editor/{{blog.id}}" class="a-plain mode" >编辑</a></button>
+            {%endif%}
+            <button class="btn btn-small btn-default" onclick="fullScreenSwitch('#full_screen_switch_1','#article')"
+                    status="off" on="全屏" off="取消全屏" id="full_screen_switch_1">全屏</button>
+            <button class="btn btn-small btn-default" onclick="speakInnerTextSwitch('#speak_switch_btn','#blog_content_{{blog.id}}')"
+                    status="off" on="朗读全文" off="停止阅读" id="speak_switch_btn">朗读全文</button>
+            <button id="pull_btn" onclick="pullUpSwitch('#pull_btn','#blog_content_{{blog.id}}')" class="btn btn-default"
+                    type="submit" status="off" on="收起" off="显示全部">收起</button>
+        </div>
+        <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.content}}</textarea>
+        <div id="blog_content_{{blog.id}}" class="markdown" data-box-id="data_box_{{blog.id}}" style="">
+            {{blog.content}}
+        </div>
+    </div>
+
+    <div class="panel-footer mode" id="comment-area">
+        <script>executeMode();</script>
+        <form id="comment-form" class="form" target="hidden-iframe" style="margin-bottom:10px;">
+            <div class="form-group">
+                <label>评论文章</label>
+                <textarea v-model="comment" id="comment-input" class="form-control mode" rows="3"
+                          placeholder="输入你的评论..."></textarea>
+            </div>
+            <button v-on:click="submit_comment" type="submit" class="btn btn-default mode">提交</button>
+        </form>
+        {%if blog.comments%}
+        {%for comment in blog.comments%}
+        {%include "html/_comment_show.html"%}
+        {%endfor%}
+        {%endif%}
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+
+        var app_comment=new Vue({
+            el:'#comment-area',
+            data:{
+                comment:'',
+            },
+            methods:{
+                submit_comment:function(){
+                    vm=this;
+                    loc=window.location.href;
+                    $.post(loc+'/comment',JSON.stringify({content:this.comment}),function(jr){
+                    log('submit_comment:');
+                        form=$('#comment-form');
+                        comment_input=$('#comment-input');
+                        if(jr['success']){
+                            form.after(jr['data']['comment']);
+                            comment_input.val('');
+                        }
+                        else{
+                            form.after(jr['message']);
+                        }
+                    })
+                }
+            }
+        })
+    })
+
+
+
+</script>

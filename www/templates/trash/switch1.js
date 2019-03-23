@@ -33,24 +33,40 @@ function setStatusOff(el,off_msg){
     el.text(off_msg);
 }
 
+
 //-------------------Switch 类------------//
-class Switch{ //el: jquery object
-    constructor(el,turnOn,turnOff){
-        this.el=el;
-        this.parse();
-        this.turnOn=turnOn;
-        this.turnOff;
-        var self=this;
-        //log(this.el);
-        this.on_el.click(function(){turnOn();self.on_el.hide();self.off_el.show();});
-        this.off_el.click(function(){turnOff();self.off_el.hide();self.on_el.show();});
-        this.off_el.click();
-        //log(this.off_el.click)
+function Switch(el,turnOn,turnOff){ //el: jquery object
+log(el)
+    this.el=el;
+    this.on_msg=getOnMsg(this.el);
+    this.off_msg=getOffMsg(this.el);
+    this.getStatus=function(){return getStatus(this.el)};
+    this.setStatusOn=function(){return setStatusOn(this.el,this.on_msg)};
+    this.setStatusOff=function(){return setStatusOff(this.el,this.off_msg)};
+    this.init=function(){
+        status=this.getStatus();
+        if(status==='on'){this.turnOn();}
+        else this.turnOff();
     }
-    parse(){
-        this.on_el=this.el.find('.switch-on');
-        this.off_el=this.el.find('.switch-off');
+    this.turnOn=function(){
+        log('on');
+        turnOn();
+        this.setStatusOn();
     }
+    this.turnOff=function(){
+        turnOff();
+        log('off')
+        this.setStatusOff();
+    }
+    //log(this.el)
+    var self=this;
+    this.el.click(function(){
+        status=self.getStatus();
+        if(status==='on'){self.turnOff();}
+        else self.turnOn();
+    });
+    this.init();
+
 }
 
 
@@ -72,12 +88,17 @@ function startSpeaking(el){
     return speechSU;
 }
 function stopSpeaking(){
+//    var speechSU = new window.SpeechSynthesisUtterance();
+//    speechSU.text ='?????';
     window.speechSynthesis.cancel();
     console.log('停止朗读');
 }
-class SpeakSwitch extends Switch{
-    constructor(btn,tar){
-        super(btn,()=>startSpeaking(tar),()=>stopSpeaking());
+function initSpeakInnerTextSwitch(){
+    sws=$('.switch-speakInnerText');
+    for(var i=0;i<sws.length;i++){
+        sw=$(sws[i]);
+        tar=$(sw.attr('tar-sel'));
+        sssw=new Switch(sw,function(){startSpeaking(tar)},function(){stopSpeaking();});
     }
 }
 //------------全屏开关-------------------//
@@ -93,7 +114,7 @@ function getExitfullScreen(){
 }
 function fullScreen(el){
     el.css('max-height','800px');
-    el.css('overflow','hide');
+    el.css('overflow','scroll');
     getreqfullscreen().call(el[0]);
 }
 function exitFullScreen(el){
@@ -103,15 +124,16 @@ function exitFullScreen(el){
     getExitfullScreen().call(document);
 }
 
-class FullScreenSwitch extends Switch{
-    constructor(btn,tar){
-        //log(btn)
-        super(btn,()=>fullScreen(tar),()=>exitFullScreen(tar));
-    }
-}
+function initFullScreenSwitch(){
+    var sw=$('.switch-fullscreen');
+    var tar=getTarget(sw);
+    var sw1=new Switch(sw,function(){fullScreen(tar)},function(){exitFullScreen(tar)});
 
+}
+//-----------FullScreenSwitch 类
 
 //----------------View 开关--------------------//
+
 function initViewSwitch(){
     sws=$('.switch-view');
     for(var i=0;i<sws.length;i++){
@@ -129,6 +151,6 @@ function initSwitch(){
     initViewSwitch();
 }
 
-//$(document).ready(function(){
-//    initSwitch();
-//})
+$(document).ready(function(){
+    initSwitch();
+})

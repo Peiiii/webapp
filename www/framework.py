@@ -8,6 +8,29 @@ templates_dir='templates'
 env = Environment(loader=PackageLoader('templates',''))
 
 
+def jsonResponse(data=False,success=True,message=False,redirect=False):
+    return web.json_response(data={
+        'data': data,
+        'success': success,
+        'message': message,
+        'redirect': redirect
+    })
+def apiError(message='Error',redirect=False,data=False,success=False):
+    if data or success:
+        raise Exception
+    return jsonResponse(
+        data=data,
+        success=success,
+        message=message,
+        redirect=redirect
+    )
+
+def pageResponse(template,**kws):
+    tem=env.get_template(template)
+    page=tem.render(**kws)
+    return web.Response(body=page,content_type='text/html')
+
+
 class Application(web.Application):
 
     def get2(self,path,wrap=False,cookies=False,headers=False,request=False):  ## 与get1不同，get2的没有对返回值的包装，因此原函数需自己返回一个web.Responce对象
@@ -191,6 +214,14 @@ class Application(web.Application):
     def render_template(cls,file, dic):
         tem = env.get_template(file)
         return tem.render(dic)
+
+
+
+
+
+
+
+
 
 
 

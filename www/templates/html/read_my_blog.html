@@ -1,0 +1,27 @@
+{%extends "html/_base.html"%}
+{%block site_body%}
+
+<div class="row mode" id="app-blog">
+
+    <div class="col-xs-10 col-md-9 container site-primary session">
+        <div class="article-box  mode">
+            <script>executeMode();</script>
+            {%include "/html/_blog_show.html"%}
+        </div>
+        <div></div>
+
+    </div>
+    <script>executeMode();</script>
+    <!--侧边栏-->
+    <div class="col-xs-2 col-md-3 container session sidebar mode">
+        <script>executeMode();</script>
+        <br><br>
+        {%include "html/_my_blog_list.html"%}
+
+    </div>
+
+</div>
+<script>
+
+</script>
+{%endblock site_body%}

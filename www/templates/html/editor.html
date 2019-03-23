@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>editor</title>
+    {%include "html/_include.html"%}
+    <style>{%include "css/editor.css"%}</style>
+</head>
+<body class="fill-window" >
+<div class="root" style="height:100%;width:100%;" >
+    <div class="bg-primary col" info="侧边栏" style="height:100%;width:16%;float:left;">
+        <div class="alert alert-info hidden" id="message"></div>
+    </div>
+    <div class="bg-dark col " id="editor_app" info="正中栏" style="height:100%;width:84%;float:left;" {%if edit%}edit="true"{%endif%}{%if blog%} blog_id="{{blog.id}}{%endif%}">
+        <div class="rw bg-danger title-input"  id="title" contenteditable="true" info="标题" style="width:100%;height:5rem;">{%if blog%}{{blog.name}}{%endif%}</div>
+        <div class="rw bg-gray"  info="工具栏" style="width:100%;height:2rem;">
+            <div class="btn-bar f-left">
+                <button class="tool-bar-btn" id="submit">提交</button>
+            </div>
+        </div>
+        <div class="col bg-info input" id="input" contenteditable="true" info="md输入" style="float:left;width:50%;height:calc(100% - 7rem);">{%if blog%}{{blog.content}}{%endif%}</div>
+        <div class="col bg-warning content-area" id="output" info="md预览" style="float:left;width:50%;height:calc(100% - 7rem);"></div>
+    </div>
+</div>
+<script>
+    {%include "js/editor.js"%}
+</script>
+
+</body>
+</html>

@@ -1,26 +1,38 @@
 
-admin={
-    'name':'top',
-    'password':'password',
-    'id':'00000000001',
-    'email':'1535376447@qq.com'
-}
-net={
-    'ip':'0.0.0.0',
-    'port':80,
-    'domain':'localhost'
-}
-database={
-    'user':'root',
-    'password':'password',
-    'db':'webapp2'
-}
-files={
-    'base':'base.html',
-    'sign_up_in':'sign_up_in.html',
-    'user_home':'user_home.html',
-    'user_manage':'user_manage.html',
-    'user_create_blog':'create_blog.html',
-    'article_display':'article-display.html',
-    'comment_show':'comment_show.html'
-}
+class Config(dict):
+    def __getattr__(self, item):
+        try:
+            r=self.__getitem__(item)
+            return r
+        except:
+            raise AttributeError('No attribute %s'%item)
+
+admin=Config(
+    name='top',
+    password='password',
+    id='00000000001',
+    email='1535376447@qq.com'
+)
+net=Config(
+    ip='0.0.0.0',
+    port=80,
+    domain='localhost'
+)
+database=Config(
+    user='root',
+    password='password',
+    db='webapp2'
+)
+files=Config(
+    base='html/_base.html',
+    sign_up_in='sign_up_in.html',
+    user_home='html/user_home.html',
+    user_manage='html/user_manage.html',
+    editor='html/editor.html',
+    article_display='html/_feedlist.html',
+    comment_show='html/_comment_show.html',
+    error='/html/error.html',
+    visit_blog='/html/visit_blog.html',
+    read_my_blog='/html/read_my_blog.html'
+)
+
