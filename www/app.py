@@ -217,9 +217,6 @@ async def do_blog(blog_id, cookies):
     if not b:
         print('获取博客用户不存在')
         return pageError(message='博客不存在！')
-    if not b.public:
-        print('not public')
-        return pageError(message='你没有权限查看该博客')
     ##  收集博客信息
     u=await User.find(b.user_id)
     await b.appendComments()

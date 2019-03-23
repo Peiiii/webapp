@@ -17,15 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/app2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1713">
-              <caret line="353" column="45" lean-forward="true" selection-start-line="353" selection-start-column="45" selection-end-line="353" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/html/visit_blog.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -60,10 +51,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4496" />
+            <state relative-caret-position="102">
+              <caret line="218" column="42" selection-start-line="218" selection-start-column="42" selection-end-line="218" selection-end-column="42" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -101,6 +94,15 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -175,7 +177,6 @@
         <option value="$PROJECT_DIR$/www/templates/site_body_base.html" />
         <option value="$PROJECT_DIR$/www/templates/create_blog.html" />
         <option value="$PROJECT_DIR$/www/templates/article-display.html" />
-        <option value="$PROJECT_DIR$/www/app.py" />
         <option value="$PROJECT_DIR$/www/framework.py" />
         <option value="$PROJECT_DIR$/www/templates/html/error.html" />
         <option value="$PROJECT_DIR$/www/templates/html/article-display.html" />
@@ -193,7 +194,6 @@
         <option value="$PROJECT_DIR$/www/templates/js/_user_home.js" />
         <option value="$PROJECT_DIR$/www/templates/html/user_home.html" />
         <option value="$PROJECT_DIR$/www/templates/html/read_my_blog.html" />
-        <option value="$PROJECT_DIR$/www/config.py" />
         <option value="$PROJECT_DIR$/www/templates/html/_include.html" />
         <option value="$PROJECT_DIR$/www/templates/html/_feedlist.html" />
         <option value="$PROJECT_DIR$/www/templates/js/editor.js" />
@@ -202,6 +202,8 @@
         <option value="$PROJECT_DIR$/www/templates/html/editor.html" />
         <option value="$PROJECT_DIR$/www/app2.py" />
         <option value="$PROJECT_DIR$/www/templates/html/_blog_show.html" />
+        <option value="$PROJECT_DIR$/www/config.py" />
+        <option value="$PROJECT_DIR$/www/app.py" />
       </list>
     </option>
   </component>
@@ -234,13 +236,6 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="webapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="www" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="webapp" type="b2602c69:ProjectViewProjectNode" />
@@ -435,6 +430,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.72112674" visible="true" weight="0.20889595" />
       <window_info id="Structure" order="1" sideWeight="0.27887323" side_tool="true" weight="0.20889595" />
@@ -689,13 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="35" column="41" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/js/_my_blog_list.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -818,15 +807,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4496" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/app2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1713">
+        <state relative-caret-position="2226">
           <caret line="353" column="45" lean-forward="true" selection-start-line="353" selection-start-column="45" selection-end-line="353" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="218" column="42" selection-start-line="218" selection-start-column="42" selection-end-line="218" selection-end-column="42" />
         </state>
       </provider>
     </entry>
