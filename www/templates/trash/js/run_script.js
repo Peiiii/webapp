@@ -37,6 +37,37 @@ function runInnerScriptAndMore(sel){
     slog(info);
 
 }
+
+//--------------------import from other files------------//
+function runInnerScript(el){
+    scripts=el.find('script');
+    ts=[];
+    for(var i=0;i<scripts.length;i++){
+        //log(scripts[i].innerHTML);
+        inf=window.eval(scripts[i].innerHTML);
+        ts.push(inf);
+    }
+    return ts
+}
+function runCurrentLineAsScript(selector){
+    //log('runinnerScript:'+selector);
+    ta=$(selector);
+    //log('scripts:'+scripts);
+    ts=[];
+    for(var i=0;i<ta.length;i++){
+        //log(scripts[i].innerHTML);
+        text=$(ta[i]).val();
+        start=ta[i].selectionStart;
+        //log(start)
+
+        text=getLine(text,start);
+        //log(text);
+        inf=window.eval(text);
+        ts.push(inf);
+    }
+    return ts
+}
+//-----------------------------//
 $(document).ready(function(){
     initRunScript();
 })

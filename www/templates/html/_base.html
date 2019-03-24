@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>新年快乐</title>
     {%include "html/_include.html"%}
     <style>
@@ -12,15 +12,30 @@
             height:200px;
             min-width:50%;
         }
+
     </style>
 </head>
 <body class="mode">
-<script type="text/javascript" color="255,0,0" opacity='0.5' dark-opacity="1" normal-opacity="0.5" zIndex="-2" count="99" src="/canvas-nest.min.js" class="canvas-script"></script>
-<div class="site container-fluid mode" >
-    <div class="row site-header mode">
-        <!--<img src="/ball.jpg" style="z-index:-10;">-->
+<script class="canvas-script" color="255,0,0" count="99" dark-opacity="1" normal-opacity="0.5" opacity='0.5'
+        src="/canvas-nest.min.js" type="text/javascript" zIndex="-2"></script>
+<div class="site container-fluid mode">
+    <div class="row site-header mode" style="padding-top:2rem;">
+
+        <div class="row mode f-right" style="">
+            <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
+            <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
+            <button class="btn btn-default mode"><a href="/me/editor">Create Blog</a></button>
+            <button class="btn btn-default mode"><a href="/me">My Home</a></button>
+            <button class="btn btn-default mode"><a href="/test.html">Test</a></button>
+            <button class="btn btn-default mode" id="mod-switch"><span class="text-primary">切换模式</span></button>
+            <button class="btn btn-default mode"><a href="/">首页</a></button>
+
+            <script>executeMode();</script>
+        </div>
+
+
         <script>executeMode();</script>
-        <div class="site-header-main col-md-6">
+        <div class="site-header-main row">
             <div class="site-branding">
                 <p class="site-title">
                     <a href="#">新年快乐</a>
@@ -30,24 +45,9 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-6 mode">
-            <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
-            <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
-            <button class="btn btn-default mode"><a href="/me/editor">Create Blog</a></button>
-            <button class="btn btn-default mode"><a href="/me">My Home</a></button>
-            <button class="btn btn-default mode"><a href="/user/manage/">Manage</a></button><br><br>
-            <button class="btn btn-default mode"><a href="/test.html">Test</a></button>
-            <button class="btn btn-default mode"><a href="/path/e:%2F ">Local File</a></button>
-            <button class="btn btn-default mode" onclick="addAppToDoList($('.app-box'))"><span class="text-primary">To Do List</span></button>
-            <button id="mod-switch" class="btn btn-default mode"><span class="text-primary">切换模式</span></button>
-            <button class="btn btn-default mode" onclick="addAppFileEditor($('.app-box'))"><span class="text-primary">File Editor</span></button><br><br>
-            <button class="btn btn-default mode"><a href="/">首页</a></button>
-
-            <script>executeMode();</script>
-        </div>
     </div>
     <div class="app-box">
-    {%block site_body%}{%endblock%}
+        {%block site_body%}{%endblock%}
     </div>
     <!--site-footer,网页尾-->
     <div class="row site-footer session mode">
@@ -56,10 +56,6 @@
     <iframe name="hidden-iframe" style="display:none;"></iframe>
 </div>
 <script>
-        $(document).ready(function(){
-           init();
-        })
-
 </script>
 </body>
 </html>

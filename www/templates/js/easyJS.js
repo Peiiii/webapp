@@ -1,17 +1,16 @@
-//base : jquery,Bootstrap
-//----------------------通用函数-----------------------------//
-//--------Initialize System---------//
-var trash={app:{},modules:['base']}
+
+hi='hi';
 hi1='hi1';
 hi2='hi2';
 hi3='hi3';
-
+var trash={app:{},modules:['base']}
 
 String.prototype.replaceAll = function(s1,s2){
 return this.replace(new RegExp(s1,"gm"),s2);
 }
-function strip(context,str){
+String.prototype.strip=function(str=''){
  //类似于 python 的 strip 函数
+    context=this;
     len=str.length;
     if(context.length<len)return context;
     while(true){
@@ -28,10 +27,17 @@ function strip(context,str){
     }
     return context;
 }
-function textToDict(text,divider){
+String.prototype.mul=function(num){
+    var str=''
+    for(var i=0;i<num;i++){
+        str+=this;
+    };
+    return str;
+}
+String.prototype.toDict= function(divider){
 //类似于对cookies的解析函数，将纯字符串的键=值对集合解析成集合，divider为分隔符。
 //例如 对 "name=nick&&key=123&&code=345" 进行解析，divider="&&",返回结果 { name:nick',key:'123',code:'345'}
-    text=strip(text,divider);
+    text=strip(this,divider);
     arr=text.split(divider);
     dic={};
     for(var i=0;i<arr.length;i++){
@@ -40,10 +46,10 @@ function textToDict(text,divider){
     }
     return dic;
 }
-function getLines (selector){
+String.prototype.getRows=function (t){
 //计算字符串中换行符数量
-    t=$(selector).val();
     arr=t.split('\n')
+    return arr.length;
 }
 function getLastLine(text){
     text=text.split('\n');
@@ -58,49 +64,19 @@ function getLine(text,n){
     //log(line);
     return line;
 }
-
+//----------------------------------------------//
+// document format conversion
 function escapeToHTML(str) {
  var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
  return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
 }
 
+//-------------------------------------------------------//
 
-function runInnerScript(el){
-    //selector=selector+' script';
-    //log('runinnerScript:'+selector);
-    scripts=el.find('script');
-    //log('scripts:'+scripts);
-    ts=[];
-    for(var i=0;i<scripts.length;i++){
-        //log(scripts[i].innerHTML);
-        inf=window.eval(scripts[i].innerHTML);
-        ts.push(inf);
-    }
-    return ts
-}
-function runCurrentLineAsScript(selector){
-    //log('runinnerScript:'+selector);
-    ta=$(selector);
-    //log('scripts:'+scripts);
-    ts=[];
-    for(var i=0;i<ta.length;i++){
-        //log(scripts[i].innerHTML);
-        text=$(ta[i]).val();
-        start=ta[i].selectionStart;
-        //log(start)
-
-        text=getLine(text,start);
-        //log(text);
-        inf=window.eval(text);
-        ts.push(inf);
-    }
-    return ts
-}
-
-function show(el){
-    el.removeClass('hidden');
-
-}
-function hide(el){
-    el.addClass('hidden');
+//------------------------------------------------//
+//常用函数
+function log(text,str='',num=10){
+    console.log('*'.mul(num));
+    console.log(text);
+    console.log('*'.mul(num));
 }

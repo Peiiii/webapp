@@ -1,14 +1,6 @@
 
 //  输出来源为 contenteditable 输出markdown
-function myMarked(text){
-    // remove <div></div>
-    text=text.replaceAll('</div><div>','\n');
-    text=text.replaceAll('<div>','\n');
-    text=text.replaceAll('</div>','\n');
-    text=escapeToHTML(text);
-    log('escapedHTML:');log(text)
-    return marked(text);
-}
+
 
 function renderSelect(sel){
    var v=sel.attr('value');

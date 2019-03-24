@@ -1,9 +1,24 @@
 // base : jquery
 
 // 需定义button属性：status:默认状态，on:表示开启状态的信息，off:表示关闭状态的信息。
+//-----------Easy Switch--------------//
+function show(el){
+    el.removeClass('hidden');
+}
+function hide(el){
+    el.addClass('hidden');
+}
+
+function showMsg(msg_box,msg){
+    msg_box.css('display','block');
+    msg_box.html(msg);
+}
+function hideMsg(msg_box){
+    msg_box.css('display','none');
+}
 
 
-//---------------new-------------------//
+//---------------Supporting Functions-------------------//
 function getSource(el){
     return $(el.attr('src-sel'));
 }
@@ -33,7 +48,11 @@ function setStatusOff(el,off_msg){
     el.text(off_msg);
 }
 
-//-------------------Switch 类------------//
+//-------------------Switch Class------------//
+//usage:
+//el: switch component; turnOn: function to turn on; turnOff: fnuction to turn off  ;
+//el: an el must contains two button inside it. These two button, one with class "switch-on" and another with "switch-off";
+//el: should own such properties: status(on/off)
 class Switch{ //el: jquery object
     constructor(el,turnOn,turnOff){
         this.el=el;
@@ -45,7 +64,6 @@ class Switch{ //el: jquery object
         this.on_el.click(function(){turnOn();self.on_el.hide();self.off_el.show();});
         this.off_el.click(function(){turnOff();self.off_el.hide();self.on_el.show();});
         this.off_el.click();
-        //log(this.off_el.click)
     }
     parse(){
         this.on_el=this.el.find('.switch-on');
@@ -61,7 +79,7 @@ class Switch{ //el: jquery object
 
 
 
-//----------------语音朗读开关--------------------//
+//----------------Speech Switch--------------------//
 //usage:
 //set properties:
 //class: switch-speakInnerText; tar-sel; status; on-msg; off-msg;
@@ -121,13 +139,17 @@ function initFullScreenSwitch(){
 }
 
 //----------------View 开关--------------------//
+function switchView(src,tar){
+    hide(src);
+    show(tar);
+}
 function initViewSwitch(){
     sws=$('.switch-view');
     for(var i=0;i<sws.length;i++){
         var sw=$(sws[i]);
         var tar=getTarget(sw);
         var src=getSource(sw);
-        var sssw=new Switch(sw,function(){view(src,tar)},function(){exitView(src,tar);});
+        var sssw=new Switch(sw,function(){switchView(src,tar)},function(){switchView(tar,src);});
     }
 }
 
@@ -138,6 +160,4 @@ function initSwitch(){
     initViewSwitch();
 }
 
-$(document).ready(function(){
-    initSwitch();
-})
+

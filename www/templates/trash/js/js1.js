@@ -1,84 +1,7 @@
-function log(text){console.log(text)}
+
 var hi='hi';
 
-//------------??cookie??????????cookie??????????cookie;-------------------//
-        function getCookie(){
-                    strcookie=document.cookie;
-                    strcookie=strcookie.split(';');
-                    var cookie= {};
-                    for(var i=0;i<strcookie.length;i++){
-                        [name,value]=strcookie[i].trim().split('=');
-                        cookie[name]=value;
-                    };
-                    return cookie;
-                }
-        function setCookie(name,value){
-                    max_age=86400*15;
-                    document.cookie=name+'=0;max-age=-1;path=/';
-                    document.cookie=name+'='+value+';max-age='+max_age+';path=/';
-                };
-//------------------?????????mode?????----------------------//
-        function executeMode(){
-            cookie=getCookie();
-            //log('Cookie from executeMode:');log(document.cookie);
-            //log('executeMode:'+cookie['mode']);
-            if(cookie['mode']==='dark'){
-                modeDark();
-            }
-            else {
-                modeNormal();
-            }
-        }
-        function modeDark(){
-            elms=$('.mode');
-            elms.addClass('dark');
-            elms.slice(0,2).css('opacity','0.7');
-            canvas_script=$('.canvas-script');
-            //canvas_script.attr('opacity',canvas_script.attr('dark-opacity'));
-            canvas=$('canvas');
-            canvas.css('opacity',canvas_script.attr('dark-opacity'));
-        }
-        function getMode(){
-            cookie=getCookie();
-            return cookie['mode'];
-        }
-        function modeNormal(){
-            elms=$('.mode');
-            elms.removeClass('dark');
-            elms.slice(0,2).css('opacity','1');
-            canvas_script=$('.canvas-script');
-            //canvas_script.attr('opacity',canvas_script.attr('normal-opacity'));
-            canvas=$('canvas');
-            canvas.css('opacity',canvas_script.attr('normal-opacity'));
-        }
-        function changeMode(name){
-            //log('changeMode('+name+')');
-            setCookie('mode',name);
-            //log(document.cookie);
-            executeMode();
-        }
-        function switchMode(){
-            mode=getMode();
-            //console.log('switchMode: from '+mode);
-            if(mode==='normal')changeMode('dark');
-            else changeMode('normal');
-        }
-        function apiGetBlog(bid){
-            var result=false
-            $.get({url:'/api/get_blog/'+bid,async:false,success:function(jr){
-                //log('getBlog response :'+jr);
-                if(jr['success']){
-                    b=jr['data'];
-                    result=b;
-                    }
-                else {
-                    //log('message:'+jr['message']);
-                }
-            }});
-            return result
-        }
 
-//--------------------html????????????-----------------//
 
 
 function removeParent(ele){
@@ -199,15 +122,7 @@ function preview(text){
     log(text);
 
 }
-function getData(selector){
-// ??????$(selector)[0]??data???????
-    //log('getData selector:'+selector);
-    data= $(selector).val();
-    data=data.replaceAll('<','<');
-    data=data.replaceAll('>','>');
-    //preview('data:'+data);
-    return data;
-}
+
 function richMarkImg(selector){
 // ??markdown???????html??????img?????н??????????
 //?????img??????????alt????????????alt?е????????img?????????
@@ -238,35 +153,8 @@ function wrapRichText(){
     executeMode();
 }
 
-function parseMarkdown(sel_show_box,sel_data_box){
-//??$(selector)??????????????????data?????????markdown???????
-//?????????????????innerHTML,????????????????н?????????
-    mks=$(sel_show_box);
-    //log('parsemarkdown selector:'+selector);
-    for(var i=0;i<mks.length;i++){
-        mk=$(mks[i]);
-        selector='#'+mk[0].id;
-        //log('mk.id:'+mk.id);
-        sel_data_box='#'+mk[0].getAttribute('data-box-id');
-        mk.html(marked(String(getData(sel_data_box)))    );
-    }
-    mks.addClass('rich-text');
-    wrapRichText();
-}
-////--------------Textarea?????------------------//
-//function wrapTextarea() {
-////??????teaxtarea???и????????????????????????????????????????rows?
-//                selector='textarea';
-//                for(var i=0;i<$(selector).length;i++){
-//                    ta=$($(selector)[i]);
-//                    var v = ta.val();
-//                    var arr = v.split('\n');
-//                    var len = arr.length;
-//                    var min=ta[0].rows;
-//                    if(len>min) ta.height(len*20);//20??и?;
-//                }
-//                log('Run wrapTextarea()');
-//};
+
+
 //----------------------------------------Initialization ?????????------------------------------------------------//
 function  initTextArea(){
     corWithContent('.textarea');
@@ -279,23 +167,6 @@ function  initTextArea(){
 //-----------------------------------------------//
 //--------------------????????----------------------------//
 function init(){
-var isDefined=(typeof maeked != "undefined" ? true : false);
-if(isDefined){
-    marked.setOptions({
-        renderer: new marked.Renderer(),
-        gfm: true,
-        tables: true,
-        breaks: false,
-        pedantic: false,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-        highlight: function (code,lang) {
-            //??? highlight ???????????д?????
-            return hljs.highlightAuto(code,[lang]).value;
-        }
-    });
-    }
     executeMode();
     btn=$('#mod-switch');
     elms=$('.mode');

@@ -1,5 +1,5 @@
 <div class="center-block category">
-            <h1 class="cate-title ">我的文章</h1><hr>
+            <h1 class="cate-title ">{%if me%}我{%endif%}{%if not me%}{{user.name}}{%endif%}的文章</h1><hr>
             <div class="alert alert-danger msg-area hidden" onclick="hide($(this))" ></div>
             <ul>
                 {%for b in blogs%}
