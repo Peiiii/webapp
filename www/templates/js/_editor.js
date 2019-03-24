@@ -33,7 +33,7 @@ function getLabel(el){
         label.push(l);
     }
     label=label.join('&&');
-    log(label);
+//    log(label);
     return label;
 
 }
@@ -42,16 +42,23 @@ function initLabelApp(app){
     var input=area.find('#label-input');
     var assure=area.find('#label-input-assure');
     var list=area.find('#label-list');
-    input.on('input propertychange',()=>{
-        show(assure);
-    })
-    assure.click(()=>{
+    function assureInput(){
         var label=input.val();
         var li=`<li class='label-entry'><span class="label label-primary" >${label}</span></li>`;
         list.append(li);
         input.val('');
         hide(assure);
+    }
+    input.on('input propertychange',(e)=>{
+        show(assure);
+    });
+    input.keydown((e)=>{
+        if(e.keyCode==13)assureInput();
     })
+    assure.click(()=>{
+        assureInput();
+    });
+
 
 }
 function initEditor(){

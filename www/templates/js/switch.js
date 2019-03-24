@@ -2,20 +2,10 @@
 
 // 需定义button属性：status:默认状态，on:表示开启状态的信息，off:表示关闭状态的信息。
 //-----------Easy Switch--------------//
-function show(el){
-    el.removeClass('hidden');
-}
-function hide(el){
-    el.addClass('hidden');
-}
 
-function showMsg(msg_box,msg){
-    msg_box.css('display','block');
-    msg_box.html(msg);
-}
-function hideMsg(msg_box){
-    msg_box.css('display','none');
-}
+
+
+
 
 
 //---------------Supporting Functions-------------------//

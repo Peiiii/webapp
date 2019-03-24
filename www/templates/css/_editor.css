@@ -26,11 +26,19 @@
 .tool-bar-btn{
     height:2rem;
     margin:0px;
+    display:inline;
+}
+.label-area{
 }
 .label-list{
     list-style:none;
     padding-left:0px;
+    overflow:hidden;
 }
 .label-entry{
-    float:left;
+    overflow:hidden;
+}
+.label-area,.label-input, .label-list, .label-entry{
+    height:2rem;
+    margin:0px;
 }

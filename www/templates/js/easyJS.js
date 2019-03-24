@@ -1,10 +1,16 @@
+//base : jsquery,boostrap(only show and hide)
 
 hi='hi';
 hi1='hi1';
 hi2='hi2';
 hi3='hi3';
 var trash={app:{},modules:['base']}
-
+function show(el){
+    el.removeClass('hidden');
+}
+function hide(el){
+    el.addClass('hidden');
+}
 String.prototype.replaceAll = function(s1,s2){
 return this.replace(new RegExp(s1,"gm"),s2);
 }
@@ -75,7 +81,8 @@ function escapeToHTML(str) {
 
 //------------------------------------------------//
 //常用函数
-function log(text,str='',num=10){
+function log(text){console.log(text);}
+function slog(text,str='',num=10){
     console.log('*'.mul(num));
     console.log(text);
     console.log('*'.mul(num));

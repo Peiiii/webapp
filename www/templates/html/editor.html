@@ -6,48 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>editor</title>
     {%include "html/_include.html"%}
-    <style>{%include "css/editor.css"%}</style>
+    <style>{%include "css/_editor.css"%}</style>
 </head>
-<body class="fill-window" >
-<div class="root" style="height:100%;width:100%;" >
+<body class="fill-window">
+<div class="root" style="height:100%;width:100%;">
     <div class="bg-primary col" info="侧边栏" style="height:100%;width:16%;float:left;">
-        <div class="alert alert-info hidden" id="message"></div>
+        <div class="alert alert-info hidden msg-box-tem" id="message"></div>
     </div>
-    <div class="bg-dark col " id="editor_app" info="正中栏" style="height:100%;width:84%;float:left;" {%if edit%}edit="true"{%endif%}{%if blog%} blog_id="{{blog.id}}{%endif%}">
-        <div class="rw bg-danger title-input"  id="title" contenteditable="true" info="标题" style="width:100%;height:5rem;">{%if blog%}{{blog.name}}{%endif%}</div>
-        <div class="rw bg-gray"  info="工具栏" style="width:100%;height:2rem;">
+    <div class="bg-dark col " id="editor_app" info="正中栏" style="height:100%;width:84%;float:left;" {%if
+         edit%}edit="true" {%endif%}{%if blog%} blog_id="{{blog.id}}{%endif%}">
+        <div class="rw bg-danger title-input" id="title" contenteditable="true" info="标题"
+             style="width:100%;height:5rem;">{%if blog%}{{blog.name}}{%endif%}
+        </div>
+        <div class="rw bg-gray" info="工具栏" style="width:100%;height:2rem;">
             <div class="btn-bar f-left">
                 <button class="tool-bar-btn" id="submit">提交</button>
             </div>
-            <div class="btn-bar f-right">
-                <select class="tool-bar-btn" id="is_public" style="margin-right:-3.5px;" name="is_public" {%if blog%}value="{{blog.public}}"{%endif%}>
-                    <option value="1">公开</option>
-                    <option value="0">私密</option>
-                </select>
-                <select class="tool-bar-btn" id="type" name="type" {%if blog%}value="{{blog.type}}"{%endif%}>
-                    <option value="text/markdown">Markdown</option>
-                    <option value="text/plain">Plain-text</option>
-                    <option value="text/html">HTML</option>
-                </select>
-                <div class="" id="label-area" style="max-width:20rem;overflow:auto;max-height:2rem;float:right;" >
-                    <input id="label-input" class="label-input" placeholder="input label">
-                    <button id="label-input-assure" class="hidden">确定</button>
-                    <ul id="label-list" class="f-right label-list">
-                        {%if blog%}
-                            {%for l in blog.labels%}
-                        <li class="label-entry"><span class="label label-primary" >{{l}}</span></li>
-                            {%endfor%}
-                        {%endif%}
-                    </ul>
-                </div>
+            <!--<div class="btn-bar f-right">-->
+            <select class="tool-bar-btn f-right" id="is_public" style="margin-right:-3.5px;" name="is_public" {%if
+                    blog%}value="{{blog.public}}" {%endif%}>
+                <option value="1">公开</option>
+                <option value="0">私密</option>
+            </select>
+            <select class="tool-bar-btn f-right" id="type" name="type" {%if blog%}value="{{blog.type}}" {%endif%}>
+                <option value="text/markdown">Markdown</option>
+                <option value="text/plain">Plain-text</option>
+                <option value="text/html">HTML</option>
+            </select>
+            <div id="label-area" class=" label-area f-right" style="max-height:2rem;">
+                <input id="label-input" class="label-input" placeholder="input label">
+                <button id="label-input-assure" class="hidden">确定</button>
+                <ul id="label-list" class=" label-list f-right">
+                    {%if blog%}
+                    {%for l in blog.labels%}
+                    <li class="label-entry f-left"><span class="label label-primary">{{l}}</span></li>
+                    {%endfor%}
+                    {%endif%}
+                </ul>
             </div>
+            <!--</div>-->
         </div>
-        <div class="col bg-info input" id="input" contenteditable="true" info="md输入" style="float:left;width:50%;height:calc(100% - 7rem);">{%if blog%}{{blog.content}}{%endif%}</div>
-        <div class="col bg-warning content-area" id="output" info="md预览" style="float:left;width:50%;height:calc(100% - 7rem);"></div>
+        <div class="col bg-info input" id="input" contenteditable="true" info="md输入"
+             style="float:left;width:50%;height:calc(100% - 7rem);">{%if blog%}{{blog.content}}{%endif%}
+        </div>
+        <div class="col bg-warning content-area" id="output" info="md预览"
+             style="float:left;width:50%;height:calc(100% - 7rem);"></div>
     </div>
 </div>
 <script>
-    {%include "js/editor.js"%}
+    {%include "js/_editor.js"%}
+
 </script>
 
 </body>
