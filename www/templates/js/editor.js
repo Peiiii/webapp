@@ -1,3 +1,15 @@
+
+//  输出来源为 contenteditable 输出markdown
+function myMarked(text){
+    // remove <div></div>
+    text=text.replaceAll('</div><div>','\n');
+    text=text.replaceAll('<div>','\n');
+    text=text.replaceAll('</div>','\n');
+    text=escapeToHTML(text);
+    log('escapedHTML:');log(text)
+    return marked(text);
+}
+
 function renderSelect(sel){
    var v=sel.attr('value');
    var ch=sel.children();
@@ -60,10 +72,18 @@ function initEditor(){
     var label_area=app.find('#label-area');
     initLabelApp(app);
     renderEditor(app);
-    output.html(marked(input.html()));
+    var md=myMarked(input.html());
+//    log('md:');log(md);log(hi)
+    output.html(md);
     input.on('focus input propertychange',()=>{
-        output.html(marked(input.html()));
-        hide(message);
+    //  transfer to markdown
+//        text=input.text();
+//        log('plain:  *******');log(text);
+        html=input.html();
+//        log('html:  *******');log(html)
+        md=myMarked(html);
+//        log('md: ********');log(md);
+        output.html(md);
     });
     var edit=false;
     if(app.attr('edit')=='true')edit=true;
@@ -72,7 +92,6 @@ function initEditor(){
 
     submit.click(()=>{
         // 检查
-//        log('clickme');
         if (title.html()==='')return;
         blog={
             blog_heading:title.html(),
