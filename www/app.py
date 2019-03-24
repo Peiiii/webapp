@@ -41,7 +41,7 @@ async def getBlogInfo(bid):
 async def toFiller(obj,wrapper):
     pass
 async def checkCookies(cookies):
-    uid,key=cookies['user_id'],cookies.get('key')
+    uid,key=cookies.get('user_id'),cookies.get('key')
     u=await User.find(uid)
     if not u:
         return CheckState(code=1,message='user %s not exists'%uid)
