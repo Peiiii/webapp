@@ -2,7 +2,7 @@
 {%block site_body%}
 <div class="row mode" id="app-blog">
 
-    <div class="col-xs-10 col-md-9 container site-primary session">
+    <div class="col-xs-10 col-sm-9 site-primary session">
         <div class="article-box  mode">
             <script>executeMode();</script>
             {%include "/html/_feedlist.html"%}
@@ -12,12 +12,12 @@
     </div>
     <script>executeMode();</script>
     <!--侧边栏-->
-    <div class="col-xs-2 col-md-3 container session sidebar mode">
+    <div class="col-xs-2 col-sm-3 session sidebar mode">
         <script>executeMode();</script>
         <br><br>
         <div class="center-block category">
             <h1 class="cate-title ">为您推荐</h1><hr>
-            <ul>
+            <ul style="padding-left:5%;">
                 {%for u in users%}
                 <li style="list-style-type:none;"><a href="{{u.href}}" class="text-primary">{{u.name}}<br><span class=" text-warning"></span></a></li><hr>
                 {%endfor%}
