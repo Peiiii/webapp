@@ -121,13 +121,31 @@ class Blog(Model):
     content = TextField(default='...')
     created_at = FloatField(default=time.time)
     public=BooleanField(default=True)
-    type=StringField(ddl='varchar(50) not null',default='plain')
+    type=StringField(ddl='varchar(50) not null',default='text/plain')
+    label=StringField(ddl='varchar(200)')
+    async def wrap(self,comment=False,label=True,href=None):
+        if label:
+            self.parseLabels()
+        if comment:
+            await self.appendComments()
+        if href:
+            self.addHref(href)
 
     async def deepDelete(self):
         cos=await self.getComments()
         for c in cos:
             await Comment.delete(c.id)
         await Blog.delete(self.id)
+    def parseLabels(self):
+        l=self.label
+        if (not l) or (l==''):
+            self.labels=[]
+            return
+        self.labels=l.split('&&')
+        return
+
+    def addHref(self,temString):
+        self.href=temString%(self.id)
     async def appendComments(self): ## 为Blog对象添加comments属性，
         cs= await self.getComments()
         if cs:

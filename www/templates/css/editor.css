@@ -25,4 +25,12 @@
 
 .tool-bar-btn{
     height:2rem;
+    margin:0px;
+}
+.label-list{
+    list-style:none;
+    padding-left:0px;
+}
+.label-entry{
+    float:left;
 }

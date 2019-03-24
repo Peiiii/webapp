@@ -37,7 +37,7 @@ function setStatusOff(el,off_msg){
 class Switch{ //el: jquery object
     constructor(el,turnOn,turnOff){
         this.el=el;
-        this.parse();
+        this.parse(); // on_sel and off_sel
         this.turnOn=turnOn;
         this.turnOff;
         var self=this;
@@ -80,6 +80,11 @@ class SpeakSwitch extends Switch{
         super(btn,()=>startSpeaking(tar),()=>stopSpeaking());
     }
 }
+function initSpeakInnerTextSwitch(){
+    var btn=$('.switch-speakInnerText');
+    var tar=getTarget(btn);
+    var s= new SpeakSwitch(btn,tar);
+}
 //------------全屏开关-------------------//
 //usage:
 //set properties:
@@ -109,7 +114,11 @@ class FullScreenSwitch extends Switch{
         super(btn,()=>fullScreen(tar),()=>exitFullScreen(tar));
     }
 }
-
+function initFullScreenSwitch(){
+    var btn=$('.switch-fullscreen');
+    var tar=getTarget(btn);
+    var s= new FullScreenSwitch(btn,tar);
+}
 
 //----------------View 开关--------------------//
 function initViewSwitch(){
@@ -129,6 +138,6 @@ function initSwitch(){
     initViewSwitch();
 }
 
-//$(document).ready(function(){
-//    initSwitch();
-//})
+$(document).ready(function(){
+    initSwitch();
+})

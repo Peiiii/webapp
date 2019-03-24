@@ -31,6 +31,7 @@ create table blogs (
     `created_at` real not null,
     `public` bool not null,
     `type` varchar(50) not null,
+    `label` varchar(200),
     key `idx_created_at` (`created_at`),
     primary key (`id`),
     foreign key (`user_id`) references users (`id`)

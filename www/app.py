@@ -38,8 +38,10 @@ async def getUserRecmendations():
     return await User.findAll()
 async def getBlogInfo(bid):
     pass
-async def toFiller(obj,wrapper):
-    pass
+def jsDataFilter(data,type='bool'):
+    if type=='bool':
+        if data=='false':return False
+        else:return True
 async def checkCookies(cookies):
     uid,key=cookies.get('user_id'),cookies.get('key')
     u=await User.find(uid)
@@ -57,7 +59,7 @@ async def do_home(cookies):
     users=await getUserRecmendations()
     ## 添加信息
     for b in blogs:
-        b.href='/blog/'+b.id
+        await b.wrap(href='/blog/%s')
     for u in users:
         u.href='/user/'+u.id
     return pageResponse(
@@ -81,7 +83,7 @@ async def do_blog(blog_id, cookies):
     await b.appendComments()
     blogs=await u.getBlogs()
     for bl in blogs:
-        bl.href='/blog/'+bl.id
+        await bl.wrap(href='/blog/%s')
 
     return pageResponse(
         template=files.visit_blog,
@@ -99,7 +101,7 @@ async def do_visit_user(user_id,cookies):
         return pageError(message='用户不存在')
     blogs=await u.getPublicBlogs()
     for b in blogs:
-        b.href='/blog/'+b.id
+        await b.wrap(href='/blog/%s')
 
     return pageResponse(
         template=files.user_home,
@@ -124,8 +126,13 @@ async def do_me_home(cookies):
     u=await User.find(uid)
     blogs=await u.getBlogs()
     for b in blogs:
-        b.href='/me/blog/'+b.id
-    return pageResponse(template=files.user_home,blogs=blogs,user=u)
+        await b.wrap(href='/me/blog/%s')
+    return pageResponse(
+        template=files.user_home,
+        blogs=blogs,
+        user=u,
+        me=True
+    )
 
 ## 创建博客 get
 @app.get2('/me/editor')
@@ -133,16 +140,18 @@ async def do_me_editor():
     return pageResponse(template=files.editor)
 ## 提交博客
 @app.post4('/me/post_blog', json=True, cookies=True)
-async def create_blog_post(blog_heading, blog_summary, blog_content, cookies):
+async def create_blog_post(blog_heading, blog_summary, blog_content, is_public,type,label,cookies):
     chk = await checkCookies(cookies)
     if not chk.success:
         if chk.code == 1:
             return pageError(message=chk.message)
         elif chk.code == 2:
             return pageSign()
+    # is_public=jsDataFilter(is_public,type='bool')
     uid=cookies['user_id']
     u=await User.find(uid)
-    b =await Blog.easyBlog(u, name=blog_heading, summary=blog_summary, content=blog_content)
+    log('public:',is_public)
+    b =await Blog.easyBlog(u, name=blog_heading, summary=blog_summary, content=blog_content,public=is_public,type=type,label=label)
     return jsonResponse(
         success=True,
         message='文章上传成功,<a href="/me">前往主页？</a>',
@@ -162,6 +171,7 @@ async def do_edit_get(blog_id,cookies):
         return apiError(message='博客不存在')
     if b.user_id != cookies['user_id']:
         return apiError(message='没有权限编辑该博客')
+    await b.wrap()
     return pageResponse(
         template=files.editor,
         edit=True,
@@ -169,7 +179,7 @@ async def do_edit_get(blog_id,cookies):
     )
 ## 编辑博客post
 @app.post4('/me/editor/{blog_id}',json=True,cookies=True)
-async def do_editor_post(blog_id,blog_heading,blog_summary,blog_content,cookies):
+async def do_editor_post(blog_id,blog_heading,blog_summary,blog_content,is_public,type,label,cookies):
     chk = await checkCookies(cookies)
     if not chk.success:
         if chk.code == 1:
@@ -184,7 +194,7 @@ async def do_editor_post(blog_id,blog_heading,blog_summary,blog_content,cookies)
     u=await User.find(b.user_id)
     if blog_summary=='':
         blog_summary=blog_content[:200] if len(blog_content)>=200 else blog_content
-    r=await b.update(name=blog_heading,summary=blog_summary,content=blog_content)
+    r=await b.update(name=blog_heading,summary=blog_summary,content=blog_content,public=is_public,type=type,label=label)
     if not r:
         log('failed to update blog %s'%blog_id)
         return apiError(message='更新失败')
@@ -222,7 +232,7 @@ async def do_blog(blog_id, cookies):
     await b.appendComments()
     blogs=await u.getBlogs()
     for blog in blogs:
-        blog.href='/me/blog/'+blog.id
+        await b.wrap(href='/me/blog/%s')
     await b.appendComments()
     return pageResponse(
         template=files.read_my_blog,

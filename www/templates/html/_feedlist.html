@@ -4,7 +4,9 @@
     <h3 class="article-title">
         <span class=""> {{blog.name}}</span>
     </h3>
-    <div class="text-warning"><small class=""> {{blog.user_name}}</small></div>
+    <div class=""><small class="text-warning"> {{blog.user_name}}</small> {%for l in blog.labels%}<span class="label label-warning">{{l}}</span>{%endfor%}</div>
+
+
     <div class="article-summary" >
         <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.summary}}</textarea>
         <div class="markdown" id="article_display_{{blog.id}}" data-box-id="data_box_{{blog.id}}">
@@ -14,6 +16,9 @@
     </div>
     <div class="more">
         <button class="btn btn-primary"><a href="{{blog.href}}" style="color:white;">继续阅读</a></button>
+        {%if me%}
+        <button class="btn btn-primary"><a href="/me/editor/{{blog.id}}" style="color:white;">编辑</a></button>
+        {%endif%}
     </div>
 </div>
 {%endfor%}

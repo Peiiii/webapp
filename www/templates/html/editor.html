@@ -19,6 +19,28 @@
             <div class="btn-bar f-left">
                 <button class="tool-bar-btn" id="submit">提交</button>
             </div>
+            <div class="btn-bar f-right">
+                <select class="tool-bar-btn" id="is_public" style="margin-right:-3.5px;" name="is_public" {%if blog%}value="{{blog.public}}"{%endif%}>
+                    <option value="1">公开</option>
+                    <option value="0">私密</option>
+                </select>
+                <select class="tool-bar-btn" id="type" name="type" {%if blog%}value="{{blog.type}}"{%endif%}>
+                    <option value="text/markdown">Markdown</option>
+                    <option value="text/plain">Plain-text</option>
+                    <option value="text/html">HTML</option>
+                </select>
+                <div class="" id="label-area" style="max-width:20rem;overflow:auto;max-height:2rem;float:right;" >
+                    <input id="label-input" class="label-input" placeholder="input label">
+                    <button id="label-input-assure" class="hidden">确定</button>
+                    <ul id="label-list" class="f-right label-list">
+                        {%if blog%}
+                            {%for l in blog.labels%}
+                        <li class="label-entry"><span class="label label-primary" >{{l}}</span></li>
+                            {%endfor%}
+                        {%endif%}
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="col bg-info input" id="input" contenteditable="true" info="md输入" style="float:left;width:50%;height:calc(100% - 7rem);">{%if blog%}{{blog.content}}{%endif%}</div>
         <div class="col bg-warning content-area" id="output" info="md预览" style="float:left;width:50%;height:calc(100% - 7rem);"></div>

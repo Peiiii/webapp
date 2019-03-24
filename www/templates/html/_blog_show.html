@@ -1,19 +1,26 @@
-<div class="panel panel-primary mode" id="article" v-bind:blog-id="blog_id">
+<div class="panel panel-primary mode" id="article" blog_id="{{blog.id}}">
 
     <script>executeMode();</script>
     <div class=" panel-heading">
         <h1 class="panel-title "> {{blog.name}}</h1>
         <small>{{blog.user_name}}</small>
+        {%for l in blog.labels%}<span class="label label-warning">{{l}}</span>{%endfor%}
     </div>
     <div class=" panel-body article-content">
         <div style="text-align:right;">
             {%if me%}
             <button class="btn btn-small btn-default" style=""><a href="/me/editor/{{blog.id}}" class="a-plain mode" >编辑</a></button>
             {%endif%}
-            <button class="btn btn-small btn-default" onclick="fullScreenSwitch('#full_screen_switch_1','#article')"
-                    status="off" on="全屏" off="取消全屏" id="full_screen_switch_1">全屏</button>
-            <button class="btn btn-small btn-default" onclick="speakInnerTextSwitch('#speak_switch_btn','#blog_content_{{blog.id}}')"
-                    status="off" on="朗读全文" off="停止阅读" id="speak_switch_btn">朗读全文</button>
+            <!--<button class="btn btn-small btn-default " onclick="fullScreenSwitch('#full_screen_switch_1','#article')"-->
+                    <!--status="off" on="全屏" off="取消全屏" id="full_screen_switch_1">全屏</button>-->
+            <div class="switch-fullscreen f-right" status="off"  tar-sel="#article">
+                <button class="switch-on btn btn-default">全屏显示</button>
+                <button class="switch-off btn btn-default">退出全屏</button>
+            </div>
+            <div class="switch-speakInnerText f-right" status="off"  tar-sel="#blog_content_{{blog.id}}">
+                <button class="switch-on btn btn-default">阅读全文</button>
+                <button class="switch-off btn btn-default">停止阅读</button>
+            </div>
             <button id="pull_btn" onclick="pullUpSwitch('#pull_btn','#blog_content_{{blog.id}}')" class="btn btn-default"
                     type="submit" status="off" on="收起" off="显示全部">收起</button>
         </div>
@@ -52,7 +59,8 @@
                 submit_comment:function(){
                     vm=this;
                     loc=window.location.href;
-                    $.post(loc+'/comment',JSON.stringify({content:this.comment}),function(jr){
+                    var bid=$('#article').attr('blog_id');
+                    $.post('/blog/'+bid+'/comment',JSON.stringify({content:this.comment}),function(jr){
                     log('submit_comment:');
                         form=$('#comment-form');
                         comment_input=$('#comment-input');
