@@ -44,7 +44,7 @@ function initLabelApp(app){
     var list=area.find('#label-list');
     function assureInput(){
         var label=input.val();
-        var li=`<li class='label-entry'><span class="label label-primary" >${label}</span></li>`;
+        var li=`<li class='label-entry f-left'><span class="label label-primary" >${label}</span></li>`;
         list.append(li);
         input.val('');
         hide(assure);
@@ -90,12 +90,13 @@ function initEditor(){
     var message=$('#message');
 
     submit.click(()=>{
+//        log(title.text().trim())
         // 检查
         if (title.html()==='')return;
         blog={
-            blog_heading:title.html(),
+            blog_heading:title.text().trim(),
             blog_summary:'',
-            blog_content:input.html(),
+            blog_content:input.html().trim(),
             is_public:toBool(is_public.val()),
             type:type.val(),
             label:getLabel(label_area)

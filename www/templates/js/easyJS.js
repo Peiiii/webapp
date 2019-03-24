@@ -14,10 +14,11 @@ function hide(el){
 String.prototype.replaceAll = function(s1,s2){
 return this.replace(new RegExp(s1,"gm"),s2);
 }
-String.prototype.strip=function(str=''){
+String.prototype.strip=function(str=' '){
  //类似于 python 的 strip 函数
     context=this;
     len=str.length;
+//    log(context);log(len)
     if(context.length<len)return context;
     while(true){
         if(context.length<len) return context;

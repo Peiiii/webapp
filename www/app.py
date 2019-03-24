@@ -711,7 +711,7 @@ async def init(loop):
 
 print('current dir:',os.getcwd())
 app.router.add_static('/', 'static', show_index=True)
-print('http://127.0.0.1/user/home')
+print('http://127.0.0.1/me')
 loop.run_until_complete(init(loop))
 import webbrowser
 print('open in a minute:')
