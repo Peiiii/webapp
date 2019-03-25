@@ -18,12 +18,15 @@ if(isDefined){
     }
 function myMarked(text){
     // remove <div></div>
+    if(dev){log('myMarkdown source:');log(text)}
     text=text.replaceAll('</div><div>','\n');
     text=text.replaceAll('<div>','\n');
     text=text.replaceAll('</div>','\n');
     text=escapeToHTML(text);
 //    log('escapedHTML:');log(text)
-    return marked(text);
+    md=marked(text);
+    if(dev){log('myMarkdown result:');log(md);}
+    return md;
 }
 function parseMarkdown(sel_show_box){
     mks=$(sel_show_box);

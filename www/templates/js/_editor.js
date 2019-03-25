@@ -66,6 +66,7 @@ function initEditor(){
     var title=app.find('#title');
     var input=app.find('#input');
     var output=app.find('#output');
+    var summary=app.find('#summary-area');
     var is_public=app.find('#is_public');
     var type=app.find('#type');
     var label_area=app.find('#label-area');
@@ -95,7 +96,7 @@ function initEditor(){
         if (title.html()==='')return;
         blog={
             blog_heading:title.text().trim(),
-            blog_summary:'',
+            blog_summary:summary.html(),
             blog_content:input.html().trim(),
             is_public:toBool(is_public.val()),
             type:type.val(),

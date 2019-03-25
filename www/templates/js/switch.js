@@ -45,19 +45,61 @@ function setStatusOff(el,off_msg){
 //el: should own such properties: status(on/off)
 class Switch{ //el: jquery object
     constructor(el,turnOn,turnOff){
-        this.el=el;
-        this.parse(); // on_sel and off_sel
+        this.el=el; // on_sel and off_sel
         this.turnOn=turnOn;
-        this.turnOff;
-        var self=this;
-        //log(this.el);
-        this.on_el.click(function(){turnOn();self.on_el.hide();self.off_el.show();});
-        this.off_el.click(function(){turnOff();self.off_el.hide();self.on_el.show();});
-        this.off_el.click();
+        this.turnOff=turnOff;
+        this.parse();
     }
     parse(){
+        if(this.el.attr('easy-switch')=='true')this.easy_switch=true;
+        else this.easy_switch=false;
+        if(this.easy_switch){
+            this.doEasySwitch();// doEasySwitch
+        }
+        else this.doNormalSwicth();  //  doNormalSwitch
+    }
+//-----------NormalSwitch-----------//
+    doNormalSwicth(){
         this.on_el=this.el.find('.switch-on');
         this.off_el=this.el.find('.switch-off');
+
+        var self=this;
+        //log(this.el);
+        this.on_el.click(function(){self.turnOn();self.on_el.hide();self.off_el.show();});
+        this.off_el.click(function(){self.turnOff();self.off_el.hide();self.on_el.show();});
+        this.off_el.click();
+    }
+//-------EasySwitch-----------------//
+    doEasySwitch(){
+        this.on_msg=this.el.attr('on-msg');
+        this.off_msg=this.el.attr('off-msg');
+
+        this.checkStatus();
+        var self=this;
+        this.el.click(()=>{
+            if(self.status()=='on'){self.easyTurnOff();}
+            else self.easyTurnOn();
+        })
+    }
+    easyTurnOn(){
+        this.setStatus('on');
+        this.checkStatus();
+    }
+    easyTurnOff(){
+        this.setStatus('off');
+        this.checkStatus();
+    }
+    setStatus(stat){
+        this.el.attr('status',stat);
+    }
+    status(){
+        return this.el.attr('status');
+    }
+    checkStatus(){
+        if(!this.el.attr('status'))this.el.attr('status','off');
+        var status=this.status();
+        if(status=='on'){this.turnOn();this.el.html(this.off_msg);}
+        else{this.turnOff();this.el.html(this.on_msg);}
     }
 }
 
@@ -142,12 +184,26 @@ function initViewSwitch(){
         var sssw=new Switch(sw,function(){switchView(src,tar)},function(){switchView(tar,src);});
     }
 }
-
+//-----------------Show-Switch--------->
+class ShowSwitch extends Switch{
+    constructor(btn,tar){
+        super(btn,()=>show(tar),()=>hide(tar));
+    }
+}
+function initShowSwitch(){
+    sws=$('.switch-show');
+    for(var i=0;i<sws.length;i++){
+        var sw=$(sws[i]);
+        var tar=getTarget(sw);
+        var sssw=new ShowSwitch(sw,tar);
+    }
+}
 //-------------初始化-------------//
 function initSwitch(){
     initFullScreenSwitch();
     initSpeakInnerTextSwitch();
     initViewSwitch();
+    initShowSwitch();
 }
 
 

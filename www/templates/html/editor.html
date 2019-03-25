@@ -21,6 +21,8 @@
         <div class="rw bg-gray" info="工具栏" style="width:100%;height:2rem;">
             <div class="btn-bar f-left">
                 <button class="tool-bar-btn" id="submit">提交</button>
+                <button class="tool-bar-btn switch-show" easy-switch="true" status="off"
+                        off-msg="隐藏快照" on-msg="添加快照" tar-sel="#summary-area" id="add-summary" >Add Summary</button>
             </div>
             <!--<div class="btn-bar f-right">-->
             <select class="tool-bar-btn f-right" id="is_public" style="margin-right:-3.5px;" name="is_public" {%if
@@ -45,6 +47,9 @@
                 </ul>
             </div>
             <!--</div>-->
+        </div>
+        <div class="summary-area bg-danger hidden input" contenteditable="true" style="min-height:3rem;max-height:40%;" id="summary-area">
+            {%if blog%}{{blog.summary}}{%endif%}
         </div>
         <div class="col bg-info input" id="input" contenteditable="true" info="md输入"
              style="float:left;width:50%;height:calc(100% - 7rem);">{%if blog%}{{blog.content}}{%endif%}

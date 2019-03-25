@@ -117,7 +117,7 @@ class Blog(Model):
     user_name = StringField(ddl='varchar(50)',default='...')
     user_image = StringField(ddl='varchar(500)')
     name = StringField(ddl='varchar(50)')
-    summary = StringField(ddl='varchar(200)',default='...')
+    summary = StringField(ddl='varchar(2000)',default='...')
     content = TextField(default='...')
     created_at = FloatField(default=time.time)
     public=BooleanField(default=True)

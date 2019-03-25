@@ -1,0 +1,20 @@
+
+
+.site-meta {
+    box-shadow: 0 0 16px rgba(0,0,0,0.5);
+    background: #262a30;
+    color: #fff;
+    padding: 20px 0;
+    margin: 0;
+    text-align: center;
+}
+.article-preview-list{
+    text-align:center;
+}
+.article-entry{
+}
+.article-wrapper{
+    display:inline-block;
+    text-align:left;
+    max-width:75%;
+}

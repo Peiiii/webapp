@@ -1,5 +1,5 @@
 //base : jsquery,boostrap(only show and hide)
-
+dev=true;
 hi='hi';
 hi1='hi1';
 hi2='hi2';
