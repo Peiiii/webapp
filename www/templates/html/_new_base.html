@@ -20,7 +20,9 @@
         </div>
         <div class="site-secondary" style="float:right;min-width:10rem;padding:20px 4% 20px 2% ;text-align:center;">
                 <div class="wrapper" style="display:inline-block;min-width:13rem;text-align:left;">
+                    {%if user%}
             {%if blogs%}{%include "html/_my_blog_list.html"%}{%endif%}
+                    {%endif%}
                 </div>
         </div>
     </div>

@@ -55,7 +55,7 @@ async def checkCookies(cookies):
 ## 响应客户端请求
 @app.get2('/test')
 async def do_test():
-    return pageResponse(template='html/_new_base.html')
+    return pageResponse(template=files.test)
 @app.get2('/',cookies=True)
 async def do_home(cookies):
     blogs=await getBlogRecmendations()
@@ -66,7 +66,7 @@ async def do_home(cookies):
     for u in users:
         u.href='/user/'+u.id
     return pageResponse(
-        template=files.test,
+        template=files.home,
         blogs=blogs,
         users=users
     )
