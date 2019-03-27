@@ -4,14 +4,25 @@
     box-shadow: 0 0 16px rgba(0,0,0,0.5);
     background: #262a30;
     color: #fff;
-    padding: 20px 0;
+    padding:auto;
     margin: 0;
     text-align: center;
+}
+.site-primary{
+    border-right:none;
+    padding-top:20px;
+}
+.site-secondary ul{
+    padding-left:0px;
 }
 .article-preview-list{
     text-align:center;
 }
 .article-entry{
+    padding:6%;
+}
+.article-summary{
+
 }
 .article-wrapper{
     display:inline-block;

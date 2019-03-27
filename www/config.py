@@ -26,13 +26,14 @@ database=Config(
 files=Config(
     base='html/_base.html',
     sign_up_in='html/sign_up_in.html',
-    user_home='html/user_home.html',
+    user_home='html/_new_user_home.html',
     user_manage='html/user_manage.html',
     editor='html/editor.html',
     article_display='html/_feedlist.html',
     comment_show='html/_comment_show.html',
-    error='/html/error.html',
-    visit_blog='/html/visit_blog.html',
-    read_my_blog='/html/read_my_blog.html'
+    error='html/error.html',
+    visit_blog='html/_new_visit_blog.html',
+    read_my_blog='html/_new_read_my_blog.html',
+    test='html/_new_base.html'
 )
 

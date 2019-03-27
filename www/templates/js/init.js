@@ -6,4 +6,5 @@ $(document).ready(function(){
     initSwitch();
     initMarkdown();
     initMessageShow();
+    initClass();
 })

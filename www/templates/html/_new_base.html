@@ -9,16 +9,30 @@
 </head>
 <body>
 <div class="" id="root">
-    <div class="site-header" >
-        <div class="site-meta">
-            <div class="site-title">盗墓笔记</div>
+    <div class="site-header " style="padding:0px;">
+        <div class="site-meta stick-to-top" style="height:80px;width:100%;padding:auto;" height-remained="60">
+            <div class="site-title center-block" style="padding:10px 10px;">尼德叔叔的小屋</div>
         </div>
     </div>
-    <div class="site-body">
-        <div class="article-preview-list" >
-        {%include "html/_new_feedlist.html"%}
+    <div class="site-body" style="text-align:center;overflow:auto;">
+        <div class="site-primary" style="display:inline-block;">
+        {%block site_primary%}{%endblock%}
+        </div>
+        <div class="site-secondary" style="float:right;min-width:10rem;padding:20px 4% 20px 2% ;text-align:center;">
+                <div class="wrapper" style="display:inline-block;min-width:13rem;text-align:left;">
+            {%if blogs%}{%include "html/_my_blog_list.html"%}{%endif%}
+                </div>
+        </div>
+    </div>
+    <div class="site-footer" style="">
+        <div class="wrapper" style="text-align:center;border-top:solid gray 1px;padding:20px;">
+            <div style="display:inline-block;">
+                <strong>基本信息应在此处显示</strong>
+            </div>
+
         </div>
     </div>
 </div>
+<script>{%include "js/_new_base.js"%}</script>
 </body>
 </html>

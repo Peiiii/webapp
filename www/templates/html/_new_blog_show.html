@@ -1,0 +1,84 @@
+<div class="article-wrapper" style="min-width:50%;max-width:45rem;overflow:hidden;padding:20px 3% 20px 5%;">
+<div class=" mode" id="article" blog_id="{{blog.id}}" style="width:100%;">
+<div style="text-align:right;">
+            {%if me%}
+            <button class="btn btn-small btn-default" style=""><a href="/me/editor/{{blog.id}}" class="a-plain mode" >编辑</a></button>
+            {%endif%}
+            <!--<button class="btn btn-small btn-default " onclick="fullScreenSwitch('#full_screen_switch_1','#article')"-->
+                    <!--status="off" on="全屏" off="取消全屏" id="full_screen_switch_1">全屏</button>-->
+            <div class="switch-fullscreen f-right" status="off"  tar-sel="#article">
+                <button class="switch-on btn btn-default">全屏显示</button>
+                <button class="switch-off btn btn-default">退出全屏</button>
+            </div>
+            <div class="switch-speakInnerText f-right" status="off"  tar-sel="#blog_content_{{blog.id}}">
+                <button class="switch-on btn btn-default">阅读全文</button>
+                <button class="switch-off btn btn-default">停止阅读</button>
+            </div>
+            <button id="pull_btn" onclick="pullUpSwitch('#pull_btn','#blog_content_{{blog.id}}')" class="btn btn-default"
+                    type="submit" status="off" on="收起" off="显示全部">收起</button>
+        </div>
+    <script>executeMode();</script>
+    <div class=" article-heading">
+        <h1 class="article-title "> {{blog.name}}</h1>
+        <small>{{blog.user_name}}</small>
+        {%for l in blog.labels%}<span class="label label-warning">{{l}}</span>{%endfor%}
+    </div>
+    <div class="  article-content" style="padding-top:20px;padding-bottom:10px;">
+
+        <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.content}}</textarea>
+        <div id="blog_content_{{blog.id}}" class="markdown" data-box-id="data_box_{{blog.id}}" style="">
+            {{blog.content}}
+        </div>
+    </div>
+
+    <div class=" mode" id="comment-area">
+        <script>executeMode();</script>
+        <form id="comment-form" class="form" target="hidden-iframe" style="margin-bottom:10px;">
+            <div class="form-group">
+                <label>评论文章</label>
+                <textarea v-model="comment" id="comment-input" class="form-control mode" rows="3"
+                          placeholder="输入你的评论..."></textarea>
+            </div>
+            <button v-on:click="submit_comment" type="submit" class="btn btn-default mode">提交</button>
+        </form>
+        {%if blog.comments%}
+        {%for comment in blog.comments%}
+        {%include "html/_comment_show.html"%}
+        {%endfor%}
+        {%endif%}
+    </div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+
+        var app_comment=new Vue({
+            el:'#comment-area',
+            data:{
+                comment:'',
+            },
+            methods:{
+                submit_comment:function(){
+                    vm=this;
+                    loc=window.location.href;
+                    var bid=$('#article').attr('blog_id');
+                    $.post('/blog/'+bid+'/comment',JSON.stringify({content:this.comment}),function(jr){
+                    log('submit_comment:');
+                        form=$('#comment-form');
+                        comment_input=$('#comment-input');
+                        if(jr['success']){
+                            form.after(jr['data']['comment']);
+                            comment_input.val('');
+                        }
+                        else{
+                            form.after(jr['message']);
+                        }
+                    })
+                }
+            }
+        })
+    })
+
+
+
+</script>

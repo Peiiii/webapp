@@ -66,7 +66,7 @@ async def do_home(cookies):
     for u in users:
         u.href='/user/'+u.id
     return pageResponse(
-        template='html/home.html',
+        template=files.test,
         blogs=blogs,
         users=users
     )
@@ -107,7 +107,7 @@ async def do_visit_user(user_id,cookies):
         await b.wrap(href='/blog/%s')
 
     return pageResponse(
-        template='html/_new_base.html',
+        template=files.user_home,
         user=u,
         blogs=blogs,
         not_me=True
