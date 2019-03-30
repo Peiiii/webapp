@@ -12,6 +12,6 @@ function initMessageShow(){
     var boxes=$('.msg-box-tem');
     boxes.map((n,box)=>{
         var box=$(box);
-        box.click(()=>{hide(box)});
+        box.click(()=>{hide(box);log(hi)});
     })
 }

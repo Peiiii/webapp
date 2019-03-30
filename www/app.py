@@ -135,6 +135,9 @@ async def checkExistence(uid=None,bid=None):
             return await Blog.find(bid)
 async def checkLogin(cookies,user_id=None):
     uid, key = cookies.get('user_id'), cookies.get('key')
+    log('cookies:',cookies)
+    if not uid:
+        return CheckState(code=3)
     u = await User.find(uid)
     if not u:
         message = '用户不存在'
@@ -414,6 +417,8 @@ async def do_comment_post(blog_id,content, cookies):
     user_id = cookies['user_id']
     logging.info('cookies:%s' % cookies)
     u = await User.find(user_id)
+    if content.strip()=='':
+        return apiError(message='评论不能为空！')
     comment = Comment(
         user_id=user_id, user_name=u.name, user_image=u.image,
         blog_id=blog_id, content=content
