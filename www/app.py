@@ -146,7 +146,7 @@ async def checkLogin(cookies,user_id=None):
     if not u.key == key:
         message = '用户尚未登录或登录已过期'
         log(message)
-        return CheckState(code=2, message=message)
+        return CheckState(code=3, message=message)
     if user_id and (not user_id==u.id):
         chk= CheckState(code=5)
         log(chk.message)

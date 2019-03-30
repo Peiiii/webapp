@@ -1,12 +1,7 @@
 .f-left{float:left}
 .f-right{float:right}
 
-.bg-black{
-    background:black;
-}
-.c-white{
-    color:white;
-}
+
 
 .a-plain{
     color:inherit;
@@ -14,4 +9,17 @@
 
 .text-align-left{
     text-align:left;
+}
+
+.hidden{
+    display:none;
+}
+
+.bg-black{
+    background:black;
+}
+.bg-333{background:#333;}
+.bg-gray{background:gray;}
+.c-white{
+    color:white;
 }

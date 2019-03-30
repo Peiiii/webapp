@@ -1,4 +1,6 @@
-<div class="center-block category">
+<div class="fixed-top d-inline-block" style="max-width:15rem;overflow:auto;background:#333;color:white;" >
+    <button class="btn-dark" data-toggle="collapse" data-target="#blog_catalogue" style="margin:0.5rem 0.2rem 0.4rem 0.2rem;">文章目录</button>
+    <div class="collapse" id="blog_catalogue" style="padding:2rem 5%;">
     <h1 class="cate-title ">{%if me%}<a class="a-plain" href="/me">我</a>的文章{%endif%}{%if not me%}<a class="a-plain" href="/user/{{user.id}}">{{user.name}}</a>的文章{%endif%}</h1><hr>
             <div class="alert alert-danger msg-area hidden" onclick="hide($(this))" ></div>
             <ul>
@@ -8,5 +10,6 @@
                 <hr></li>
                 {%endfor%}
             </ul>
-        </div>
+    </div>
+</div>
 <script>{%include "js/_my_blog_list.js"%}</script>
