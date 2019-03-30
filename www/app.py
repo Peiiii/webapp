@@ -258,7 +258,8 @@ async def create_blog_post(blog_heading, blog_summary, blog_content, is_public,t
     return jsonResponse(
         success=True,
         message='文章上传成功,<a href="/me">前往主页？</a>',
-        data=b
+        data=b,
+        me=True
     )
 ## 编辑博客 get
 @app.get2(paths.edit_my_blog_get,cookies=True)
@@ -271,7 +272,8 @@ async def do_edit_get(blog_id,cookies):
     return pageResponse(
         template=pages.editor,
         edit=True,
-        blog=b
+        blog=b,
+        me=True
     )
 ## 编辑博客post
 @app.post4(paths.edit_my_blog_post,json=True,cookies=True)

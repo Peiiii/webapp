@@ -1,10 +1,10 @@
 <div class="center-block category">
-            <h1 class="cate-title ">{%if me%}我{%endif%}{%if not me%}{{user.name}}{%endif%}的文章</h1><hr>
+    <h1 class="cate-title ">{%if me%}<a class="a-plain" href="/me">我</a>的文章{%endif%}{%if not me%}<a class="a-plain" href="/user/{{user.id}}">{{user.name}}</a>的文章{%endif%}</h1><hr>
             <div class="alert alert-danger msg-area hidden" onclick="hide($(this))" ></div>
             <ul>
                 {%for b in blogs%}
                 <li style="list-style-type:none;" id="blog_li_{{b.id}}"><a href="{{b.href}}" class="text-primary">{{b.name}}<br><span class=" text-warning"></span></a>
-                {%if not not_me %}<span class=" text-warning" onclick="deleteBlog('#blog_li_{{b.id}}','{{b.id}}')" style="float:right">删除</span>{%endif%}
+                {%if me %}<span class=" text-warning" onclick="deleteBlog('#blog_li_{{b.id}}','{{b.id}}')" style="float:right">删除</span>{%endif%}
                 <hr></li>
                 {%endfor%}
             </ul>
