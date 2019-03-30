@@ -28,7 +28,8 @@
   aiomysql
   chardet
 ```
-需要安装有myql数据库
+需要安装有myql数据库，再config.py文件中配置数据库名称、用户名、密码
+运行app.py
  
  **项目目录结构**
  ## webapp
