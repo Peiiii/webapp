@@ -1,0 +1,74 @@
+.f-left{
+    float:left;
+}
+.f-right{
+    float:right;
+}
+
+#home-header-wrapper{
+    background:inherit;
+}
+.nav-header{
+    overflow:auto;
+    border-bottom:solid #101010 2px;
+    padding:0.24rem 0.4rem 0.2rem 1rem;
+}
+#nav-menu{
+}
+#nav-menu-toggle{
+    margin:0.1rem 0.2rem 0.1rem 0.1rem;
+}
+.menu-item{
+    padding:0.3rem 1rem 0.3rem 1rem;
+    border-bottom:solid 1px gray;
+}
+#nav-menu .btn{
+    border-radius:0rem;
+}
+#nav-menu .menu-item a{
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#home-summary {
+    border-bottom: 1px solid #EEE;
+    height: 728px;
+    background: #467b96;
+    color: #DAE5EA;
+    font-size: 18px;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px 3%;
+}
+#home-summary h3 {
+    margin: 25px 0 30px;
+    font-weight: normal;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    color: inherit;
+}
+.btn-primary a{
+}
+.home-footer{
+    background: #467b96;
+    color: #DAE5EA;
+    font-size: 18px;
+    text-align: center;
+    padding:3rem 20%;;
+}
+.home-footer h1{
+    font-weight:700;
+}

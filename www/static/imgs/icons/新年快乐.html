@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://127.0.0.1/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>新年快乐</title>
+    <script type="text/javascript" src="./新年快乐_files/jquery-3.1.1.min.js.下载"></script>
+
+<script src="./新年快乐_files/popper.min.js.下载" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="./新年快乐_files/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="./新年快乐_files/bootstrap.min.js.下载" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!--<link rel="stylesheet/less" type="text/css" href="/css/navbar.less" >-->
+<!--<link rel="stylesheet/less" type="text/css" href="/css/normalize.less" >-->
+<!--<link rel="stylesheet/less" type="text/css" href="/css/scaffolding.less" >-->
+<!--<link rel="stylesheet/less" type="text/css" href="/css/utilities.less" >-->
+
+<script src="./新年快乐_files/less.min.js.下载"></script>
+
+
+<style>.f-left{float:left}
+.f-right{float:right}
+
+.bg-black{
+    background:black;
+}
+.c-white{
+    color:white;
+}
+
+.a-plain{
+    color:inherit;
+}</style>
+<style>.f-left{
+    float:left;
+}
+.f-right{
+    float:right;
+}
+
+#home-header-wrapper{
+    background:inherit;
+}
+.nav-header{
+    overflow:auto;
+    border-bottom:solid #101010 2px;
+    padding:0.24rem 0.4rem 0.2rem 1rem;
+}
+#nav-menu{
+    padding-bottom:2rem;
+}
+#nav-menu-toggle{
+    margin:0.1rem 0.2rem 0.1rem 0.1rem;
+}
+.menu-item{
+    padding:0.3rem 1rem 0.3rem 1rem;
+    border-bottom:solid 1px gray;
+
+}
+#nav-menu .menu-item a{
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#home-summary {
+    border-bottom: 1px solid #EEE;
+    height: 728px;
+    background: #467b96;
+    color: #DAE5EA;
+    font-size: 18px;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px 3%;
+}
+#home-summary h3 {
+    margin: 25px 0 30px;
+    font-weight: normal;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    color: inherit;
+}
+.btn-primary a{
+}</style>
+<script src="./新年快乐_files/vue.js.下载"></script>
+<script src="./新年快乐_files/highlight.js.下载"></script>
+<script src="./新年快乐_files/marked.min.js.下载"></script>
+<script src="./新年快乐_files/handle.js.下载"></script>
+<script>//base : jsquery,boostrap(only show and hide)
+dev=true;
+hi='hi';
+hi1='hi1';
+hi2='hi2';
+hi3='hi3';
+var trash={app:{},modules:['base']}
+function show(el){
+    el.removeClass('hidden');
+}
+function hide(el){
+    el.addClass('hidden');
+}
+String.prototype.replaceAll = function(s1,s2){
+return this.replace(new RegExp(s1,"gm"),s2);
+}
+String.prototype.strip=function(str=' '){
+ //类似于 python 的 strip 函数
+    context=this;
+    len=str.length;
+//    log(context);log(len)
+    if(context.length<len)return context;
+    while(true){
+        if(context.length<len) return context;
+        s1=context.slice(0,len);
+        if(s1===str)context=context.slice(len,);
+        else break;
+    }
+    while(true){
+        if(context.length<len) return context;
+        s2=context.slice(-len,);
+        if(s2===str)context=context.slice(0,-len);
+        else break;
+    }
+    return context;
+}
+String.prototype.mul=function(num){
+    var str=''
+    for(var i=0;i<num;i++){
+        str+=this;
+    };
+    return str;
+}
+String.prototype.toDict= function(divider){
+//类似于对cookies的解析函数，将纯字符串的键=值对集合解析成集合，divider为分隔符。
+//例如 对 "name=nick&&key=123&&code=345" 进行解析，divider="&&",返回结果 { name:nick',key:'123',code:'345'}
+    text=strip(this,divider);
+    arr=text.split(divider);
+    dic={};
+    for(var i=0;i<arr.length;i++){
+        [name,value]=arr[i].split('=');
+        dic[name]=value;
+    }
+    return dic;
+}
+String.prototype.getRows=function (t){
+//计算字符串中换行符数量
+    arr=t.split('\n')
+    return arr.length;
+}
+function getLastLine(text){
+    text=text.split('\n');
+    return text[text.length-1];
+}
+function getLine(text,n){
+    num=0;
+    for(var i=0;i<n;i++){
+        if(text[i]=='\n')num++;
+    };
+    line =text.split('\n')[num];
+    //log(line);
+    return line;
+}
+//----------------------------------------------//
+// document format conversion
+function escapeToHTML(str) {
+ var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+ return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+}
+
+//-------------------------------------------------------//
+
+//------------------------------------------------//
+//常用函数
+function log(text){console.log(text);}
+function slog(text,str='',num=10){
+    console.log('*'.mul(num));
+    console.log(text);
+    console.log('*'.mul(num));
+}</script>
+<script>trash.modules.push('request');
+function getJson(url){
+    r=$.get({url:url,async:false});
+    return r.responseJSON;
+}
+function apiGetBlog(bid){
+            var result=false
+            $.get({url:'/api/get_blog/'+bid,async:false,success:function(jr){
+                //log('getBlog response :'+jr);
+                if(jr['success']){
+                    b=jr['data'];
+                    result=b;
+                    }
+                else {
+                    //log('message:'+jr['message']);
+                }
+            }});
+            return result
+        }</script>
+<script>function getCookie(){
+                    strcookie=document.cookie;
+                    strcookie=strcookie.split(';');
+                    var cookie= {};
+                    for(var i=0;i<strcookie.length;i++){
+                        [name,value]=strcookie[i].trim().split('=');
+                        cookie[name]=value;
+                    };
+                    return cookie;
+                }
+function setCookie(name,value){
+                    max_age=86400*15;
+                    document.cookie=name+'=0;max-age=-1;path=/';
+                    document.cookie=name+'='+value+';max-age='+max_age+';path=/';
+};</script>
+
+<script>// base:  jquery
+// function: intereactive , message show and hide, query ;
+trash.modules.push('pageData');
+
+//-------------------page data operation---------------//
+function getData(selector){
+    data= $(selector).val();
+    data=data.replaceAll('<','<');
+    data=data.replaceAll('>','>');
+    return data;
+}
+function getInnerContent(el){
+    tag=el.prop('nodeName')
+    if(tag==='textarea' || tag==='input' ){return el.val();}
+    return el.html();
+}
+function copyHTMLTo(src,tar){
+    html=getInnerContent(src);
+    html=escapeToHTML(html);
+    var isDefined=(typeof maeked != "undefined" ? true : false);
+    if(isDefined)html=myMarked(html);
+    tar.html(html);
+}</script>
+
+<script>function executeMode(){
+            cookie=getCookie();
+            //log('Cookie from executeMode:');log(document.cookie);
+            //log('executeMode:'+cookie['mode']);
+            if(cookie['mode']==='dark'){
+                modeDark();
+            }
+            else {
+                modeNormal();
+            }
+        }
+function modeDark(){
+            elms=$('.mode');
+            elms.addClass('dark');
+            elms.slice(0,2).css('opacity','0.7');
+            canvas_script=$('.canvas-script');
+            //canvas_script.attr('opacity',canvas_script.attr('dark-opacity'));
+            canvas=$('canvas');
+}
+function getMode(){
+            cookie=getCookie();
+            return cookie['mode'];
+}
+function modeNormal(){
+            elms=$('.mode');
+            elms.removeClass('dark');
+            elms.slice(0,2).css('opacity','1');
+            canvas_script=$('.canvas-script');
+            //canvas_script.attr('opacity',canvas_script.attr('normal-opacity'));
+            canvas=$('canvas');
+            canvas.css('opacity',canvas_script.attr('normal-opacity'));
+}
+function changeMode(name){
+            //log('changeMode('+name+')');
+            setCookie('mode',name);
+            //log(document.cookie);
+            executeMode();
+        }
+function switchMode(){
+            mode=getMode();
+            //console.log('switchMode: from '+mode);
+            if(mode==='normal')changeMode('dark');
+            else changeMode('normal');
+}
+
+function initTheme(){
+    executeMode();
+}</script>
+<script>// base : jquery
+
+// 需定义button属性：status:默认状态，on:表示开启状态的信息，off:表示关闭状态的信息。
+//-----------Easy Switch--------------//
+
+
+
+
+
+
+//---------------Supporting Functions-------------------//
+function getSource(el){
+    return $(el.attr('src-sel'));
+}
+function getTarget(el){
+    return $(el.attr('tar-sel'));
+}
+function getStatus(el){
+    return el.attr('status');
+}
+function getOnMsg(el){
+    return el.attr('on-msg');
+}
+function getOffMsg(el){
+    return el.attr('off-msg');
+}
+function getStatusAndMsg(el){
+    return [getStatus(el),getOnMsg(el),getOffMsg(el)];
+}
+function setStatusOn(el,on_msg){
+    el.attr('status','on');
+    el.text(on_msg);
+}
+function setStatusOff(el,off_msg){
+    el.attr('status','off');
+    //log('off:'+off_msg);
+    //log(el)
+    el.text(off_msg);
+}
+
+//-------------------Switch Class------------//
+//usage:
+//el: switch component; turnOn: function to turn on; turnOff: fnuction to turn off  ;
+//el: an el must contains two button inside it. These two button, one with class "switch-on" and another with "switch-off";
+//el: should own such properties: status(on/off)
+class Switch{ //el: jquery object
+    constructor(el,turnOn,turnOff){
+        this.el=el; // on_sel and off_sel
+        this.turnOn=turnOn;
+        this.turnOff=turnOff;
+        this.parse();
+    }
+    parse(){
+        if(this.el.attr('easy-switch')=='true')this.easy_switch=true;
+        else this.easy_switch=false;
+        if(this.easy_switch){
+            this.doEasySwitch();// doEasySwitch
+        }
+        else this.doNormalSwicth();  //  doNormalSwitch
+    }
+//-----------NormalSwitch-----------//
+    doNormalSwicth(){
+        this.on_el=this.el.find('.switch-on');
+        this.off_el=this.el.find('.switch-off');
+
+        var self=this;
+        //log(this.el);
+        this.on_el.click(function(){self.turnOn();self.on_el.hide();self.off_el.show();});
+        this.off_el.click(function(){self.turnOff();self.off_el.hide();self.on_el.show();});
+        this.off_el.click();
+    }
+//-------EasySwitch-----------------//
+    doEasySwitch(){
+        this.on_msg=this.el.attr('on-msg');
+        this.off_msg=this.el.attr('off-msg');
+
+        this.checkStatus();
+        var self=this;
+        this.el.click(()=>{
+            if(self.status()=='on'){self.easyTurnOff();}
+            else self.easyTurnOn();
+        })
+    }
+    easyTurnOn(){
+        this.setStatus('on');
+        this.checkStatus();
+    }
+    easyTurnOff(){
+        this.setStatus('off');
+        this.checkStatus();
+    }
+    setStatus(stat){
+        this.el.attr('status',stat);
+    }
+    status(){
+        return this.el.attr('status');
+    }
+    checkStatus(){
+        if(!this.el.attr('status'))this.el.attr('status','off');
+        var status=this.status();
+        if(status=='on'){this.turnOn();this.el.html(this.off_msg);}
+        else{this.turnOff();this.el.html(this.on_msg);}
+    }
+}
+
+
+//----------------------------------------------//
+
+
+
+
+
+
+//----------------Speech Switch--------------------//
+//usage:
+//set properties:
+//class: switch-speakInnerText; tar-sel; status; on-msg; off-msg;
+function startSpeaking(el){
+    var speechSU = new window.SpeechSynthesisUtterance();
+    speechSU.text = getInnerContent(el);
+    window.speechSynthesis.speak(speechSU);
+    return speechSU;
+}
+function stopSpeaking(){
+    window.speechSynthesis.cancel();
+    console.log('停止朗读');
+}
+class SpeakSwitch extends Switch{
+    constructor(btn,tar){
+        super(btn,()=>startSpeaking(tar),()=>stopSpeaking());
+    }
+}
+function initSpeakInnerTextSwitch(){
+    var btn=$('.switch-speakInnerText');
+    var tar=getTarget(btn);
+    var s= new SpeakSwitch(btn,tar);
+}
+//------------全屏开关-------------------//
+//usage:
+//set properties:
+//class:switch-fullscreen;status:on/off;on-msg;off-msg;tar-sel;
+function getreqfullscreen(){
+    var root = document.documentElement
+    return root.requestFullscreen || root.webkitRequestFullscreen || root.mozRequestFullScreen || root.msRequestFullscreen
+}
+function getExitfullScreen(){
+    return document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen
+}
+function fullScreen(el){
+    el.css('max-height','800px');
+    el.css('overflow','hide');
+    getreqfullscreen().call(el[0]);
+}
+function exitFullScreen(el){
+    el.css('max-height','');
+    el.css('overflow','');
+    //log(hi);
+    getExitfullScreen().call(document);
+}
+
+class FullScreenSwitch extends Switch{
+    constructor(btn,tar){
+        //log(btn)
+        super(btn,()=>fullScreen(tar),()=>exitFullScreen(tar));
+    }
+}
+function initFullScreenSwitch(){
+    var btn=$('.switch-fullscreen');
+    var tar=getTarget(btn);
+    var s= new FullScreenSwitch(btn,tar);
+}
+
+//----------------View 开关--------------------//
+function switchView(src,tar){
+    hide(src);
+    show(tar);
+}
+function initViewSwitch(){
+    sws=$('.switch-view');
+    for(var i=0;i<sws.length;i++){
+        var sw=$(sws[i]);
+        var tar=getTarget(sw);
+        var src=getSource(sw);
+        var sssw=new Switch(sw,function(){switchView(src,tar)},function(){switchView(tar,src);});
+    }
+}
+//-----------------Show-Switch--------->
+class ShowSwitch extends Switch{
+    constructor(btn,tar){
+        super(btn,()=>show(tar),()=>hide(tar));
+    }
+}
+function initShowSwitch(){
+    sws=$('.switch-show');
+    for(var i=0;i<sws.length;i++){
+        var sw=$(sws[i]);
+        var tar=getTarget(sw);
+        var sssw=new ShowSwitch(sw,tar);
+    }
+}
+//-------------初始化-------------//
+function initSwitch(){
+    initFullScreenSwitch();
+    initSpeakInnerTextSwitch();
+    initViewSwitch();
+    initShowSwitch();
+}
+
+</script>
+<script>//base: jquery, easyJS(show and hide)
+
+function showMsg(msg_box,msg){
+    msg_box.css('display','block');
+    msg_box.html(msg);
+}
+function hideMsg(msg_box){
+    msg_box.css('display','none');
+}
+function initMessageShow(){
+//    log('init mssageShow')
+    var boxes=$('.msg-box-tem');
+    boxes.map((n,box)=>{
+        var box=$(box);
+        box.click(()=>{hide(box);log(hi)});
+    })
+}</script>
+<script>// base : jquery , marked
+
+var isDefined=(typeof marked != "undefined" ? true : false);
+if(isDefined){
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        highlight: function (code,lang) {
+            return hljs.highlightAuto(code,[lang]).value;
+        }
+    });
+    }
+function myMarked(text){
+    // remove <div></div>
+    if(dev){log('myMarkdown source:');log(text)}
+    text=text.replaceAll('</div><div>','\n');
+    text=text.replaceAll('<div>','\n');
+    text=text.replaceAll('</div>','\n');
+    text=escapeToHTML(text);
+//    log('escapedHTML:');log(text)
+    md=marked(text);
+    if(dev){log('myMarkdown result:');log(md);}
+    return md;
+}
+function parseMarkdown(sel_show_box){
+    mks=$(sel_show_box);
+    for(var i=0;i<mks.length;i++){
+        mk=$(mks[i]);
+        selector='#'+mk[0].id;
+        //log('mk.id:'+mk.id);
+        sel_data_box='#'+mk[0].getAttribute('data-box-id');
+        mk.html(myMarked(String(getData(sel_data_box)))    );
+    }
+    mks.addClass('rich-text');
+}
+function initMarkdown(){
+    parseMarkdown('.markdown');
+}</script>
+
+<script>//base:jquery
+
+function initClassStickToTop(){
+    var el_css={'position':'fixed','top':'0'};
+    var enter_css={'position':'static'};
+    var els=$('.stick-to-top');
+    els.map((n,el)=>{
+        var el=$(el);
+        var original_height=el.height();
+        log(original_height)
+        enter_css['height']=String(original_height)+'px';
+        $(document).scroll(()=>{
+            var top=$(document).scrollTop();
+            var my_height=el.height();log('my height:');log(my_height);log('top:');log(top)
+            var r_height=Number(el.attr('height-remained'));
+            el_css['height']=r_height+'px';
+            if(top>=original_height-r_height){el.css(el_css);log('top:'+top)}
+            log('top:'+top);
+            if(top<=0){log('yes');el.css(enter_css)}
+        })
+    })
+}
+
+function initClass(){
+    initClassStickToTop();
+}</script>
+<script>
+
+
+$(document).ready(function(){
+    initTheme();
+    initSwitch();
+    initMarkdown();
+    initMessageShow();
+    initClass();
+})</script>
+<script src="chrome-extension://ocggccaacacpienfcgmgcihoombokbbj/pages/client/livestartpage-message-add.js"></script></head>
+<body class="mode" style="opacity: 1;">
+<script class="canvas-script" color="255,0,0" count="99" dark-opacity="1" normal-opacity="0.5" opacity="0.5" src="./新年快乐_files/canvas-nest.min.js.下载" type="text/javascript" zindex="-2"></script><canvas id="c_n19" width="722" height="479" style="position: fixed; top: 0px; left: 0px; z-index: -2; opacity: 0.5;"></canvas>
+<div class="root mode" style="opacity: 1;">
+
+
+    <header class="" style="background:#333;">
+    <div class="fixed-top " id="home-header-wrapper" style="">
+        <div class="nav-header" style="">
+        <button class="bg-black d-inline-block f-right" id="nav-menu-toggle" data-toggle="collapse" data-target="#nav-menu" style="" aria-expanded="true">
+            <span class="icon-bar"><img src="./新年快乐_files/list6-32.png"></span></button>
+        </div>
+        <div class="collapse show" id="nav-menu" style="">
+            <!--<div class="menu-item"><a href="/sign-up">Sign up</a></div>-->
+            <!--<div class="menu-item"><a href="/sign-in">Sign in</a></div>-->
+            <!--<div class="menu-item"><a href="/sign-up">Create blog</a></div>-->
+            <!--<div class="menu-item"><a href="/sign-up">My Home</a></div>-->
+            <!--<div class="menu-item"><a href="/sign-up">Test</a></div>-->
+            <!--<div class="menu-item"><a href="/sign-up">Home</a></div>-->
+
+            <div class="btn-group-vertical" style="display:inline-block;width:100%;">
+            <a href="http://127.0.0.1/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
+            <a class="btn btn-lg btn-dark mode" href="http://127.0.0.1/sign-in">Sign In</a>
+            <a class="btn btn-lg btn-secondary mode" href="http://127.0.0.1/me/editor">Create Blog</a>
+            <a class="btn btn-lg btn-success mode" href="http://127.0.0.1/me">My Home</a>
+            <a class="btn btn-lg btn-danger mode" href="http://127.0.0.1/test">Test</a>
+            <!--<span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>-->
+            <a class="btn btn-lg btn-info mode" href="http://127.0.0.1/">首页</a>
+        </div>
+        </div>
+    </div>
+
+
+    </header>
+    </div>
+
+    <div class="collapse">
+        <a href="http://127.0.0.1/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
+            <a class="btn btn-lg btn-dark mode" href="http://127.0.0.1/sign-in">Sign In</a>
+            <a class="btn btn-lg btn-secondary mode" href="http://127.0.0.1/me/editor">Create Blog</a>
+            <a class="btn btn-lg btn-success mode" href="http://127.0.0.1/me">My Home</a>
+            <a class="btn btn-lg btn-danger mode" href="http://127.0.0.1/test">Test</a>
+            <!--<span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>-->
+            <a class="btn btn-lg btn-info mode" href="http://127.0.0.1/">首页</a>
+    </div>
+    <div class="jumbotron">
+        <h1 class="display-4">Hello, world!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+            featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="http://127.0.0.1/#" role="button">Learn more</a>
+        </p>
+    </div>
+    <section id="home-summary">
+
+        <script>executeMode();</script>
+        <div class="site-header-main  container">
+            <h2>念念不忘，必有回响</h2>
+            <h3>蓦然回首，那人却在，灯火阑珊处</h3>
+        </div>
+
+        <div class="btn-group-vertical" style="display:inline-block;">
+            <a href="http://127.0.0.1/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
+            <a class="btn btn-lg btn-dark mode" href="http://127.0.0.1/sign-in">Sign In</a>
+            <a class="btn btn-lg btn-secondary mode" href="http://127.0.0.1/me/editor">Create Blog</a>
+            <a class="btn btn-lg btn-success mode" href="http://127.0.0.1/me">My Home</a>
+            <a class="btn btn-lg btn-danger mode" href="http://127.0.0.1/test">Test</a>
+            <span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>
+            <a class="btn btn-lg btn-info mode" href="http://127.0.0.1/">首页</a>
+        </div>
+
+
+    </section>
+    <div class="app-box">
+        
+<div class="row mode" id="app-blog">
+
+    <div class="col-xs-10 col-sm-9 site-primary session" style="">
+        <div class="article-box mode">
+            <script>executeMode();</script>
+            
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> 第二篇测试</span>
+    </h3>
+    <div class=""><small class="text-warning"> 勤奋的小菜鸟</small> </div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_0015533229750004096f566662a4bc3b6c501cfd91b25b7000" style="display:none;">公开的博客</textarea>
+        <div class="markdown rich-text" id="article_display_0015533229750004096f566662a4bc3b6c501cfd91b25b7000" data-box-id="data_box_0015533229750004096f566662a4bc3b6c501cfd91b25b7000"><p>公开的博客</p>
+</div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/0015533229750004096f566662a4bc3b6c501cfd91b25b7000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> 论吃饭的重要性</span>
+    </h3>
+    <div class=""><small class="text-warning"> 问鼎</small> <span class="label label-warning"> 吃饭</span><span class="label label-warning">生活</span></div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_00155335427800040b46f8bddd54826b101b7c7ddf7c3d3000" style="display:none;">&lt;div&gt;&nbsp; 吃饭重要性&lt;/div&gt;人不吃饭就会死，动物不进食也会死。可见，吃饭是一种基本需求。&lt;div&gt;标记&lt;/div&gt;</textarea>
+        <div class="markdown rich-text" id="article_display_00155335427800040b46f8bddd54826b101b7c7ddf7c3d3000" data-box-id="data_box_00155335427800040b46f8bddd54826b101b7c7ddf7c3d3000"><p>  吃饭重要性
+人不吃饭就会死，动物不进食也会死。可见，吃饭是一种基本需求。
+标记</p>
+</div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/00155335427800040b46f8bddd54826b101b7c7ddf7c3d3000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> 不然你可以试一试
+        
+        
+        
+        
+     </span>
+    </h3>
+    <div class=""><small class="text-warning"> 问鼎</small> <span class="label label-warning">hi</span><span class="label label-warning">试试</span><span class="label label-warning">试试</span><span class="label label-warning">haha</span></div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_001553413510000e97747c1cd1e43468f92da0713f72c97000" style="display:none;">回忆里想起模糊的小时候
+        
+        
+        
+        
+        
+        </textarea>
+        <div class="markdown rich-text" id="article_display_001553413510000e97747c1cd1e43468f92da0713f72c97000" data-box-id="data_box_001553413510000e97747c1cd1e43468f92da0713f72c97000"><p>回忆里想起模糊的小时候</p>
+</div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/001553413510000e97747c1cd1e43468f92da0713f72c97000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> hi
+        </span>
+    </h3>
+    <div class=""><small class="text-warning"> 问鼎</small> <span class="label label-warning">hello</span></div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_001553417594000f987f42306284f5ca965ab4adcf36f99000" style="display:none;">&lt;div&gt;到底什么情况&lt;/div&gt;&lt;div&gt;我要弄清楚&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;# hello&lt;div&gt;## hello&lt;/div&gt;&lt;div&gt;### hello&lt;/div&gt;&lt;div&gt;- hi&lt;/div&gt;&lt;div&gt;- hi&lt;/div&gt;&lt;div&gt;&nbsp;- hi&lt;/div&gt;
+        </textarea>
+        <div class="markdown rich-text" id="article_display_001553417594000f987f42306284f5ca965ab4adcf36f99000" data-box-id="data_box_001553417594000f987f42306284f5ca965ab4adcf36f99000"><p>到底什么情况
+我要弄清楚
+<br></p>
+<h1 id="hello">hello</h1>
+<h2 id="hello-1">hello</h2>
+<h3 id="hello-2">hello</h3>
+<ul>
+<li>hi</li>
+<li>hi<ul>
+<li>hi</li>
+</ul>
+</li>
+</ul>
+</div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/001553417594000f987f42306284f5ca965ab4adcf36f99000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> 建站日志</span>
+    </h3>
+    <div class=""><small class="text-warning"> top</small> <span class="label label-warning">建站</span><span class="label label-warning">日志</span></div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_001553442508000ed552433623b40e28ed82e7c7f60bef2000" style="display:none;">            - 重构页面布局，重构网站外观&lt;div&gt;- 兼容行测试调整&lt;/div&gt;&lt;div&gt;- 发布有用的博客&lt;/div&gt;&lt;div&gt;- SEO&lt;/div&gt;&lt;div&gt;- 完成评论系统&lt;/div&gt;&lt;div&gt;**重点**&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;访客能看到的页面无非两三个：&lt;/div&gt;&lt;div&gt;- 网站首页&lt;/div&gt;&lt;div&gt;- 博客目录页&lt;/div&gt;&lt;div&gt;- 博客浏览页&lt;/div&gt;
+        </textarea>
+        <div class="markdown rich-text" id="article_display_001553442508000ed552433623b40e28ed82e7c7f60bef2000" data-box-id="data_box_001553442508000ed552433623b40e28ed82e7c7f60bef2000"><pre><code>        - 重构页面布局，重构网站外观</code></pre><ul>
+<li>兼容行测试调整</li>
+<li>发布有用的博客</li>
+<li>SEO</li>
+<li>完成评论系统</li>
+</ul>
+<p><strong>重点</strong>
+<br>
+访客能看到的页面无非两三个：</p>
+<ul>
+<li>网站首页</li>
+<li>博客目录页</li>
+<li>博客浏览页</li>
+</ul>
+</div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/001553442508000ed552433623b40e28ed82e7c7f60bef2000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> tensorflow</span>
+    </h3>
+    <div class=""><small class="text-warning"> top</small> </div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_00155353078000094585db4dfd34f768c3d7ec18ae76d21000" style="display:none;">            &lt;img aria-describedby="caption-attachment-158" class="wp-image-158 size-medium" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-graph-example-260x300.png?resize=260%2C300&amp;ssl=1" alt="TensorFlow教程 - 简单的计算图" width="260" height="299" srcset="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-graph-example.png?resize=260%2C300&amp;ssl=1 260w, https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-graph-example.png?w=296&amp;ssl=1 296w" sizes="(max-width: 260px) 100vw, 260px" style="vertical-align: baseline; color: rgb(102, 102, 102); font-family: Raleway, sans-serif; font-size: 16px; margin: 0px; padding: 0px; outline: 0px; background: transparent; max-width: 100%; height: auto;"&gt;&lt;p id="caption-attachment-158" class="wp-caption-text" style="margin-bottom: 35px; color: rgb(102, 102, 102); padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background: transparent; line-height: 1.75em; overflow-wrap: break-word; font-family: "Roboto Condensed", sans-serif; max-width: 100%; text-align: center;"&gt;&lt;font style="vertical-align: inherit;"&gt;简单的计算图&lt;/font&gt;&lt;/p&gt;
+        </textarea>
+        <div class="markdown rich-text" id="article_display_00155353078000094585db4dfd34f768c3d7ec18ae76d21000" data-box-id="data_box_00155353078000094585db4dfd34f768c3d7ec18ae76d21000"><pre><code>        &lt;img aria-describedby="caption-attachment-158" class="wp-image-158 size-medium" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-graph-example-260x300.png?resize=260%2C300&amp;ssl=1" alt="TensorFlow教程 - 简单的计算图" width="260" height="299" srcset="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-graph-example.png?resize=260%2C300&amp;ssl=1 260w, https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-graph-example.png?w=296&amp;ssl=1 296w" sizes="(max-width: 260px) 100vw, 260px" style="vertical-align: baseline; color: rgb(102, 102, 102); font-family: Raleway, sans-serif; font-size: 16px; margin: 0px; padding: 0px; outline: 0px; background: transparent; max-width: 100%; height: auto;"&gt;&lt;p id="caption-attachment-158" class="wp-caption-text" style="margin-bottom: 35px; color: rgb(102, 102, 102); padding: 0px; border: 0px; outline: 0px; vertical-align: baseline; background: transparent; line-height: 1.75em; overflow-wrap: break-word; font-family: "Roboto Condensed", sans-serif; max-width: 100%; text-align: center;"&gt;&lt;font style="vertical-align: inherit;"&gt;简单的计算图&lt;/font&gt;&lt;/p&gt;</code></pre></div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/00155353078000094585db4dfd34f768c3d7ec18ae76d21000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+<div class="article-entry mode">
+    <h3 class="article-title">
+        <span class=""> 作者总结写作</span>
+    </h3>
+    <div class=""><small class="text-warning"> top</small> </div>
+
+
+    <div class="article-summary">
+        <textarea class="data-box" id="data_box_0015535317960009e09e5fa570446dc956faf7ec228b576000" style="display:none;">&lt;span style="background-color: rgb(252, 248, 227);"&gt;距上一次写文章已经快一年时间了，其实我挺喜欢写作或是笔记的，这个博客也坚持经营6年有余了。人到一定的阶段精力总是会变得分散，更是相信所谓的坚持只靠意念是不够的。但我又不希望某一天这里的文章变成像是
+        &lt;/span&gt;</textarea>
+        <div class="markdown rich-text" id="article_display_0015535317960009e09e5fa570446dc956faf7ec228b576000" data-box-id="data_box_0015535317960009e09e5fa570446dc956faf7ec228b576000"><p><span style="background-color: rgb(252, 248, 227);">距上一次写文章已经快一年时间了，其实我挺喜欢写作或是笔记的，这个博客也坚持经营6年有余了。人到一定的阶段精力总是会变得分散，更是相信所谓的坚持只靠意念是不够的。但我又不希望某一天这里的文章变成像是
+        </span></p>
+</div>
+    </div>
+    <div class="more">
+        <button class="btn btn-primary"><a href="http://127.0.0.1/blog/0015535317960009e09e5fa570446dc956faf7ec228b576000" style="color:white;">继续阅读</a></button>
+        
+    </div>
+</div>
+
+        </div>
+        <div></div>
+
+    </div>
+    <script>executeMode();</script>
+    <!--侧边栏-->
+    <div class="col-xs-2 col-sm-3 session sidebar mode">
+        <script>executeMode();</script>
+        <br><br>
+        <div class="center-block category">
+            <h1 class="cate-title ">为您推荐</h1><hr>
+            <ul style="padding-left:5%;">
+                
+                <li style="list-style-type:none;"><a href="http://127.0.0.1/user/00000000001" class="text-primary">top<br><span class=" text-warning"></span></a></li><hr>
+                
+                <li style="list-style-type:none;"><a href="http://127.0.0.1/user/001553309228000692a5044ddc24538826d126d8b4df2ff000" class="text-primary">勤奋的小菜鸟<br><span class=" text-warning"></span></a></li><hr>
+                
+                <li style="list-style-type:none;"><a href="http://127.0.0.1/user/00155332710400074187c9f492d42c788d3aac3b1423909000" class="text-primary">问鼎<br><span class=" text-warning"></span></a></li><hr>
+                
+                <li style="list-style-type:none;"><a href="http://127.0.0.1/user/001553922791000ede65e82a5004a5eb3353ad4b6b16948000" class="text-primary">迷雾<br><span class=" text-warning"></span></a></li><hr>
+                
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+    <!--site-footer,网页尾-->
+    <div class="home-footer mode" style="background:#333;">
+        <h1 class="mode" style="color:white;font-weight:700;">谢谢观赏</h1>
+    </div>
+    <iframe name="hidden-iframe" style="display:none;" src="./新年快乐_files/saved_resource.html"></iframe>
+
+<script>
+</script>
+
+</body></html>

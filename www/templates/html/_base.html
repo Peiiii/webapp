@@ -5,55 +5,92 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>新年快乐</title>
-    {%include "html/_include.html"%}
-    <style>
-
-        .img-responsive{
-            height:200px;
-            min-width:50%;
-        }
-
-    </style>
+    {%include "html/_include.min.html"%}
 </head>
 <body class="mode">
 <script class="canvas-script" color="255,0,0" count="99" dark-opacity="1" normal-opacity="0.5" opacity='0.5'
         src="/canvas-nest.min.js" type="text/javascript" zIndex="-2"></script>
-<div class="site  mode">
-    <div class="row site-header mode" style="padding-top:2rem;">
-
-        <div class="row mode f-right" style="">
-            <button class="btn btn-default mode"><a href="/sign-up">Sign up</a></button>
-            <button class="btn btn-default mode"><a href="/sign-in">Sign In</a></button>
-            <button class="btn btn-default mode"><a href="/me/editor">Create Blog</a></button>
-            <button class="btn btn-default mode"><a href="/me">My Home</a></button>
-            <button class="btn btn-default mode"><a href="/test">Test</a></button>
-            <button class="btn btn-default mode" id="mod-switch"><span class="text-primary">切换模式</span></button>
-            <button class="btn btn-default mode"><a href="/">首页</a></button>
-
-            <script>executeMode();</script>
-        </div>
+<div class="root mode">
 
 
-        <script>executeMode();</script>
-        <div class="site-header-main row">
-            <div class="site-branding">
-                <p class="site-title">
-                    <a href="#">新年快乐</a>
-                </p>
-                <p class="site-description">
-                    Happy new year
-                </p>
+    <header class="" style="background:#333;">
+        <div class="fixed-top " id="home-header-wrapper" style="">
+            <div class="nav-header" style="">
+                <button class="bg-black d-inline-block f-right" id="nav-menu-toggle" data-toggle="collapse"
+                        data-target="#nav-menu" style="">
+                    <span class="icon-bar"><img src="/imgs/icons/list6-32.png"></span></button>
+            </div>
+            <div class=" collapse " id="nav-menu">
+                <!--<div class="menu-item"><a href="/sign-up">Sign up</a></div>-->
+                <!--<div class="menu-item"><a href="/sign-in">Sign in</a></div>-->
+                <!--<div class="menu-item"><a href="/sign-up">Create blog</a></div>-->
+                <!--<div class="menu-item"><a href="/sign-up">My Home</a></div>-->
+                <!--<div class="menu-item"><a href="/sign-up">Test</a></div>-->
+                <!--<div class="menu-item"><a href="/sign-up">Home</a></div>-->
+
+                <div class="btn-group-vertical" style="display:inline-block;width:100%;">
+                    <a href="/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
+                    <a class="btn btn-lg btn-dark mode" href="/sign-in">Sign In</a>
+                    <a class="btn btn-lg btn-secondary mode" href="/me/editor">Create Blog</a>
+                    <a class="btn btn-lg btn-success mode" href="/me">My Home</a>
+                    <a class="btn btn-lg btn-danger mode" href="/test">Test</a>
+                    <!--<span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>-->
+                    <a class="btn btn-lg btn-info mode" href="/">首页</a>
+                </div>
             </div>
         </div>
+
+
+    </header>
+</div>
+
+<div class="collapse">
+    <a href="/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
+    <a class="btn btn-lg btn-dark mode" href="/sign-in">Sign In</a>
+    <a class="btn btn-lg btn-secondary mode" href="/me/editor">Create Blog</a>
+    <a class="btn btn-lg btn-success mode" href="/me">My Home</a>
+    <a class="btn btn-lg btn-danger mode" href="/test">Test</a>
+    <!--<span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>-->
+    <a class="btn btn-lg btn-info mode" href="/">首页</a>
+</div>
+<div class="jumbotron">
+    <h1 class="display-4">Hello, world!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+        featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+</div>
+<section id="home-summary">
+
+    <script>executeMode();</script>
+    <div class="site-header-main  container">
+        <h2>念念不忘，必有回响</h2>
+        <h3>蓦然回首，那人却在，灯火阑珊处</h3>
     </div>
-    <div class="app-box">
-        {%block site_body%}{%endblock%}
+
+    <div class="btn-group-vertical" style="display:inline-block;">
+        <a href="/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
+        <a class="btn btn-lg btn-dark mode" href="/sign-in">Sign In</a>
+        <a class="btn btn-lg btn-secondary mode" href="/me/editor">Create Blog</a>
+        <a class="btn btn-lg btn-success mode" href="/me">My Home</a>
+        <a class="btn btn-lg btn-danger mode" href="/test">Test</a>
+        <span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>
+        <a class="btn btn-lg btn-info mode" href="/">首页</a>
     </div>
-    <!--site-footer,网页尾-->
-    <div class="row site-footer session mode">
-        <h1 class="btn btn-default mode">谢谢观赏</h1>
-    </div>
-    <iframe name="hidden-iframe" style="display:none;"></iframe>
+
+
+</section>
+<div class="app-box">
+    {%block site_body%}{%endblock%}
+</div>
+<!--site-footer,网页尾-->
+<div class="home-footer mode" >
+    <h1 class=" mode" style="">没有底线？绝对不可以！</h1>
+</div>
+<iframe name="hidden-iframe" style="display:none;"></iframe>
 </div>
 <script>
 </script>

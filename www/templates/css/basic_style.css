@@ -1,8 +1,17 @@
 .f-left{float:left}
 .f-right{float:right}
 
-
+.bg-black{
+    background:black;
+}
+.c-white{
+    color:white;
+}
 
 .a-plain{
     color:inherit;
+}
+
+.text-align-left{
+    text-align:left;
 }
