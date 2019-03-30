@@ -96,7 +96,7 @@ function initEditor(){
         if (title.html()==='')return;
         blog={
             blog_heading:title.text().trim(),
-            blog_summary:summary.html(),
+            blog_summary:summary.html().trim(),
             blog_content:input.html().trim(),
             is_public:toBool(is_public.val()),
             type:type.val(),

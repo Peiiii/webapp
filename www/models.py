@@ -1,6 +1,7 @@
 import time,uuid,os,random
 from orm import Model,StringField, FloatField,TextField,BooleanField
 from jinja2 import Template
+from config import paths,hrefs
 
 
 def brace(obj,head):
@@ -22,7 +23,16 @@ class User(Model):
     image=StringField(ddl='varchar(50)',default='about:blank')
     created_at = FloatField(default=time.time)
     key=StringField(ddl='varchar(100)',default=None)
-
+    async def lightInfo(self,myhref=paths.visit_user):
+        self.addHref(myhref)
+    async def heavyInfo(self,myhref=paths.my_home,childhref=paths.visit_blog):
+        await self.lightInfo(myhref)
+        blogs=await self.getBlogs()
+        for b in blogs:
+            await b.lightInfo(childhref)
+        self.blogs=blogs
+    def addHref(self,myhref):
+        self.href=myhref.replace('{user_id}',self.id)
     async def getBlogs(self):
         blogs=await Blog.findAll(user_id=self.id)
         if blogs:
@@ -123,6 +133,18 @@ class Blog(Model):
     public=BooleanField(default=True)
     type=StringField(ddl='varchar(50) not null',default='text/plain')
     label=StringField(ddl='varchar(200)')
+
+    async  def lightInfo(self,myhref=paths.visit_blog):
+        self.parseLabels()
+        self.addDate()
+        self.addDateTime()
+        self.addHref(myhref)
+    async def heavyInfo(self,myhref=paths.visit_blog):
+        await self.lightInfo(myhref)
+        comments=await self.getComments()
+        for c in comments:
+            await c.lightInfo()
+        self.comments=comments
     async def wrap(self,comment=False,label=True,href=None):
         if label:
             self.parseLabels()
@@ -145,7 +167,7 @@ class Blog(Model):
         return
 
     def addHref(self,temString):
-        self.href=temString%(self.id)
+        self.href=temString.replace('{blog_id}',self.id)
     async def appendComments(self): ## 为Blog对象添加comments属性，
         cs= await self.getComments()
         if cs:
@@ -224,6 +246,9 @@ class Comment(Model):
     content = TextField()
     created_at = FloatField(default=time.time)
     reply_to=StringField(ddl='varchar(50)')
+    async def lightInfo(self):
+        self.dateTime()
+        self.format()
     def wrap(self,template=TEM_COM_WRAP):
         from jinja2 import Template
         tem=Template(template)

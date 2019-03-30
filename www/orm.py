@@ -106,7 +106,16 @@ class Model(dict,metaclass=ModelMetaclass):
                 logging.debug(r'Set default value for %s: %s'%(field,value))
                 setattr(self,key,value)    ##仅当default 不为 None 时才将该字段设置为属性，否则不能！！！
         return value
-
+    @classmethod
+    async def exists(cls,pk):
+        '''
+        检测对象是否存在于数据库中
+        :param pk: 主键，通常为id
+        :return:
+        '''
+        rs=await select("select count(*) from %s where %s= ?"%(cls.__table__,cls.__primary_key__),[pk])
+        # print(rs[0]['count(*)'])
+        return rs[0]['count(*)']
     @classmethod
     async def find(cls,pk):
         ######## select ############

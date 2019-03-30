@@ -23,7 +23,28 @@ database=Config(
     password='password',
     db='webapp2'
 )
-files=Config(
+paths=Config(
+    test='/test',
+    home='/',
+    visit_blog='/blog/{blog_id}',
+    visit_user='/user/{user_id}',
+    my_home='/me',
+    create_my_blog_get='/me/editor',
+    create_my_blog_post='/me/post_blog',
+    edit_my_blog_get='/me/editor/{blog_id}',
+    edit_my_blog_post='/me/editor/{blog_id}',
+    delete_my_blog='/me/delete_blog/{blog_id}',
+    view_my_blog='/me/blog/{blog_id}',
+    sign_up_get='/sign-up',
+    sign_up_post='/sign-up',
+    sign_in_get='/sign-in',
+    sign_in_post='/sign-in',
+    post_comment='/blog/{blog_id}/comment'
+)
+hrefs=Config(
+
+)
+pages=Config(
     base='html/_base.html',
     sign_up_in='html/sign_up_in.html',
     user_home='html/_new_user_home.html',

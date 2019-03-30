@@ -4,7 +4,7 @@ from aiohttp import web
 from orm import create_pool
 from models import User, Blog, Comment, loadText, next_id
 from framework import Application, templates_dir
-from config import database,files,net
+from config import database,pages,net,paths
 from jinja2 import Template, Environment, PackageLoader
 from framework import apiError, jsonResponse,pageResponse
 from tool import  initTools,log,Path,T
@@ -12,29 +12,81 @@ import tool
 env = Environment(loader=PackageLoader('templates',''))
 loop = asyncio.get_event_loop()
 app = Application(loop=loop)
-
+'''
+layer:
+    preCheck(responseJson=false):
+        用户不存在，博客不存在，没有权限（from public area: private ; from private area : user_id not match or not login  ）
+        尚未登录（没有cookies或user_id不存在或登录已过期）
+        outside: if(checkStatus==False)return checkStatus.errorResponse
+    gatherInfo():
+        信息体：
+        light，heavy;  group,single;
+        light-group:用户概览列表，博客概览列表
+        heavy-group:博客详细列表;评论详情列表
+        heavy-single:用户详情，博客详情
+        
+        用户概览： 单用户带下级轻列表           用户详情：单用户带下级重列表
+        
+        wrapAll(): 获取详情信息；详情：本级+下级列表
+        网站首页：用户概览列表+博客概览列表
+        用户访问外主页：用户详情
+        用户访问外博客：博客详情列表
+        （用户推荐（不带博客），博客推荐），（特定用户（带博客列表））
+    runOperations
+    :return Results
+'''
 ########################################
 ## 快捷工具
-def pageError(template=files.error,**kws):
+def pageError(template=pages.error,**kws):
     return pageResponse(template=template,**kws)
-def pageSign(template=files.sign_up_in,sign_in=True,**kws):
+def pageSign(template=pages.sign_up_in,sign_in=True,**kws):
     return pageResponse(template=template,sign_in=sign_in,**kws)
 class CheckState:
     '''
     case code:
     0:正常
     1：用户不存在
-    2：尚未登录
+    2：博客不存在
+    3：尚未登录
+    4：没有权限
     '''
-    def __init__(self,success=False,code=2,message='failed',result=None):
+    def __init__(self,success=False,code=3,message=None,result=None,errorResponse=True,log_message=True):
         self.success=success
         self.code=code
         self.message=message
         self.result=result
+        if self.success:
+            self.code=0
+        if not self.message:
+            self.autoFillMessage()
+        if errorResponse:
+            self.autoErrorResponse()
+        if log_message:
+            log('CheckState:'+self.message)
+    def autoFillMessage(self):
+        if self.code==0:
+            self.message='一切正常'
+        elif self.code==1:
+            self.message='用户不存在'
+        elif self.code==2:
+            self.message='博客不存在'
+        elif self.code==3:
+            self.message='尚未登录'
+        elif self.code==4:
+            self.message='没有权限'
+        elif self.code==5:
+            self.message='该用户未登录，但有其它已登录用户'
+    def autoErrorResponse(self):
+        if not self.success:
+            if self.code==3:
+                self.errorPageResponse=pageSign()
+            else:
+                self.errorPageResponse=pageError(message=self.message)
+            self.errorJsonResponse=apiError(message=self.message)
 #######################################
-async def getBlogRecmendations():
+async def getBlogRecomendations():
     return await Blog.getAllPublic()
-async def getUserRecmendations():
+async def getUserRecomendations():
     return await User.findAll()
 async def getBlogInfo(bid):
     pass
@@ -43,71 +95,121 @@ def jsDataFilter(data,type='bool'):
         if data=='false':return False
         else:return True
 async def checkCookies(cookies):
-    uid,key=cookies.get('user_id'),cookies.get('key')
-    u=await User.find(uid)
+    return await checkLogin(cookies)
+#################check##############
+async def checkRequiredData(uid=None,bid=None,from_public=True,cookies=None):
+    if uid:
+        user=await checkExistence(uid=uid)
+        if not user:
+            message='用户不存在'
+            log(message+':'+uid)
+            return CheckState(code=1,message=message)
+    if bid:
+        blog=await checkExistence(bid=bid)
+        if not blog:
+            message='博客不存在'
+            log(message+':'+bid)
+            return CheckState(code=2,message=message)
+        if from_public and not blog.public:
+            return CheckState(code=2)
+    if not from_public:
+        if bid:
+            uid=blog.user_id
+        login=await checkLogin(cookies)
+        if not login.success:
+            return login
+    return CheckState(success=True)
+
+async def checkExistence(uid=None,bid=None):
+    if uid:
+        rs=await User.exists(uid)
+        if not rs:
+            return False
+        else:
+            return await User.find(uid)
+    if bid:
+        rs=await Blog.exists(bid)
+        if not rs:
+            return False
+        else:
+            return await Blog.find(bid)
+async def checkLogin(cookies,user_id=None):
+    uid, key = cookies.get('user_id'), cookies.get('key')
+    u = await User.find(uid)
     if not u:
-        return CheckState(code=1,message='user %s not exists'%uid)
-    if not u.key==key:
-        return CheckState(code=2,message='尚未登录')
+        message = '用户不存在'
+        log(message + ':' + uid)
+        return CheckState(code=1, message=message)
+    if not u.key == key:
+        message = '用户尚未登录或登录已过期'
+        log(message)
+        return CheckState(code=2, message=message)
+    if user_id and (not user_id==u.id):
+        chk= CheckState(code=5)
+        log(chk.message)
+        return chk
     else:
-        return CheckState(True,code=0)
+        return CheckState(success=True, code=0)
 #############################################
 ## 响应客户端请求
-@app.get2('/test')
+@app.get2(paths.test)
 async def do_test():
-    return pageResponse(template=files.test)
-@app.get2('/',cookies=True)
+    return pageResponse(template=pages.test)
+@app.get2(paths.home,cookies=True)
 async def do_home(cookies):
-    blogs=await getBlogRecmendations()
-    users=await getUserRecmendations()
+    '''
+    parseRequest and Check
+    gatherData: users,blogs,comments
+    def getData(blogs=True,users=false,comments=false):
+        pass
+    :param cookies:
+    :return:
+    '''
+    blogs=await getBlogRecomendations()
+    users=await getUserRecomendations()
     ## 添加信息
     for b in blogs:
-        await b.wrap(href='/blog/%s')
+        await b.lightInfo(paths.visit_blog)
     for u in users:
-        u.href='/user/'+u.id
+        await u.lightInfo(paths.visit_user)
     return pageResponse(
-        template=files.home,
+        template=pages.home,
         blogs=blogs,
         users=users
     )
 ## 访问博客
-@app.get2('/blog/{blog_id}', cookies=True)
+@app.get2(paths.visit_blog, cookies=True)
 async def do_blog(blog_id, cookies):
-    b = await Blog.find(blog_id)
-    print('blog:%s' % b)
-    if not b:
-        print('获取博客用户不存在')
-        return pageError(message='博客不存在！')
-    if not b.public:
-        print('not public')
-        return pageError(message='你没有权限查看该博客')
+
+    chk=await checkRequiredData(bid=blog_id,cookies=cookies)
+    if not chk.success:
+        return chk.errorPageResponse
+    b=await Blog.find(blog_id)
     ##  收集博客信息
     u=await User.find(b.user_id)
-    await b.appendComments()
-    blogs=await u.getBlogs()
-    for bl in blogs:
-        await bl.wrap(href='/blog/%s')
+    await b.heavyInfo()
+    await u.heavyInfo()
 
     return pageResponse(
-        template=files.visit_blog,
+        template=pages.visit_blog,
         blog=b,
         user=u,
-        blogs=blogs
+        blogs=u.blogs
     )
 
 ## 访问用户
-@app.get2('/user/{user_id}',cookies=True)
+@app.get2(paths.visit_user,cookies=True)
 async def do_visit_user(user_id,cookies):
-    try:
-        u=await User.find(user_id)
-    except:
-        return pageError(message='用户不存在')
+    chk = await checkRequiredData(uid=user_id, cookies=cookies)
+    if not chk.success:
+        return chk.errorPageResponse
+    u=await User.find(user_id)
     blogs=await u.getPublicBlogs()
     for b in blogs:
-        await b.wrap(href='/blog/%s')
+        await b.lightInfo(paths.visit_blog)
 
     return pageResponse(
-        template=files.user_home,
+        template=pages.user_home,
         user=u,
         blogs=blogs,
         not_me=True
@@ -116,44 +218,39 @@ async def do_visit_user(user_id,cookies):
 #####################################
 ## 用户本人操作
 ## me
-
-@app.get2('/me',cookies=True)
+###########小工具
+@app.get2(paths.my_home,cookies=True)
 async def do_me_home(cookies):
-    chk=await checkCookies(cookies)
+    chk = await checkRequiredData(from_public=False,cookies=cookies)
     if not chk.success:
-        if chk.code==1:
-            return pageError(message=chk.message)
-        elif chk.code==2:
-            return pageSign()
+        return chk.errorPageResponse
     uid=cookies['user_id']
     u=await User.find(uid)
-    blogs=await u.getBlogs()
-    for b in blogs:
-        await b.wrap(href='/me/blog/%s')
+    await u.heavyInfo()
     return pageResponse(
-        template=files.user_home,
-        blogs=blogs,
+        template=pages.user_home,
+        blogs=u.blogs,
         user=u,
         me=True
     )
 
 ## 创建博客 get
-@app.get2('/me/editor')
-async def do_me_editor():
-    return pageResponse(template=files.editor)
-## 提交博客
-@app.post4('/me/post_blog', json=True, cookies=True)
-async def create_blog_post(blog_heading, blog_summary, blog_content, is_public,type,label,cookies):
-    chk = await checkCookies(cookies)
+@app.get2(paths.create_my_blog_get,cookies=True)
+async def do_me_editor(cookies):
+    chk = await checkRequiredData(from_public=False, cookies=cookies)
     if not chk.success:
-        if chk.code == 1:
-            return pageError(message=chk.message)
-        elif chk.code == 2:
-            return pageSign()
-    # is_public=jsDataFilter(is_public,type='bool')
+        return chk.errorPageResponse
+    return pageResponse(template=pages.editor)
+## 提交博客
+@app.post4(paths.create_my_blog_post, json=True, cookies=True)
+async def create_blog_post(blog_heading, blog_summary, blog_content, is_public,type,label,cookies):
+    chk = await checkRequiredData(from_public=False, cookies=cookies)
+    if not chk.success:
+        return chk.errorJsonResponse
     uid=cookies['user_id']
     u=await User.find(uid)
-    log('public:',is_public)
+    if blog_heading.strip()=='':
+        return apiError(message='文章标题不能为空')
     b =await Blog.easyBlog(u, name=blog_heading, summary=blog_summary, content=blog_content,public=is_public,type=type,label=label)
     return jsonResponse(
         success=True,
@@ -161,41 +258,29 @@ async def create_blog_post(blog_heading, blog_summary, blog_content, is_public,t
         data=b
     )
 ## 编辑博客 get
-@app.get2('/me/editor/{blog_id}',cookies=True)
+@app.get2(paths.edit_my_blog_get,cookies=True)
 async def do_edit_get(blog_id,cookies):
-    chk = await checkCookies(cookies)
+    chk = await checkRequiredData(bid=blog_id,from_public=False, cookies=cookies)
     if not chk.success:
-        if chk.code == 1:
-            return apiError(message=chk.message)
-        elif chk.code == 2:
-            return pageSign()
-    b = await Blog.find(blog_id)
-    if not b:
-        return apiError(message='博客不存在')
-    if b.user_id != cookies['user_id']:
-        return apiError(message='没有权限编辑该博客')
-    await b.wrap()
+        return chk.errorPageResponse
+    b=await Blog.find(blog_id)
+    await b.lightInfo()
     return pageResponse(
-        template=files.editor,
+        template=pages.editor,
         edit=True,
         blog=b
     )
 ## 编辑博客post
-@app.post4('/me/editor/{blog_id}',json=True,cookies=True)
+@app.post4(paths.edit_my_blog_post,json=True,cookies=True)
 async def do_editor_post(blog_id,blog_heading,blog_summary,blog_content,is_public,type,label,cookies):
-    chk = await checkCookies(cookies)
+    chk = await checkRequiredData(bid=blog_id,from_public=False, cookies=cookies)
     if not chk.success:
-        if chk.code == 1:
-            return apiError(message=chk.message)
-        elif chk.code == 2:
-            return pageSign()
-    b = await Blog.find(blog_id)
-    if not b:
-        return apiError(message='博客不存在')
-    if b.user_id != cookies['user_id']:
-        return apiError(message='没有权限编辑该博客')
+        return chk.errorJsonResponse
+    b=await Blog.find(blog_id)
     u=await User.find(b.user_id)
-    if blog_summary=='':
+    if blog_heading.strip()=='':
+        return apiError(message='文章标题不能为空')
+    if blog_summary.strip()=='':
         blog_summary=blog_content[:200] if len(blog_content)>=200 else blog_content
     r=await b.update(name=blog_heading,summary=blog_summary,content=blog_content,public=is_public,type=type,label=label)
     if not r:
@@ -204,44 +289,34 @@ async def do_editor_post(blog_id,blog_heading,blog_summary,blog_content,is_publi
     return jsonResponse(message='更新成功，<a href="/me">前往主页？</a>')
 ## 删除博客
 
-@app.get2('/me/delete_blog/{blog_id}',cookies=True)
+@app.get2(paths.delete_my_blog,cookies=True)
 async def do_me_delete_blog(blog_id,cookies):
-    chk = await checkCookies(cookies)
+    chk = await checkRequiredData(bid=blog_id,from_public=False, cookies=cookies)
     if not chk.success:
-        if chk.code == 1:
-            return apiError(message=chk.message)
-        elif chk.code == 2:
-            return pageSign()
+        return chk.errorJsonResponse
     b=await Blog.find(blog_id)
-    if not b:
-        return apiError(message='博客不存在')
-    if b.user_id!=cookies['user_id']:
-        return apiError(message='没有权限删除该博客')
     r=await Blog.delete(b.id)
     if not r:
         return apiError(message='删除失败')
     return jsonResponse(message='删除成功')
 
 ## 浏览自己的博客
-@app.get2('/me/blog/{blog_id}', cookies=True)
+@app.get2(paths.view_my_blog, cookies=True)
 async def do_blog(blog_id, cookies):
+    chk = await checkRequiredData(bid=blog_id,from_public=False, cookies=cookies)
+    if not chk.success:
+        return chk.errorJsonResponse
     b = await Blog.find(blog_id)
-    print('blog:%s' % b)
-    if not b:
-        print('获取博客用户不存在')
-        return pageError(message='博客不存在！')
+    print('view blog:%s' % b)
     ##  收集博客信息
     u=await User.find(b.user_id)
-    await b.appendComments()
-    blogs=await u.getBlogs()
-    for blog in blogs:
-        await b.wrap(href='/me/blog/%s')
-    await b.appendComments()
+    await b.lightInfo()
+    await u.heavyInfo()
     return pageResponse(
-        template=files.read_my_blog,
+        template=pages.read_my_blog,
         blog=b,
         user=u,
-        blogs=blogs,
+        blogs=u.blogs,
         me=True
     )
 
@@ -262,15 +337,15 @@ async def do_blog(blog_id, cookies):
 ###############################################################################################################
 ## 登录与注册
 
-@app.get2('/sign-up', wrap=True)
+@app.get2(paths.sign_up_get, wrap=True)
 async def do_signup_get():
     return {
-        '__template__': files['sign_up_in'],
+        '__template__': pages['sign_up_in'],
         'sign_up': True
     }
 
 
-@app.post4('/sign-up', form=True)
+@app.post4(paths.sign_up_post, form=True)
 async def do_signup_post(username, email, password):
     uid = next_id()
     passwd = tool.encrypt(uid,password)
@@ -286,20 +361,20 @@ async def do_signup_post(username, email, password):
     return web.json_response(json)
 
 
-@app.get2('/sign-in', wrap=True)
+@app.get2(paths.sign_in_get, wrap=True)
 async def do_signin_get():
     return {
-        '__template__': files['sign_up_in'],
+        '__template__': pages['sign_up_in'],
         'sign_in': True
     }
 
 
-@app.post4('/sign-in', form=True, headers=True)
+@app.post4(paths.sign_in_post, form=True, headers=True)
 async def do_signin_post(email, password, headers):
     u = await User.findAll(email=email)
     if not u:
         dic = {
-            '__template__': files['sign_up_in'],
+            '__template__': pages['sign_up_in'],
             'user_not_exist': True,
             'message': 'User not exists.'
         }
@@ -310,7 +385,7 @@ async def do_signin_post(email, password, headers):
         log('expected user:',u)
         print(passwd, ' ', u.passwd)
         dic = {
-            '__template__': files['sign_up_in'],
+            '__template__': pages['sign_up_in'],
             'wrong_password': True,
             'message': 'Wrong password.'
         }
@@ -331,33 +406,22 @@ async def do_signin_post(email, password, headers):
 #############################################################################################
 ##  评论
 ## 提交评论
-@app.post4('/blog/{blog_id}/comment',json=True,cookies=True)
+@app.post4(paths.post_comment,json=True,cookies=True)
 async def do_comment_post(blog_id,content, cookies):
-    chk = await checkCookies(cookies)
+    chk = await checkRequiredData(bid=blog_id,from_public=False, cookies=cookies)
     if not chk.success:
-        if chk.code == 1:
-            return apiError(message=chk.message)
-        elif chk.code == 2:
-            return pageSign()
+        return chk.errorJsonResponse
     user_id = cookies['user_id']
     logging.info('cookies:%s' % cookies)
     u = await User.find(user_id)
-    if not u:
-        logging.warn('User %s not found' % user_id)
-        message = '<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span>你需要先登录<a href="/sign-in">前往登录</a>？</div>'
-        return apiError(message=message)
-    if u.key != cookies['key']:
-        logging.warn('User %d 持有的key 与本地数据不一致' % user_id)
-        message = '<div class="alert alert-warning"><span class="glyphicon glyphicon-exclamation-sign"></span>你尚未登录，<a href="/sign-in">前往登录</a>?</div>'
-        return apiError(message=message)
     comment = Comment(
         user_id=user_id, user_name=u.name, user_image=u.image,
         blog_id=blog_id, content=content
     )
     logging.info('comments-object formed:%s' % comment)
     await comment.save()
-    comment.format()
-    tem = env.get_template(files['comment_show'])
+    await comment.lightInfo()
+    tem = env.get_template(pages['comment_show'])
     co = tem.render(comment=comment)
     return jsonResponse(data={'comment': co})
 
