@@ -56,6 +56,6 @@ pages=Config(
     error='html/error.html',
     visit_blog='html/_new_visit_blog.html',
     read_my_blog='html/_new_read_my_blog.html',
-    test='html/_new_base.html'
+    test='html/test.html'
 )
 

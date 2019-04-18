@@ -53,9 +53,7 @@ class Switch{ //el: jquery object
     parse(){
         if(this.el.attr('easy-switch')=='true')this.easy_switch=true;
         else this.easy_switch=false;
-        if(this.easy_switch){
-            this.doEasySwitch();// doEasySwitch
-        }
+        if(this.easy_switch)this.doEasySwitch();// doEasySwitch
         else this.doNormalSwicth();  //  doNormalSwitch
     }
 //-----------NormalSwitch-----------//

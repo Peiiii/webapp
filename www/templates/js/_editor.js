@@ -58,8 +58,15 @@ function initLabelApp(app){
     assure.click(()=>{
         assureInput();
     });
-
-
+}
+function initPreviewSwitch(el){
+    var btns=el.find('.switch-preview');
+    var input=el.find('#input');
+    var output=el.find('#output');
+    btns.map((n,btn)=>{
+        var b=$(btn);
+        var s=new Switch(b,()=>{if(screen.width<400)hide(input);},()=>{if(screen.width<400)show(input);});
+    });
 }
 function initEditor(){
     var app=$('#editor_app');
@@ -72,6 +79,7 @@ function initEditor(){
     var label_area=app.find('#label-area');
     initLabelApp(app);
     renderEditor(app);
+    initPreviewSwitch(app);
     var md=myMarked(input.html());
 //    log('md:');log(md);log(hi)
     output.html(md);

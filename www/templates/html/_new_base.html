@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>me</title>
+    <title>Island</title>
     {%include "html/_include.html"%}
 </head>
 <body>
@@ -17,21 +17,15 @@
                     <span class="icon-bar"><img src="/imgs/icons/list6-32.png"></span></button>
             </div>
             <div class=" collapse " id="nav-menu">
-                <!--<div class="menu-item"><a href="/sign-up">Sign up</a></div>-->
-                <!--<div class="menu-item"><a href="/sign-in">Sign in</a></div>-->
-                <!--<div class="menu-item"><a href="/sign-up">Create blog</a></div>-->
-                <!--<div class="menu-item"><a href="/sign-up">My Home</a></div>-->
-                <!--<div class="menu-item"><a href="/sign-up">Test</a></div>-->
-                <!--<div class="menu-item"><a href="/sign-up">Home</a></div>-->
 
                 <div class="btn-group-vertical" style="display:inline-block;width:100%;">
-                    <a href="/sign-up" class="btn btn-lg btn-primary mode">Sign up</a>
-                    <a class="btn btn-lg btn-dark mode" href="/sign-in">Sign In</a>
+                    <a class="btn btn-lg btn-primary mode" href="/">Home Page</a>
                     <a class="btn btn-lg btn-secondary mode" href="/me/editor">Create Blog</a>
                     <a class="btn btn-lg btn-success mode" href="/me">My Home</a>
-                    <a class="btn btn-lg btn-danger mode" href="/test">Test</a>
                     <!--<span class="btn btn-lg btn-warning mode" id="mod-switch"><span class="text-primary">切换模式</span></span>-->
-                    <a class="btn btn-lg btn-info mode" href="/">首页</a>
+                    <a href="/sign-up" class="btn btn-lg btn-info mode">Sign up</a>
+                    <a class="btn btn-lg btn-warning mode" href="/sign-in">Sign In</a>
+                    <a class="btn btn-lg btn-danger mode" href="/test">Test</a>
                 </div>
             </div>
         </div>
@@ -41,7 +35,7 @@
 
 
     <div class="site-body" style="text-align:center;overflow:auto;padding-top:50px;">
-        <div class="site-primary" style="display:inline-block;">
+        <div class="site-primary" style="">
         {%block site_primary%}{%endblock%}
         </div>
         <div class="site-secondary" style="float:right;min-width:10rem;padding:20px 4% 20px 2% ;text-align:center;">
@@ -52,7 +46,7 @@
                 </div>
         </div>
     </div>
-    <div class="site-footer" style="border-top:solid gray 1px;,m">
+    <div class="site-footer" style="border-top:solid gray 1px;">
         <div class="wrapper" style="text-align:center;padding:20px;">
             <div style="display:inline-block;">
                 <strong>基本信息应在此处显示</strong>

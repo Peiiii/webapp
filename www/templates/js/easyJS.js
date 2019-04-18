@@ -11,6 +11,10 @@ function show(el){
 function hide(el){
     el.addClass('hidden');
 }
+function hide_or_show(el){
+    if(el.hasClass('hidden'))show(el);
+    else hide(el);
+}
 String.prototype.replaceAll = function(s1,s2){
 return this.replace(new RegExp(s1,"gm"),s2);
 }

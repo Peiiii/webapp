@@ -158,6 +158,7 @@ async def checkLogin(cookies,user_id=None):
 @app.get2(paths.test)
 async def do_test():
     return pageResponse(template=pages.test)
+## 首页
 @app.get2(paths.home,cookies=True)
 async def do_home(cookies):
     '''
@@ -258,8 +259,7 @@ async def create_blog_post(blog_heading, blog_summary, blog_content, is_public,t
     return jsonResponse(
         success=True,
         message='文章上传成功,<a href="/me">前往主页？</a>',
-        data=b,
-        me=True
+        data=b
     )
 ## 编辑博客 get
 @app.get2(paths.edit_my_blog_get,cookies=True)

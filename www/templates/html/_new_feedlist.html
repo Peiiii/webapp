@@ -1,6 +1,6 @@
-<div class="article-preview-list-1" style="max-width:40rem;min-width:45%;display:inline-block;text-align:left;padding-top:20px;overflow:hidden;">
+<div class="article-preview-list-1" style="min-width:45%;text-align:left;padding-top:20px;overflow:hidden;">
 {%for blog in blogs%}
-<div class="article-entry" style="border:solid gray 1px;margin-top:-1px;">
+<div class="article-entry f-left d-inline-block" style="border:solid gray 1px;margin-top:-1px;max-width:20rem;padding:3% 2% 2% 2%;">
 <div class="article-wrapper mode" >
     <h3 class="article-title">
         <span class=""> {{blog.name}}</span>
@@ -8,7 +8,7 @@
     <div class=""><small class="text-warning"> {{blog.user_name}}</small> {%for l in blog.labels%}<span class="label label-warning">{{l}}</span>{%endfor%}</div>
 
 
-    <div class="article-summary" >
+    <div class="article-summary" style="height:15rem;" >
         <textarea class="data-box" id="data_box_{{blog.id}}" style="display:none;">{{blog.summary}}</textarea>
         <div class="markdown" id="article_display_{{blog.id}}" data-box-id="data_box_{{blog.id}}">
 
