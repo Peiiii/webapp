@@ -158,6 +158,15 @@ async def checkLogin(cookies,user_id=None):
 @app.get2(paths.test)
 async def do_test():
     return pageResponse(template=pages.test)
+## 网站根目录
+@app.get2(paths.root)
+async def do_root():
+    return pageResponse(template=pages.root)
+## 公告
+@app.get2(paths.board)
+async def do_board():
+
+    return pageResponse(template=pages.board)
 ## 首页
 @app.get2(paths.home,cookies=True)
 async def do_home(cookies):

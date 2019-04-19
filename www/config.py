@@ -24,8 +24,10 @@ database=Config(
     db='webapp2'
 )
 paths=Config(
+    root='/',
+    board='/papers',
     test='/test',
-    home='/',
+    home='/home',
     visit_blog='/blog/{blog_id}',
     visit_user='/user/{user_id}',
     my_home='/me',
@@ -45,6 +47,8 @@ hrefs=Config(
 
 )
 pages=Config(
+    root='html/root.html',
+    board='html/board.html',
     base='html/_base.html',
     sign_up_in='html/sign_up_in.html',
     user_home='html/_new_user_home.html',
