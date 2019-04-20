@@ -28,7 +28,7 @@ def loadPapers(file):
     papers=parsePapers(text)
     list=[]
     for p in papers:
-        list.append('<li>%s</li>'%(p))
+        list.append('<li style="border-bottom:solid gray 1px;">%s</li>'%(p))
     html='\n'.join(list)
     return html
 def writetohtml(f_tem,f_tar,text):

@@ -12,6 +12,7 @@ import tool
 env = Environment(loader=PackageLoader('templates',''))
 loop = asyncio.get_event_loop()
 app = Application(loop=loop)
+quik_links=['http://127.0.0.1/home','http://127.0.0.1/']
 '''
 layer:
     preCheck(responseJson=false):
@@ -794,7 +795,8 @@ async def init(loop):
 
 print('current dir:',os.getcwd())
 app.router.add_static('/', 'static', show_index=True)
-print('http://127.0.0.1/me')
+for i in quik_links:
+    print(i)
 loop.run_until_complete(init(loop))
 import webbrowser
 print('open in a minute:')

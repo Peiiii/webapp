@@ -1,16 +1,16 @@
-<li>A survey of multi-agent formation control</li>
-<li>Adaptive Control Strategies for Interlimb Coordination in Legged Robots: A Review</li>
-<li>An Overview of Dynamic LinearizationBased Data-Driven Control and Applications</li>
-<li>DC Microgrids—Part I: A Review of Control Strategies and Stabilization Techniques</li>
-<li>Energy performance optimization in buildings:A review on semantic interoperability,faultdetection,and predictivecontrol</li>
-<li>Human–Agent Teaming for Multirobot Control: A Review of Human Factors Issues</li>
-<li>Integration of electric vehicles in smart grid: A review on vehicle to grid technologies and optimization techniques</li>
-<li>MAS-Based Distributed Coordinated Control and Optimization in Microgrid and Microgrid Clusters: A Comprehensive Overview</li>
-<li>Modeling and control of Cyber-Physical Systems subject to cyber attacks: A survey of recent advances and challenges</li>
-<li>Networked Control System: Survey and Directions</li>
-<li>Optimal Process Control</li>
-<li>Review of Applications of Fuzzy Logic in Multi-Agent-Based Control System of AC-DC Hybrid Microgrid</li>
-<li>Stochastic model predictive control:an overview and perspectives for future research</li>
-<li>Surface Roughness Optimization Techniques of CNC Milling: A Review</li>
-<li>Token-based pull production control systems: an introductory overview</li>
-<li>Vision and Control for UAVs: A Survey of General Methods and of Inexpensive Platforms for Infrastructure Inspection</li>
+<li style="border-bottom:solid gray 1px;">A survey of multi-agent formation control</li>
+<li style="border-bottom:solid gray 1px;">Adaptive Control Strategies for Interlimb Coordination in Legged Robots: A Review</li>
+<li style="border-bottom:solid gray 1px;">An Overview of Dynamic LinearizationBased Data-Driven Control and Applications</li>
+<li style="border-bottom:solid gray 1px;">DC Microgrids—Part I: A Review of Control Strategies and Stabilization Techniques</li>
+<li style="border-bottom:solid gray 1px;">Energy performance optimization in buildings:A review on semantic interoperability,faultdetection,and predictivecontrol</li>
+<li style="border-bottom:solid gray 1px;">Human–Agent Teaming for Multirobot Control: A Review of Human Factors Issues</li>
+<li style="border-bottom:solid gray 1px;">Integration of electric vehicles in smart grid: A review on vehicle to grid technologies and optimization techniques</li>
+<li style="border-bottom:solid gray 1px;">MAS-Based Distributed Coordinated Control and Optimization in Microgrid and Microgrid Clusters: A Comprehensive Overview</li>
+<li style="border-bottom:solid gray 1px;">Modeling and control of Cyber-Physical Systems subject to cyber attacks: A survey of recent advances and challenges</li>
+<li style="border-bottom:solid gray 1px;">Networked Control System: Survey and Directions</li>
+<li style="border-bottom:solid gray 1px;">Optimal Process Control</li>
+<li style="border-bottom:solid gray 1px;">Review of Applications of Fuzzy Logic in Multi-Agent-Based Control System of AC-DC Hybrid Microgrid</li>
+<li style="border-bottom:solid gray 1px;">Stochastic model predictive control:an overview and perspectives for future research</li>
+<li style="border-bottom:solid gray 1px;">Surface Roughness Optimization Techniques of CNC Milling: A Review</li>
+<li style="border-bottom:solid gray 1px;">Token-based pull production control systems: an introductory overview</li>
+<li style="border-bottom:solid gray 1px;">Vision and Control for UAVs: A Survey of General Methods and of Inexpensive Platforms for Infrastructure Inspection</li>
