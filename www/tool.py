@@ -113,3 +113,23 @@ class Path:
 
 # p=Path('e:/webapp/www/templates')
 # print(p.__dict__)
+##---------------------------------------##
+#####专用小工具
+def parsePapers(text):
+    lines=text.split('\n')
+    lines=[l.strip() for l in lines]
+    new_lines=[]
+    for i in lines:
+        if i == '' or i == '\n' or i[0]=='#':
+            continue
+        else:
+            new_lines.append(i)
+    lines=new_lines
+    lines=[l.title() for l in lines]
+    lines.sort()
+    print('records: %s'%len(lines))
+    return lines
+def getPaperList(pfile):
+    text=loadText(pfile)
+    lines=parsePapers(text)
+    return lines

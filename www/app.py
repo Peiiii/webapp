@@ -164,10 +164,12 @@ async def do_test():
 async def do_root():
     return pageResponse(template=pages.root)
 ## 公告
+from tool import  getPaperList
 @app.get2(paths.board)
 async def do_board():
-
-    return pageResponse(template=pages.board)
+    pfile='papers.txt'
+    plist=getPaperList(pfile)
+    return pageResponse(template=pages.board,plist=plist)
 ## 首页
 @app.get2(paths.home,cookies=True)
 async def do_home(cookies):
