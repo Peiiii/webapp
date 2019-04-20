@@ -8,6 +8,18 @@ def loadText(file):
         text = text.decode(encoding=encoding)
     else:
         text = ''
+    f=open(file,'r',encoding=encoding)
+    list=[]
+    while(True):
+        try:
+            l=f.readline()
+            if not l:
+                break
+        except:
+            break
+        if(l.strip()!=''):
+            list.append(l)
+    return ''.join(list)
     return text
 def writeFile(fn, s, encoding='utf-8'):
     f = open(fn, 'wb')
@@ -18,9 +30,11 @@ def parsePapers(text):
     lines=text.split('\n')
     lines=[l.strip() for l in lines]
     for i in lines:
-        if i == '' or i == '\n':
+        if i == '' or i == '\n' or i[0]=='#':
             lines.remove(i)
+    lines=[l.title() for l in lines]
     lines.sort()
+    print('records: %s'%len(lines))
     return lines
 def loadPapers(file):
     text=loadText(file)
