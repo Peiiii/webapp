@@ -7,9 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b3798f02-fcd6-4924-afca-4830ea277111" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/papers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tools/papers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/papers_sorted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tools/papers_sorted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/templates/html/board.html" beforeDir="false" afterPath="$PROJECT_DIR$/www/templates/html/board.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -318,7 +315,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.get_paper_list">
+  <component name="RunManager" selected="Python.app">
     <configuration name="app (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="webapp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -457,15 +454,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7107232" visible="true" weight="0.20969023" />
       <window_info id="Structure" order="1" sideWeight="0.2892768" side_tool="true" weight="0.26370135" />
       <window_info id="Favorites" order="2" sideWeight="0.2892768" side_tool="true" weight="0.26370135" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32962963" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25577265" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25577265" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
