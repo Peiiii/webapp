@@ -12,7 +12,7 @@ import tool
 env = Environment(loader=PackageLoader('templates',''))
 loop = asyncio.get_event_loop()
 app = Application(loop=loop)
-quik_links=['http://127.0.0.1/home','http://127.0.0.1/']
+quik_links=['http://127.0.0.1/home','http://127.0.0.1/','http://127.0.0.1/papers/manage']
 '''
 layer:
     preCheck(responseJson=false):
@@ -164,12 +164,35 @@ async def do_test():
 async def do_root():
     return pageResponse(template=pages.root)
 ## 公告
-from tool import  getPaperList
+from tool import  getPaperList,writeFile
+pfile='papers.txt'
+quik_links.append('http://127.0.0.1/papers')
 @app.get2(paths.board)
 async def do_board():
-    pfile='papers.txt'
     plist=getPaperList(pfile)
+    new_plist = []
+    for p in plist:
+        new_p = ' '.join(p.split())
+        new_plist.append(new_p)
+    plist = new_plist
+    writeFile(pfile,'\n'.join(plist))
     return pageResponse(template=pages.board,plist=plist)
+@app.get2('/papers/manage')
+async def do_board_post_get():
+    return pageResponse(template='html/post_paper.html')
+@app.post4('/papers/post',form=True)
+async def do_board_post(heading):
+    plist=getPaperList(pfile)
+    heading=heading.strip().title()
+    heading=' '.join(heading.split(' '))
+    if heading in plist:
+        return pageError(message='该论文已被提交过！')
+    plist.append(heading)
+    plist.sort()
+    text='\n'.join(plist)
+    print('new length: %s'%len(plist))
+    writeFile(pfile,text)
+    return pageError(message='已成功提交论文！%s<br>最新论文数量%s'%(heading,len(plist)))
 ## 首页
 @app.get2(paths.home,cookies=True)
 async def do_home(cookies):
