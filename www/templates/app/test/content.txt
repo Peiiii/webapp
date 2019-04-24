@@ -1,0 +1,32 @@
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        
+        <div id="editable" contenteditable="true" class="f-left" style="padding: 0.5rem; border: 1px solid gray; width: 50%; height: 100%;">Hello , world !
+ <div style="background:green;">Hello again!</div>
+<div style="background:orange">Hello, world!</div></div>
+        <textarea id="source-code-box" class="f-left" style="width:50%;display:block;height:100%;"></textarea>
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

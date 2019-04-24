@@ -154,7 +154,7 @@ async def checkLogin(cookies,user_id=None):
         return chk
     else:
         return CheckState(success=True, code=0)
-#############################################
+#########################################################################################################
 ## 响应客户端请求
 @app.get2(paths.test)
 async def do_test():
@@ -193,6 +193,24 @@ async def do_board_post(heading):
     print('new length: %s'%len(plist))
     writeFile(pfile,text)
     return pageError(message='已成功提交论文！%s<br>最新论文数量%s'%(heading,len(plist)))
+#############################################
+##纯html页面
+# @app.get2('/html/{fname}')
+# async def do_html_get(fname):
+#     fname='html/test/'+fname+'.html'
+#     return pageResponse(template=fname)
+@app.get2('/app/{aname}')
+async def do_html_get(aname):
+    fname='app/'+aname+'/'+aname+'.html'
+    cpath='templates/app/'+aname+'/'+'content.txt'
+    content=loadText(cpath)
+    return pageResponse(template=fname,content=content)
+@app.post4('/app/{aname}',request=True)
+async def do_app_post(aname,request):
+    new_html=await request.text()
+    fpath='templates/app/'+aname+'/'+'content.txt'
+    writeFile(fpath,new_html)
+    return jsonResponse(message="提交成功")
 ## 首页
 @app.get2(paths.home,cookies=True)
 async def do_home(cookies):

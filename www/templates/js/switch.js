@@ -7,7 +7,7 @@
 
 
 
-
+switches={};
 //---------------Supporting Functions-------------------//
 function getSource(el){
     return $(el.attr('src-sel'));
@@ -182,7 +182,7 @@ function initViewSwitch(){
         var sssw=new Switch(sw,function(){switchView(src,tar)},function(){switchView(tar,src);});
     }
 }
-//-----------------Show-Switch--------->
+//-----------------ShowSwitch--------->
 class ShowSwitch extends Switch{
     constructor(btn,tar){
         super(btn,()=>show(tar),()=>hide(tar));
@@ -196,12 +196,68 @@ function initShowSwitch(){
         var sssw=new ShowSwitch(sw,tar);
     }
 }
+//-------------------End ShowSwitch-----------------//
+//---------------DoubleViewSwitch----------------//
+function doubleViewSwitchTurnOn(btn,tar1,tar2){
+        tar1.css({width:'50%'});
+        tar2.css({width:'50%'});
+        show(tar2);
+    }
+ function doubleViewSwitchTurnOff(btn,tar1,tar2){
+            tar1.css({width:'100%'});
+            hide(tar2);
+    }
+class DoubleViewSwitch extends Switch{
+    constructor(btn,tar1,tar2){
+        super(btn,()=>{doubleViewSwitchTurnOn(btn,tar1,tar2)},()=>{doubleViewSwitchTurnOff(btn,tar1,tar2)});
+    }
+}
+function initDoubleViewSwitch(){
+    var btns=$('.switch-doubleview');
+    switches['doubleview']=[];
+    btns.map((n,btn)=>{
+        btn=$(btn);log(btn)
+        var tar1=$(btn.attr('tar-sel1'));
+        var tar2=$(btn.attr('tar-sel2'));
+        var sw=new DoubleViewSwitch(btn,tar1,tar2);
+        switches.doubleview.push(sw);
+    })
+}
+//--------------------End DoubleViewSwitch-----------------------//
+
+//---------------SwitchInitializer---------------------//
+class SwitchInitializer{
+    constructor(btn){
+        this.btn=btn;
+        this.initialState=this.status();
+        this.src=$(this.btn.attr('src-sel'));
+        this.tar=$(this.btn.attr('tar-sel'));
+        this.tar1=$(this.btn.attr('tar-sel1'));
+        this.tar2=$(this.btn.attr('tar-sel2'));
+        var tars=this.btn.attr('tar-sels');
+        this.tars=[];
+        if(tars){
+//            log(tars)
+            tars=tars.split();
+            tars.map((n,ta)=>{
+                this.tars.push($(ta));
+            })
+        }
+
+    }
+    status(){
+        return this.btn.attr('status');
+    }
+}
 //-------------初始化-------------//
 function initSwitch(){
     initFullScreenSwitch();
     initSpeakInnerTextSwitch();
     initViewSwitch();
     initShowSwitch();
+    initDoubleViewSwitch();
 }
-
+$(document).ready(()=>{
+    initSwitch();
+})
 

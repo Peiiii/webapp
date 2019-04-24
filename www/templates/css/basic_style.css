@@ -21,8 +21,10 @@
 .bg-black{background:black;}
 .bg-gray{background:gray;}
 .bg-333{background:#333;}
+.bg-book{background:#e8e5d4;}
 /*color*/
 .c-white{ color:white;}
+.c-book{color:#343530;}
 /*height*/
 .h-10{height:10rem;}
 .h-p100{height:100%;}
